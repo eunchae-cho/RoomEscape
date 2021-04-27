@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="com.sdc.escape.dao.RoomAttributeDao">
+    <resultMap type="roomAttribute" id="RoomAttributeMap">
+        <result column="attr_reasoning" property="reasoning"></result>
+        <result column="attr_observation" property="observation"></result>
+        <result column="attr_horror" property="horror"></result>
+        <result column="attr_activity" property="activity"></result>
+    </resultMap>
+
+    <select id="findAll" resultMap="RoomAttributeMap">
+    </select>
+  </mapper>
