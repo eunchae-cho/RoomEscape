@@ -5,7 +5,8 @@ public class Room {
     private String title;
     private String content;
     private int level;
-    private int participant;
+    private String participant;
+    private String photo;
 
     public int getNo() {
         return this.no;
@@ -39,11 +40,19 @@ public class Room {
         this.level = level;
     }
 
-    public int getParticipant() {
+    public String getParticipant() {
         return this.participant;
     }
 
-    public void setParticipant(int participant) {
+    public void setParticipant(String participant) {
         this.participant = participant;
+    }
+    
+    public String getPhoto() {
+    	return this.photo;
+    }
+    
+    public void setPhoto(String photo) {
+    	this.photo = photo;
     }
 }

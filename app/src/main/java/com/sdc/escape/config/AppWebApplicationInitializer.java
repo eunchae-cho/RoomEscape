@@ -19,6 +19,4 @@ public class AppWebApplicationInitializer extends AbstractAnnotationConfigDispat
     protected String[] getServletMappings() {
       return new String[] {"/"};
     }
-    
-    
 }

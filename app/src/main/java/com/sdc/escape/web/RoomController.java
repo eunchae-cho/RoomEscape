@@ -1,24 +1,20 @@
 package com.sdc.escape.web;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.sdc.escape.service.RoomService;
 
 @Controller
-@RequestMapping("/room")
 public class RoomController {
 	
-	public RoomController() {
-		System.out.println("dd") ;
-	}
+	@Autowired RoomService roomService;
 
-    @GetMapping("/")
-    public String index() {
-        return "index";
-    }
-    
-    @GetMapping("/list")
-    public String room() {
-        return "room/room";
+    @GetMapping("/room")
+    public String room(Model model, int no) throws Exception {
+    	model.addAttribute("room" , roomService.listByNo(no));
+        return "room/detail";
     }
 }

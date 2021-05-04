@@ -10,8 +10,29 @@
         <result column="r_content" property="content"></result>
         <result column="r_level" property="level"></result>
         <result column="r_participant" property="participant"></result>
+         <result column="r_photo" property="photo"></result>
     </resultMap>
-
+   
     <select id="findAll" resultMap="RoomMap">
+    	select
+    		r_no,
+    		r_title,
+    		r_content,
+    		r_level,
+    		r_participant,
+    		r_photo
+    	from escape_room 
+    </select>
+    
+    <select id="findByNo" resultMap="RoomMap">
+    	select
+    		r_no,
+    		r_title,
+    		r_content,
+    		r_level,
+    		r_participant,
+    		r_photo
+    	from escape_room 
+    	where r_no = #{no}
     </select>
   </mapper>

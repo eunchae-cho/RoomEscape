@@ -5,8 +5,8 @@
   <head>
   <meta charset="UTF-8">
   <title>index</title>
-  <link href="<%=request.getContextPath()%>/bootstrap/css/bootstrap.rtl.css?ver=1" rel="stylesheet">
-  <link href="<%=request.getContextPath()%>/bootstrap/css/index.css?ver=1" rel="stylesheet">
+  <link href="<%=request.getContextPath() %>/bootstrap/css/bootstrap.rtl.css?var=2"  rel="stylesheet"  >
+  <link href="<%=request.getContextPath() %>/bootstrap/css/index.css?var=2" rel="stylesheet">
   </head>
   <body>
       <header class="bg-dark d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
@@ -27,45 +27,24 @@
           </div>
         </header>
   
+
   <div class="container marketing" style="padding-top: 50px;">
       <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-indicators">
-            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-          </div>
+          
+        <c:forEach items="${roomList}" var="room">
           <div class="carousel-inner">
             <div class="carousel-item active">
               <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
-      
               <div class="container">
                 <div class="carousel-caption">
-                  <h1>테마1</h1>
-                  <p>테마내용</p>
+                  <h1><a href="room/detail?no=${room.no}">${room.title}</a></h1>
+                  <p>${room.content}</p>
                 </div>
               </div>
             </div>
-            <div class="carousel-item">
-              <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
-      
-              <div class="container">
-                <div class="carousel-caption">
-                  <h1>테마2</h1>
-                  <p>테마내용</p>
-                </div>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
-      
-              <div class="container">
-                <div class="carousel-caption">
-                  <h1>테마3</h1>
-                  <p>테마내용</p>
-                </div>
-              </div>
-            </div>
-          </div>
+           </div>
+       </c:forEach>
+         
           <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">왼쪽으로 넘기기</span>
@@ -76,45 +55,21 @@
           </button>
         </div>
   
-        <hr class="featurette-divider">
-  
-      <div class="row featurette">
-        <div class="col-md-7">
-          <h2 class="featurette-heading">테마 제목</h2>
-          <p class="lead">테마 내용</p>
-        </div>
-        <div class="col-md-5">
-          <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
-        </div>
-      </div>
-  
-      <hr class="featurette-divider">
-  
-      <div class="row featurette">
-        <div class="col-md-7 order-md-2">
-          <h2 class="featurette-heading">테마 제목</h2>
-          <p class="lead">테마 내용</p>
-        </div>
-        <div class="col-md-5 order-md-1">
-          <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
-        </div>
-      </div>
-  
-      <hr class="featurette-divider">
-  
-      <div class="row featurette">
-        <div class="col-md-7">
-            <h2 class="featurette-heading">테마 제목</h2>
-            <p class="lead">테마 내용</p>
-        </div>
-        <div class="col-md-5">
-          <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
-        </div>
-      </div>
+	   <c:forEach items="${roomList}" var="room">
+	      <hr class="featurette-divider">
+	      <div class="row featurette">
+	        <div class="col-md-7">
+	          <h2 class="featurette-heading"><a href="room/detail?no=${room.no}">${room.title}</a></h2>
+	          <p class="lead">${room.content}</p>
+	        </div>
+	        <div class="col-md-5">
+	          <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+	        </div>
+	      </div>
+	      <hr class="featurette-divider">
+	  </c:forEach>
   </div>
-  
-      <hr class="featurette-divider">
-  
+   
       <script src="/<%=request.getContextPath()%>/bootstrap/js/bootstrap.bundle.min.js"></script>
   </body>
   </html>
