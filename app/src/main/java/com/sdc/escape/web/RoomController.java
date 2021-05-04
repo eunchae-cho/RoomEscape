@@ -14,6 +14,12 @@ public class RoomController {
 	
 	@Autowired RoomService roomService;
 
+	@GetMapping("/list")
+    public String index(Model model) throws Exception {
+    	model.addAttribute("roomList", roomService.list());
+        return "room/list";
+    }
+	
     @GetMapping("/detail")
     public void room(Model model, int no) throws Exception {
     	model.addAttribute("room" , roomService.roomByNo(no));
