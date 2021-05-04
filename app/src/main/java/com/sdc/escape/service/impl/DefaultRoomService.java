@@ -1,5 +1,7 @@
 package com.sdc.escape.service.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.sdc.escape.dao.RoomDao;
@@ -15,12 +17,12 @@ public class DefaultRoomService implements RoomService{
     }
     
     @Override
-    public Room list() throws Exception {
+    public List<Room> list() throws Exception {
     	return roomDao.findAll();
     }
 
     @Override
-    public Room listByNo(int no) throws Exception {
+    public Room roomByNo(int no) throws Exception {
         return roomDao.findByNo(no);
     }
 }

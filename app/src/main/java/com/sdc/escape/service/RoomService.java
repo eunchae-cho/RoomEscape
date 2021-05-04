@@ -1,8 +1,10 @@
 package com.sdc.escape.service;
 
+import java.util.List;
+
 import com.sdc.escape.domain.Room;
 
 public interface RoomService {
-	Room list() throws Exception;
-    Room listByNo(int no) throws Exception;
+	List<Room> list() throws Exception;
+    Room roomByNo(int no) throws Exception;
 }

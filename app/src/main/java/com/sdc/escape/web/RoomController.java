@@ -14,7 +14,7 @@ public class RoomController {
 
     @GetMapping("/room")
     public String room(Model model, int no) throws Exception {
-    	model.addAttribute("room" , roomService.listByNo(no));
+    	model.addAttribute("room" , roomService.roomByNo(no));
         return "room/detail";
     }
 }

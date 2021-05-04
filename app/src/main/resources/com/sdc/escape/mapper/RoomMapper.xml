@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
   <mapper namespace="com.sdc.escape.dao.RoomDao">
+  
     <resultMap type="room" id="RoomMap">
         <id column="r_no" property="no"></id>
         <result column="r_title" property="title"></result>
@@ -24,7 +25,7 @@
     	from escape_room 
     </select>
     
-    <select id="findByNo" resultMap="RoomMap">
+    <select id="findByNo" resultMap="RoomMap" parameterType="int">
     	select
     		r_no,
     		r_title,
