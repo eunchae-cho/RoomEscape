@@ -5,8 +5,8 @@
   <head>
   <meta charset="UTF-8">
   <title>index</title>
-  <link href="<%=request.getContextPath()%>/bootstrap/css/bootstrap.rtl.css?v" rel="stylesheet">
-  <link href="<%=request.getContextPath()%>/bootstrap/css/index.css?v" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/bootstrap/css/bootstrap.rtl.css?ver=1" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/bootstrap/css/index.css?ver=1" rel="stylesheet">
   </head>
   <body>
       <header class="bg-dark d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
@@ -115,6 +115,6 @@
   
       <hr class="featurette-divider">
   
-      <script src="<%=request.getContextPath()%>/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <script src="/<%=request.getContextPath()%>/bootstrap/js/bootstrap.bundle.min.js"></script>
   </body>
   </html>
