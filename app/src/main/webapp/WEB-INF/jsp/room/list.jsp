@@ -5,8 +5,6 @@
   <head>
   <meta charset="UTF-8">
   <title>index</title>
-  <link href="<%=request.getContextPath() %>/bootstrap/css/bootstrap.rtl.css?var=2"  rel="stylesheet"  >
-  <link href="<%=request.getContextPath() %>/bootstrap/css/index.css?var=2" rel="stylesheet">
   </head>
   <body>
   <jsp:include page="../header.jsp"></jsp:include>  
@@ -18,11 +16,8 @@
           <div class="row featurette">
             <div class="col-md-7">
               <h2 class="featurette-heading"><a href="./detail?no=${room.no}" class="nav-link px-2" style="color: coral;">${room.title}</a></h2><br>
-              <p class="lead">${room.level}</p>
-              <p class="lead">${room.participant}명</p>
-              <p class="lead">${room.content}</p>
-              <br><br>
-              <a href="#" style="font-size: 20px;">예약하러 가기>></a>
+              <p class="lead">난이도:  ${room.level}</p>
+              <p class="lead">인원:  ${room.participant} 명</p>
             </div>
             <div class="col-md-5">
               <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false">
@@ -33,8 +28,8 @@
       </c:forEach>
     </div>
   </main>
-
-  <!-- <jsp:include page="../footer.jsp"></jsp:include>   -->
+  
+  <jsp:include page="../footer.jsp"></jsp:include>  
   <script src="/<%=request.getContextPath()%>/bootstrap/js/bootstrap.bundle.min.js"></script>
   </body>
   </html>

@@ -1,40 +1,40 @@
 package com.sdc.escape.domain;
 
 public class RoomAttribute {
-    private int reasoning;
-    private int observation;
-    private int horror;
-    private int activity;
+    private String reasoning;
+    private String observation;
+    private String horror;
+    private String activity;
 
-    public int getReasoning() {
+    public String getReasoning() {
         return this.reasoning;
     }
 
-    public void setReasoning(int reasoning) {
+    public void setReasoning(String reasoning) {
         this.reasoning = reasoning;
     }
 
-    public int getObservation() {
+    public String getObservation() {
         return this.observation;
     }
 
-    public void setObservation(int observation) {
+    public void setObservation(String observation) {
         this.observation = observation;
     }
 
-    public int getHorror() {
+    public String getHorror() {
         return this.horror;
     }
 
-    public void setHorror(int horror) {
+    public void setHorror(String horror) {
         this.horror = horror;
     }
 
-    public int getActivity() {
+    public String getActivity() {
         return this.activity;
     }
 
-    public void setActivity(int activity) {
+    public void setActivity(String activity) {
         this.activity = activity;
     }
 

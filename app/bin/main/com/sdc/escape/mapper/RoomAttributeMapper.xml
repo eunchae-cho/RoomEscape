@@ -11,6 +11,41 @@
         <result column="attr_activity" property="activity"></result>
     </resultMap>
 
-    <select id="findAll" resultMap="RoomAttributeMap">
+    <select id="findByNo" resultMap="RoomAttributeMap" parameterType="int">
+   		select
+   			case 
+   				when  attr_reasoning=1 then '★☆☆☆☆'
+   				when  attr_reasoning=2 then '★★☆☆☆'
+   				when  attr_reasoning=3 then '★★★☆☆'
+   				when  attr_reasoning=4 then '★★★★☆'
+   				when  attr_reasoning=5 then '★★★★★'
+   				else '???'
+   			end as attr_reasoning,
+   			case 
+   				when  attr_observation=1 then '★☆☆☆☆'
+   				when  attr_observation=2 then '★★☆☆☆'
+   				when  attr_observation=3 then '★★★☆☆'
+   				when  attr_observation=4 then '★★★★☆'
+   				when  attr_observation=5 then '★★★★★'
+   				else '???'
+   			end as attr_observation,
+   			case 
+   				when  attr_horror=1 then '★☆☆☆☆'
+   				when  attr_horror=2 then '★★☆☆☆'
+   				when  attr_horror=3 then '★★★☆☆'
+   				when  attr_horror=4 then '★★★★☆'
+   				when  attr_horror=5 then '★★★★★'
+   				else '???'
+   			end as attr_horror,
+   				case 
+   				when  attr_activity=1 then '★☆☆☆☆'
+   				when  attr_activity=2 then '★★☆☆☆'
+   				when  attr_activity=3 then '★★★☆☆'
+   				when  attr_activity=4 then '★★★★☆'
+   				when  attr_activity=5 then '★★★★★'
+   				else '???'
+   			end as attr_activity
+   		from escape_room_attr
+   		where r_no = #{no}
     </select>
   </mapper>

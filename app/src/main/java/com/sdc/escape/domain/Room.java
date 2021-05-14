@@ -4,7 +4,7 @@ public class Room {
     private int no;
     private String title;
     private String content;
-    private int level;
+    private String level;
     private String participant;
     private String photo;
 
@@ -32,11 +32,11 @@ public class Room {
         this.content = content;
     }
 
-    public int getLevel() {
+    public String getLevel() {
         return this.level;
     }
 
-    public void setLevel(int level) {
+    public void setLevel(String level) {
         this.level = level;
     }
 

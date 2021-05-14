@@ -112,3 +112,24 @@ body {
       margin-top: 7rem;
     }
   }
+
+  /* FOOTER CSS
+  -------------------------------------------------- */
+
+  .footer {
+  }
+  
+  .container {
+      width: auto;
+    max-width: 680px;
+    padding: 0 15px;
+  }
+  
+ .content {
+    display: flex;
+    justify-content: center;
+  }
+
+  .footer.container.hr {
+    margin: 5rem 0;
+  }

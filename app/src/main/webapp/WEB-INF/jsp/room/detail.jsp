@@ -5,8 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>index</title>
-  <link href="<%=request.getContextPath() %>/bootstrap/css/bootstrap.rtl.css?var=2"  rel="stylesheet"  >
-  <link href="<%=request.getContextPath() %>/bootstrap/css/index.css?var=2" rel="stylesheet">
 </head>
 <body>
 <jsp:include page="../header.jsp"></jsp:include>  
@@ -32,17 +30,23 @@
       </div>
       <div class="col-md-5" style="margin: 0 auto; margin-bottom: 200px; text-align: center;">
         <h2 style="text-align: center; padding-block:50px;">${room.title}</h2>
-        <p style="text-align: center;">${room.level}</p>
-        <p style="text-align: center;">${room.participant}명</p>
+        <p style="text-align: center; color=yellow;">${room.level}</p
+        ><br>
+        <p style="text-align: center;">인원: ${room.participant} 명</p>
+        <p style="text-align: center;">추리력: ${roomAttr.reasoning}</p>
+        <p style="text-align: center;">관찰력: ${roomAttr.observation}</p>
+        <p style="text-align: center;">공포: ${roomAttr.horror}</p>
+        <p style="text-align: center;">활동성: ${roomAttr.activity}</p>
+        <br>
         <p style="text-align: center;">${room.content}</p>
     </div>
+	<div style="text-align: center;">
+        <h3><a href="#" style="color=red;">예약하러 가기>></a></h3>
+	</div>
   </div>
-
-      <hr class="featurette-divider">
-
 </main>
 
-<!-- <jsp:include page="../footer.jsp"></jsp:include>   -->
+<jsp:include page="../footer.jsp"></jsp:include>  
 <script src="/<%=request.getContextPath()%>/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

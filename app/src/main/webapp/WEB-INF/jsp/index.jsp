@@ -5,8 +5,6 @@
   <head>
   <meta charset="UTF-8">
   <title>index</title>
-  <link href="<%=request.getContextPath() %>/bootstrap/css/bootstrap.rtl.css?var=2"  rel="stylesheet"  >
-  <link href="<%=request.getContextPath() %>/bootstrap/css/index.css?var=2" rel="stylesheet">
   </head>
   <body>
   <jsp:include page="./header.jsp"></jsp:include>  
@@ -17,10 +15,11 @@
           <c:forEach items='${roomList}' var="room">
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
+                <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/>
+               </svg>
                 <div class="container">
                   <div class="carousel-caption">
-                    <h1><a href='./room/detail?no=${room.no}' class="nav-link px-2" style="color: aliceblue;">${room.title}</a></h1>
+                    <h1><a href='./room/detail?no=${room.no}' class="nav-link px-2" style="color: aliceblue;   text-shadow: 1px 1px black;">${room.title}</a></h1>
                     <p>${room.content}</p>
                   </div>
                 </div>
@@ -70,7 +69,8 @@
           </div>
     </div>
   </main>
-  <!-- <jsp:include page="./footer.jsp"></jsp:include>   -->
+ 
+  <jsp:include page="./footer.jsp"></jsp:include>  
   <script src="/<%=request.getContextPath()%>/bootstrap/js/bootstrap.bundle.min.js"></script>
   </body>
   </html>

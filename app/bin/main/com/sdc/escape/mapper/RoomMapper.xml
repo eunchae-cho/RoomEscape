@@ -19,7 +19,12 @@
     		r_no,
     		r_title,
     		r_content,
-    		r_level,
+    			case  
+    				when r_level=3 then ' ⭐ ⭐ ⭐'
+    				when r_level=4 then ' ⭐ ⭐ ⭐ ⭐'
+    				when r_level=5 then ' ⭐ ⭐ ⭐ ⭐ ⭐'
+    			else '☆☆☆☆☆'
+    			end as r_level,
     		r_participant,
     		r_photo
     	from escape_room 
@@ -30,7 +35,12 @@
     		r_no,
     		r_title,
     		r_content,
-    		r_level,
+	    		case  
+	    				when r_level=3 then ' ⭐ ⭐ ⭐'
+	    				when r_level=4 then ' ⭐ ⭐ ⭐ ⭐'
+	    				when r_level=5 then ' ⭐ ⭐ ⭐ ⭐ ⭐'
+	    			else '☆☆☆☆☆'
+	    			end as r_level,
     		r_participant,
     		r_photo
     	from escape_room 

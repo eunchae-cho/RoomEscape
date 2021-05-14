@@ -4,8 +4,8 @@
 <head>
 <meta charset="UTF-8">
 <title>index</title>
-<link href="<%=request.getContextPath()%>/bootstrap/css/bootstrap.rtl.css" rel="stylesheet">
-<link href="<%=request.getContextPath()%>/bootstrap/css/index.css" rel="stylesheet">
+<link href="<%=request.getContextPath() %>/bootstrap/css/bootstrap.rtl.css?var=2"  rel="stylesheet"  >
+<link href="<%=request.getContextPath() %>/bootstrap/css/index.css?var=2" rel="stylesheet">
 </head>
 <body>
     <header class="bg-dark d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
