@@ -8,6 +8,7 @@ public class Reservation {
     private Date reservatedDate;
     private boolean cancel;
     private Date canceledDate;
+    private String price;
 
     public int getNo() {
         return this.no;
@@ -49,5 +50,11 @@ public class Reservation {
         this.canceledDate = canceledDate;
     }
 
-  
+	public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
 }

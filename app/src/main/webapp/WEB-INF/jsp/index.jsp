@@ -4,7 +4,7 @@
   <html>
   <head>
   <meta charset="UTF-8">
-  <title>index</title>
+  <title>room escape</title>
   </head>
   <body>
   <jsp:include page="./header.jsp"></jsp:include>  
@@ -71,6 +71,5 @@
   </main>
  
   <jsp:include page="./footer.jsp"></jsp:include>  
-  <script src="/<%=request.getContextPath()%>/bootstrap/js/bootstrap.bundle.min.js"></script>
   </body>
   </html>

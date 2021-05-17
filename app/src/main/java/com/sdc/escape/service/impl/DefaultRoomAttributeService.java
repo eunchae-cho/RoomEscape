@@ -1,22 +1,24 @@
 package com.sdc.escape.service.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
-import com.sdc.escape.dao.RoomAttributeDao;
-import com.sdc.escape.domain.RoomAttribute;
-import com.sdc.escape.service.RoomAttributeService;
+import com.sdc.escape.dao.RoomTimeDao;
+import com.sdc.escape.domain.RoomTime;
+import com.sdc.escape.service.RoomTimeService;
 
 @Service
-public class DefaultRoomAttributeService implements RoomAttributeService{
-	RoomAttributeDao roomAttributeDao;
+public class DefaultRoomAttributeService implements RoomTimeService{
+	RoomTimeDao roomTimeDao;
 
-    public DefaultRoomAttributeService(RoomAttributeDao roomAttributeDao) {
-        this.roomAttributeDao = roomAttributeDao;
+    public DefaultRoomAttributeService(RoomTimeDao roomTimeDao) {
+        this.roomTimeDao = roomTimeDao;
     }
     
    
     @Override
-    public RoomAttribute roomAttrByNo(int no) throws Exception {
-        return roomAttributeDao.findByNo(no);
+    public List<RoomTime> timeByNo(int no) throws Exception {
+        return roomTimeDao.findByNo(no);
     }
 }

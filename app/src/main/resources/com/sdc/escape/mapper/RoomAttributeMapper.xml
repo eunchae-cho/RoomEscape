@@ -12,40 +12,40 @@
     </resultMap>
 
     <select id="findByNo" resultMap="RoomAttributeMap" parameterType="int">
-   		select
-   			case 
-   				when  attr_reasoning=1 then '★☆☆☆☆'
-   				when  attr_reasoning=2 then '★★☆☆☆'
-   				when  attr_reasoning=3 then '★★★☆☆'
-   				when  attr_reasoning=4 then '★★★★☆'
-   				when  attr_reasoning=5 then '★★★★★'
-   				else '???'
-   			end as attr_reasoning,
-   			case 
-   				when  attr_observation=1 then '★☆☆☆☆'
-   				when  attr_observation=2 then '★★☆☆☆'
-   				when  attr_observation=3 then '★★★☆☆'
-   				when  attr_observation=4 then '★★★★☆'
-   				when  attr_observation=5 then '★★★★★'
-   				else '???'
-   			end as attr_observation,
-   			case 
-   				when  attr_horror=1 then '★☆☆☆☆'
-   				when  attr_horror=2 then '★★☆☆☆'
-   				when  attr_horror=3 then '★★★☆☆'
-   				when  attr_horror=4 then '★★★★☆'
-   				when  attr_horror=5 then '★★★★★'
-   				else '???'
-   			end as attr_horror,
-   				case 
-   				when  attr_activity=1 then '★☆☆☆☆'
-   				when  attr_activity=2 then '★★☆☆☆'
-   				when  attr_activity=3 then '★★★☆☆'
-   				when  attr_activity=4 then '★★★★☆'
-   				when  attr_activity=5 then '★★★★★'
-   				else '???'
-   			end as attr_activity
-   		from escape_room_attr
-   		where r_no = #{no}
+   		SELECT
+   			CASE
+   				WHEN  attr_reasoning=1 THEN '★☆☆☆☆'
+   				WHEN  attr_reasoning=2 THEN '★★☆☆☆'
+   				WHEN  attr_reasoning=3 THEN '★★★☆☆'
+   				WHEN  attr_reasoning=4 THEN '★★★★☆'
+   				WHEN  attr_reasoning=5 THEN '★★★★★'
+   				ELSE '???'
+   			END AS attr_reasoning
+   			, CASE 
+   				WHEN  attr_observation=1 THEN '★☆☆☆☆'
+   				WHEN  attr_observation=2 THEN '★★☆☆☆'
+   				WHEN  attr_observation=3 THEN '★★★☆☆'
+   				WHEN  attr_observation=4 THEN '★★★★☆'
+   				WHEN  attr_observation=5 THEN '★★★★★'
+   				ELSE '???'
+   			END AS attr_observation
+   			, CASE 
+   				WHEN  attr_horror=1 THEN '★☆☆☆☆'
+   				WHEN  attr_horror=2 THEN '★★☆☆☆'
+   				WHEN  attr_horror=3 THEN '★★★☆☆'
+   				WHEN  attr_horror=4 THEN '★★★★☆'
+   				WHEN  attr_horror=5 THEN '★★★★★'
+   				ELSE '???'
+   			END AS attr_horror
+   				, CASE 
+   				WHEN  attr_activity=1 THEN '★☆☆☆☆'
+   				WHEN  attr_activity=2 THEN '★★☆☆☆'
+   				WHEN  attr_activity=3 THEN '★★★☆☆'
+   				WHEN  attr_activity=4 THEN '★★★★☆'
+   				WHEN  attr_activity=5 THEN '★★★★★'
+   				ELSE '???'
+   			END AS attr_activity
+   		FROM escape_room_attr
+   		WHERE r_no = #{no}
     </select>
   </mapper>

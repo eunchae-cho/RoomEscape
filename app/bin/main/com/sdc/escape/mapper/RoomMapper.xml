@@ -15,35 +15,35 @@
     </resultMap>
    
     <select id="findAll" resultMap="RoomMap">
-    	select
-    		r_no,
-    		r_title,
-    		r_content,
-    			case  
-    				when r_level=3 then ' ⭐ ⭐ ⭐'
-    				when r_level=4 then ' ⭐ ⭐ ⭐ ⭐'
-    				when r_level=5 then ' ⭐ ⭐ ⭐ ⭐ ⭐'
-    			else '☆☆☆☆☆'
-    			end as r_level,
-    		r_participant,
-    		r_photo
-    	from escape_room 
+    	SELECT
+    		r_no
+    		, r_title
+    		, r_content
+    			, CASE  
+    				WHEN r_level=3 THEN ' ⭐ ⭐ ⭐'
+    				WHEN r_level=4 THEN ' ⭐ ⭐ ⭐ ⭐'
+    				WHEN r_level=5 THEN ' ⭐ ⭐ ⭐ ⭐ ⭐'
+    				ELSE '☆☆☆☆☆'
+    			 END AS r_level
+    		, r_participant
+    		, r_photo
+    	FROM escape_room 
     </select>
     
     <select id="findByNo" resultMap="RoomMap" parameterType="int">
-    	select
-    		r_no,
-    		r_title,
-    		r_content,
-	    		case  
-	    				when r_level=3 then ' ⭐ ⭐ ⭐'
-	    				when r_level=4 then ' ⭐ ⭐ ⭐ ⭐'
-	    				when r_level=5 then ' ⭐ ⭐ ⭐ ⭐ ⭐'
-	    			else '☆☆☆☆☆'
-	    			end as r_level,
-    		r_participant,
-    		r_photo
-    	from escape_room 
-    	where r_no = #{no}
+    	SELECT
+    		r_no
+    		, r_title
+    		, r_content
+	    		, CASE  
+	    			WHEN r_level=3 THEN ' ⭐ ⭐ ⭐'
+	    			WHEN r_level=4 THEN ' ⭐ ⭐ ⭐ ⭐'
+	    			WHEN r_level=5 THEN ' ⭐ ⭐ ⭐ ⭐ ⭐'
+	    			ELSE '☆☆☆☆☆'
+	    		END AS r_level
+    		, r_participant
+    		, r_photo
+    	FROM escape_room 
+    	WHERE r_no = #{no}
     </select>
   </mapper>

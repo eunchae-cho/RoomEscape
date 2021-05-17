@@ -14,7 +14,7 @@
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
           <li><a href="<%=request.getContextPath()%>/" class="nav-link px-2 font-light">Home</a></li>
           <li><a href="<%=request.getContextPath()%>/room/list" class="nav-link px-2 font-light">Rooms</a></li>
-          <li><a href="#" class="nav-link px-2 font-light">Reservation</a></li>
+          <li><a href="<%=request.getContextPath()%>/reservation/form" class="nav-link px-2 font-light">Reservation</a></li>
           <li><a href="#" class="nav-link px-2 font-light">My page</a></li>
         </ul>
     
@@ -23,6 +23,7 @@
           <button type="button" class="btn btn-primary">회원가입</button>
         </div>
       </header>
-    <script src="<%=request.getContextPath()%>/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="<%=request.getContextPath()%>/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

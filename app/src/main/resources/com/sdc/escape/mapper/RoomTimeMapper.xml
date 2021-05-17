@@ -8,6 +8,12 @@
         <result column="r_time" property="roomTime"></result>
     </resultMap>
 
-    <select id="findAll" resultMap="RoomTimeMap">
+    <select id="findByNo" resultMap="RoomTimeMap">
+    	SELECT
+    		r_time
+    	FROM escape_room_time AS rt
+    	INNER JOIN escape_room AS r
+    	ON rt.r_no = r.r_no
+    	WHERE rt.r_no = #{no}
     </select>
   </mapper>
