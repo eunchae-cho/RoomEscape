@@ -8,10 +8,21 @@
        <id column="res_no" property="no"></id>
         <result column="res_time" property="roomTime"></result>
         <result column="res_rdt" property="reservatedDate"></result>
-        <result column="cancel" property="cancel"></result>
-        <result column="cancel_date" property="canceledDate"></result>
+        <result column="res_cancel" property="cancel"></result>
+        <result column="res_cancel_date" property="canceledDate"></result>
+        <result column="res_participant" property="participant"></result>
+        <result column="res_price" property="price"></result>
+        <result column="u_no" property="uno"></result>
+        <result column="r_no" property="rno"></result>
     </resultMap>
 
     <select id="findAll" resultMap="ReservationMap">
     </select>
+    
+    <insert id="add" parameterType="Reservation">
+     	INSERT INTO escape_reservation
+     		(res_time, res_rdt, res_participant, res_price, u_no, r_no)
+     	VALUES
+     		(#{roomTime}, #{reservatedDate}, #{participant}, #{price}, #{uno}, #{rno})
+    </insert>
   </mapper>

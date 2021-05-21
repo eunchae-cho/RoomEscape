@@ -132,6 +132,53 @@ body {
  .select-box {
    margin: 30px;
  }
+ 
+  .select-container {
+   color: burlywood;
+   margin-left: 30px;
+   width: 300px;
+   display: flex;
+   flex-wrap: nowrap;
+   flex-direction: row;
+   justify-content: space-between;
+ }
+ 
+
+  /* SIGNUP CSS
+  -------------------------------------------------- */
+  .signup-container{
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  
+    /* LOGIN CSS
+  -------------------------------------------------- */
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-signin .checkbox {
+  font-weight: 400;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
 
   /* FOOTER CSS
   -------------------------------------------------- */

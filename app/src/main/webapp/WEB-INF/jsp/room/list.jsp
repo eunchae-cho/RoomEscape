@@ -4,8 +4,8 @@
   <html>
   <head>
   <meta charset="UTF-8">
-  <title>룸테마</title>
-  </head>
+  <title>[room escape] 룸테마</title>
+  </head> 
   <body>
   <jsp:include page="../header.jsp"></jsp:include>  
 

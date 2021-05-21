@@ -11,8 +11,33 @@
         <result column="u_password" property="password"></result>
         <result column="u_phone" property="phone"></result>
         <result column="u_email" property="email"></result>
+        <result column="u_rdt" property="registeredDate"></result>
     </resultMap>
 
     <select id="findAll" resultMap="UserMap">
     </select>
+    
+    <select id="findByIdPassword" resultMap="UserMap" parameterType="map">
+    	SELECT
+    		  u_no
+    		, u_name
+    		, u_id
+    		, u_password
+    		, u_phone
+    		, u_email
+    		, u_rdt
+    	FROM 
+    		escape_user
+    	WHERE	
+    		u_id = #{id}
+    			AND
+    		u_password = password(#{password})
+    </select>
+    
+    <insert id="add" parameterType="User">
+    	INSERT INTO escape_user
+    		(u_name, u_id, u_password, u_phone, u_email)
+    	VALUES
+    		(#{name}, #{id}, password(#{password}), #{phone}, #{email})
+    </insert>
   </mapper>

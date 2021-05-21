@@ -1,5 +1,7 @@
 package com.sdc.escape.domain;
 
+import java.sql.Date;
+
 public class User {
     private int no;
     private String name;
@@ -7,6 +9,7 @@ public class User {
     private String password;
     private String phone;
     private String email;
+    private Date registeredDate;
 
     public int getNo() {
         return this.no;
@@ -56,4 +59,11 @@ public class User {
         this.email = email;
     }
 
+	public Date getRegisteredDate() {
+		return registeredDate;
+	}
+
+	public void setRegisteredDate(Date registeredDate) {
+		this.registeredDate = registeredDate;
+	}
 }

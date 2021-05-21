@@ -1,5 +1,10 @@
 package com.sdc.escape.dao;
 
+import org.apache.ibatis.annotations.Param;
+
+import com.sdc.escape.domain.User;
+
 public interface UserDao {
-    
+	User findByIdPassword(@Param("id") String id, @Param("password") String password) throws Exception;
+    int add(User user) throws Exception;
 }

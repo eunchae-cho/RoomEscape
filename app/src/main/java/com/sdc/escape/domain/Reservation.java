@@ -8,7 +8,10 @@ public class Reservation {
     private Date reservatedDate;
     private boolean cancel;
     private Date canceledDate;
+    private int participant;
     private String price;
+    private int uno;
+    private int rno;
 
     public int getNo() {
         return this.no;
@@ -49,6 +52,14 @@ public class Reservation {
     public void setCanceledDate(Date canceledDate) {
         this.canceledDate = canceledDate;
     }
+    
+    public int getParticipant() {
+    	return participant;
+    }
+    
+    public void setParticipant(int participant) {
+    	 this.participant = participant;
+    }
 
 	public String getPrice() {
 		return price;
@@ -56,5 +67,21 @@ public class Reservation {
 
 	public void setPrice(String price) {
 		this.price = price;
+	}
+
+	public int getUno() {
+		return uno;
+	}
+
+	public void setUno(int uno) {
+		this.uno = uno;
+	}
+
+	public int getRno() {
+		return rno;
+	}
+
+	public void setRno(int rno) {
+		this.rno = rno;
 	}
 }
