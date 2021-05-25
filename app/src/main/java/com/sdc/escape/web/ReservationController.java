@@ -25,7 +25,7 @@ public class ReservationController {
 	@Autowired RoomTimeService roomTimeService;
 	@Autowired ReservationService reservationService;
 
-	@GetMapping("/form")
+	@GetMapping("/")
     public String reservation(Model model) throws Exception {
 		model.addAttribute("roomList", roomService.list());
         return "reservation/form";

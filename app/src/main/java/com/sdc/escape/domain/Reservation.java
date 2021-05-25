@@ -6,12 +6,16 @@ public class Reservation {
     private int no;
     private String roomTime;
     private Date reservatedDate;
-    private boolean cancel;
+    // cancel =>  default: 0, 예약 취소: 1
+    private int cancel;
     private Date canceledDate;
     private int participant;
     private String price;
     private int uno;
     private int rno;
+    // status => default / 예약: 0, 예약취소: 1, 종료: 2
+    private int status;
+    private Room room;
 
     public int getNo() {
         return this.no;
@@ -37,11 +41,11 @@ public class Reservation {
         this.reservatedDate = reservatedDate;
     }
 
-    public boolean isCancel() {
+    public int getCancel() {
         return this.cancel;
     }
 
-    public void setCancel(boolean cancel) {
+    public void setCancel(int cancel) {
         this.cancel = cancel;
     }
 
@@ -83,5 +87,21 @@ public class Reservation {
 
 	public void setRno(int rno) {
 		this.rno = rno;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public Room getRoom() {
+		return room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
 	}
 }

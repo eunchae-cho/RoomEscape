@@ -17,9 +17,23 @@
     <select id="findAll" resultMap="UserMap">
     </select>
     
+    <select id="findByNo" resultMap="UserMap" parameterType="int">
+    SELECT
+    		  u_no 
+    		, u_name
+    		, u_id
+    		, u_password
+    		, u_phone
+    		, u_email
+    		, u_rdt
+    	FROM 
+    		escape_user
+    	WHERE u_no = #{no}
+    </select>
+    
     <select id="findByIdPassword" resultMap="UserMap" parameterType="map">
     	SELECT
-    		  u_no
+    		  u_no 
     		, u_name
     		, u_id
     		, u_password
@@ -34,10 +48,24 @@
     		u_password = password(#{password})
     </select>
     
+    <select id="findPassword" resultMap="UserMap" parameterType="String">
+    	SELECT
+    		 password(#{password}) AS u_password
+    </select>
+    
     <insert id="add" parameterType="User">
     	INSERT INTO escape_user
     		(u_name, u_id, u_password, u_phone, u_email)
     	VALUES
     		(#{name}, #{id}, password(#{password}), #{phone}, #{email})
     </insert>
+    
+    <update id="update" parameterType="User">
+    	UPDATE escape_user
+    		SET
+    				u_email = #{email}
+    			,	u_phone = #{phone}
+    			,	u_password = password(#{password})
+    	WHERE u_no = #{no}
+    </update>
   </mapper>

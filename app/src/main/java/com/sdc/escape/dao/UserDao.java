@@ -6,5 +6,8 @@ import com.sdc.escape.domain.User;
 
 public interface UserDao {
 	User findByIdPassword(@Param("id") String id, @Param("password") String password) throws Exception;
+	User findByNo(int no) throws Exception;
     int add(User user) throws Exception;
+	User findPassword(String password) throws Exception;
+	int update(User user) throws Exception;
 }

@@ -67,9 +67,10 @@ public class AuthController {
 	
 	@PostMapping("/login")
 	public String loginForm(
-			String id,
+			String id, 
 			String password, 
 			String rememberMe,
+			boolean check,
 			HttpServletResponse res,
 			HttpSession session) throws Exception {
 		
@@ -84,10 +85,13 @@ public class AuthController {
 		
 		User loginUser = userService.get(id, password);
 	
-		// 로그인 에러페이지 이동 작
-//		if (user == null) {
-//		 	return
-//		}
+		// 아이디나 비밀번호가 일치하지 않을 
+		if (loginUser == null) {
+			check = false;
+		 	return "auth/login";
+		}
+		
+		check = true;
 		session.setAttribute("loginUser", loginUser);
 		return "redirect:../";
 	}

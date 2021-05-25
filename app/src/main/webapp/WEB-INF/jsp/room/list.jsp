@@ -15,7 +15,7 @@
       <c:forEach items="${roomList}" var="room">
           <div class="row featurette">
             <div class="col-md-7">
-              <h2 class="featurette-heading"><a href="./detail?no=${room.no}" class="nav-link px-2" style="color: coral;">${room.title}</a></h2><br>
+              <h2 class="featurette-heading"><a href="./detail?no=${room.no}" class="nav-link px-2" style="color: indianred;">${room.title}</a></h2><br>
               <p class="lead">난이도: &nbsp ${room.level}</p>
               <p class="lead">인원: &nbsp ${room.participant} &nbsp 명</p>
             </div>

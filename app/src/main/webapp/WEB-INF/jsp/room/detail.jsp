@@ -41,7 +41,7 @@
     </div>
 
     <div style="text-align: center;">
-      <h3><a href="#">예약하러 가기>></a></h3>
+      <h3><a href="<%=request.getContextPath()%>/reservation/">예약하러 가기>></a></h3>
     </div>
   </div>
 </main>

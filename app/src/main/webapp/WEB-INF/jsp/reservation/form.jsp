@@ -63,11 +63,11 @@
 		                    
 		                   <div class="select-box">
 		                       예약자:
-		                       <input type="text" style="margin-left: 50px;" readonly>
+		                       <input type="text" style="margin-left: 50px;" value="${sessionScope.loginUser.name}" readonly>
 		                   </div>
 		                   <div class="select-box">
 		                       연락처:
-		                       <input type="text" style="margin-left: 50px;" readonly>
+		                       <input type="text" style="margin-left: 50px;" value="${sessionScope.loginUser.phone}" readonly>
 		                   </div>
 		
 		                   <br>
@@ -105,12 +105,12 @@
      		}
      		
      		$.ajax({
-     			url: "roomTimeList",
-     			type: "POST",
+     			url: 'roomTimeList',
+     			type: 'POST',
      			data: {
      				no : param
      			},
-     			dataType: "json",
+     			dataType: 'json',
      			success: function(data) {
      				console.log(data);
      				if (data.length < 1) { 

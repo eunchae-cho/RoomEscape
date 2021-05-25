@@ -33,6 +33,10 @@ body {
     background-color: black;
   }
   
+  a:hover {
+  	color: darksalmon;
+  }
+  
   
   /* CUSTOMIZE THE CAROUSEL
   -------------------------------------------------- */
@@ -179,6 +183,118 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+.btn-color {
+	color: #fff;
+    background-color: darksalmon;
+    border-color: darksalmon;
+}
+
+.btn-color:hover {
+	color: #fff;
+	background: #eba489;
+}
+
+.btn-outline-color {
+	color: darksalmon;
+	border-color: darksalmon;
+}
+
+.btn-outline-color:hover {
+	color: #fff;
+	background-color: darksalmon;
+	border-color: darksalmon;
+}
+
+  /* MYPAGE CSS
+  -------------------------------------------------- */
+  
+  .mypage-container {
+    margin-top: 200px;
+  }
+  
+  .category-container{
+  	display: flex;
+    align-content: space-around;
+  }
+  
+  .item {
+  	padding-inline: 30px;
+  }
+  
+  .item h5 {
+  margin-block: 20px;
+  }
+  
+  .item a {
+  text-decoration: none;
+  color: white;
+  }
+  
+  .item a:hover {
+  background-color: darksalmon;
+  }
+  
+   .item a:active {
+  background-color: darksalmon;
+  }
+  
+   .item a:focus {
+  background-color: darksalmon;
+  }
+  
+   .item a:visited {
+  background-color: darksalmon;
+  }
+  
+  .table {
+  	text-align: center;
+  }
+   .table td {
+  	color: lightslategray;
+  }
+  
+  .table th {
+  	color: peachpuff;
+  }
+  
+  thead, tbody, tfoot, tr, td, th {
+    border-color: inherit;
+    border-style: unset;
+    border-width: 0;
+}
+  
+  .btn-cancel {
+    padding-block: 2px;
+    color: purple;
+    border-color: purple;
+  }
+  
+  .btn-cancel:hover {
+	color: #fff;
+	background-color: purple;
+	border-color: purple;
+}
+  
+  .btn-style {
+    padding-block: 2px;
+    margin-block: 4px;
+    color: #fff;
+    background-color: dimgrey;
+    border-color: dimgrey;
+  }
+  
+  .btn-style:hover {
+  	cursor: pointer;
+  	color: #fff;
+  	background: black;
+  	border-color: white;
+  }
+  
+  .inputBox {
+    margin-left: 10px;
+    border-radius: 5px;
+  }
 
   /* FOOTER CSS
   -------------------------------------------------- */

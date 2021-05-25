@@ -20,7 +20,22 @@ public class DefaultUserService implements UserService{
 	}
 	
 	@Override
+	public User userByNo(int no) throws Exception {
+		return userDao.findByNo(no);
+	}
+	
+	@Override
 	public int add(User user) throws Exception {
 		return userDao.add(user);
+	}
+	
+	@Override
+	public User findPassword(String password) throws Exception {
+		return userDao.findPassword(password);
+	}
+	
+	@Override
+	public int update(User user) throws Exception {
+		return userDao.update(user);
 	}
 }
