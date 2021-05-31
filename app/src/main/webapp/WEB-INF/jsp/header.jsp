@@ -5,19 +5,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>index</title>
+<title>헤더</title>
 <link href="<%=request.getContextPath() %>/bootstrap/css/bootstrap.rtl.css?var=2"  rel="stylesheet"  >
 <link href="<%=request.getContextPath() %>/bootstrap/css/style.css?var=2" rel="stylesheet">
 </head>
 <body>
     <header class="bg-dark d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
         <p class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-decoration-none"></p>
+        
+         <input type="hidden" id="loginUser" value="${sessionScope.loginUser}">
     
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
           <li><a href="<%=request.getContextPath()%>/" class="nav-link px-2 font-light">Home</a></li>
-          <li><a href="<%=request.getContextPath()%>/room/list" class="nav-link px-2 font-light">Rooms</a></li>
-          <li><a href="<%=request.getContextPath()%>/reservation/" class="nav-link px-2 font-light">Reservation</a></li>
-          <li><a href="<%=request.getContextPath()%>/mypage/" class="nav-link px-2 font-light">My page</a></li>
+          <li><a href="<%=request.getContextPath()%>/room/list" class="nav-link px-2 font-light">Room</a></li>
+          <li><a href="<%=request.getContextPath()%>/reservation/" class="nav-link px-2 font-light needLogin" onClick="checkLogin()">Reservation</a></li>
+          <li><a href="<%=request.getContextPath()%>/mypage/" class="nav-link px-2 font-light needLogin" onClick="checkLogin()">My page</a></li>
         </ul>
         
         <c:if test="${not empty sessionScope.loginUser}">
@@ -45,6 +47,16 @@
 		} else {
 		}
 	});
+	
+	// 로그인이 필요한 링크 알림 설정
+	function checkLogin() {
+		var loginUser = $('#loginUser').val();
+		 console.log(loginUser);
+		if (loginUser == '') {
+			alert('로그인이 필요합니다.');
+			$('.needLogin').attr('href', '<%=request.getContextPath()%>/auth/login');
+		}
+	};
 </script>
 </body>
 </html>

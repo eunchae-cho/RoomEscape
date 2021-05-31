@@ -14,7 +14,7 @@
         <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
+              <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#212121" stroke="#808080"/></svg>
               <div class="container">
                 <div class="carousel-caption">
                   <h1>예약 안내</h1>
@@ -32,7 +32,7 @@
                    <div class="reservation-content">
 						<div class="select-box">
 	                        <label for="selectRoom">룸테마: </label>
-	                        <select id="selectRoom" name="roomNo" onchange="setRoomNo(this.value);" style="width: 200px; margin-left: 36px;">
+	                        <select id="selectRoom" name="roomNo" onchange="setRoomNo(this.value);" style="width: 200px; margin-left: 36px; padding-block: 3px;">
 	                            <option selected>선택</option>
 	                            <c:forEach items="${roomList}" var="room">
 	                                <option value="${room.no}">${room.title}</option>
@@ -47,27 +47,29 @@
                    
                    			<div class="select-box">
 	                        <label for="selectTime">시간: </label>
-	                        <select id="selectTime" name="roomTime" style="width: 200px; margin-left: 50px; "></select>
+	                        <select id="selectTime" name="roomTime" style="width: 200px; margin-left: 50px; padding-block: 3px; ">
+								<option value="">선택</option>	                        
+	                        </select>
                           </div>
                           
                           <div class="select-box">
 	                        <label for="selectParticipant">인원: </label>
-	                        <input type="radio" id="participant" name="participant" style="margin-left:50px" value="2">2
-	                        <input type="radio" id="participant" name="participant" style="margin-left:50px" value="3">3
-	                        <input type="radio" id="participant" name="participant" style="margin-left:50px" value="4">4
-	                        <input type="radio" id="participant" name="participant" style="margin-left:50px" value="5">5
-	                        <input type="radio" id="participant" name="participant" style="margin-left:50px" value="6">6
+	                        <input type="radio" id="participant" name="participant" style="margin-left:50px" value="2"> 2
+	                        <input type="radio" id="participant" name="participant" style="margin-left:50px" value="3"> 3
+	                        <input type="radio" id="participant" name="participant" style="margin-left:50px" value="4"> 4
+	                        <input type="radio" id="participant" name="participant" style="margin-left:50px" value="5"> 5
+	                        <input type="radio" id="participant" name="participant" style="margin-left:50px" value="6"> 6
                           </div>
 
 		                   <br>
 		                    
 		                   <div class="select-box">
 		                       예약자:
-		                       <input type="text" style="margin-left: 50px;" value="${sessionScope.loginUser.name}" readonly>
+		                       <input type="text" style="margin-left: 35px; border-radius: 5px;" value="${sessionScope.loginUser.name}" readonly>
 		                   </div>
 		                   <div class="select-box">
 		                       연락처:
-		                       <input type="text" style="margin-left: 50px;" value="${sessionScope.loginUser.phone}" readonly>
+		                       <input type="text" style="margin-left: 35px; border-radius: 5px;" value="${sessionScope.loginUser.phone}" readonly>
 		                   </div>
 		
 		                   <br>
@@ -81,7 +83,7 @@
                 </div>
             <hr class="featurette-divider">
             <div style="text-align: center;">
-                <button type="submit" id="reservationBtn" class="btn btn-primary">예약하기</button>
+                <button type="submit" id="reservationBtn" class="btn btn-find" style="padding-block: 5px;">예약하기</button>
             </div>
 		  
 		  </form>
@@ -99,10 +101,12 @@
      	function setRoomNo(param) {
      		var $target = $('#selectTime option:selected').val();
      		
-     		if (param == "") {
+     		if (param == '') {
      			$target.append('<option value="">선택</option>');
      			return;
      		}
+     		
+     		
      		
      		$.ajax({
      			url: 'roomTimeList',
@@ -112,6 +116,8 @@
      			},
      			dataType: 'json',
      			success: function(data) {
+     				// onchange 시 전 데이터 초기화 해서 출력
+     				$('#selectTime').html('');
      				console.log(data);
      				if (data.length < 1) { 
      					$('#selectTime').append('<option value="">선택</option>');

@@ -14,7 +14,7 @@
     <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
+          <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#212121" stroke="#808080""/></svg>
           <div class="container">
             <div class="carousel-caption">
               <h1>테마 소개</h1>
@@ -23,11 +23,13 @@
         </div>
       </div>
     </div>
+    
+    <input type="hidden" id="loginUser" value="${sessionScope.loginUser}">
 
     <div style="text-align: center; margin-top: 200px;">
       <img src="${room.photo}" width="500" height="500">
     </div>
-    <div class="col-md-5" style="margin: 0 auto; margin-bottom: 200px; text-align: center;">
+    <div class="col-md-5" style="margin: 0 auto; margin-bottom: 100px; text-align: center;">
       <h2 style="text-align: center; padding-block:50px;">${room.title}</h2>
       <p style="text-align: center;">${room.level}</p
       ><br>
@@ -41,11 +43,22 @@
     </div>
 
     <div style="text-align: center;">
-      <h3><a href="<%=request.getContextPath()%>/reservation/">예약하러 가기>></a></h3>
+      <h3><a href="<%=request.getContextPath()%>/reservation/" class="needLogin" onClick="checkLogin()" style="text-decoration: none; color: mediumvioletred;">예약하러 가기 >></a></h3>
     </div>
   </div>
 </main>
 
 <jsp:include page="../footer.jsp"></jsp:include>  
+<script>
+//로그인이 필요한 링크 알림 설정
+function checkLogin() {
+	var loginUser = $('#loginUser').val();
+	 console.log(loginUser);
+	if (loginUser == '') {
+		alert('로그인이 필요합니다.');
+		$('.needLogin').attr('href', '<%=request.getContextPath()%>/auth/login');
+	}
+};
+</script>
 </body>
 </html>

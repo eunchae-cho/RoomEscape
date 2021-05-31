@@ -4,7 +4,7 @@
   <html>
   <head>
   <meta charset="UTF-8">
-  <title>[room escape] 마이페이지</title>
+  <title>[room escape] 마이페이지 - 예약 확인 </title>
   </head>
   <body>
   <jsp:include page="../header.jsp"></jsp:include>  
@@ -13,7 +13,7 @@
 	        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
 	          <div class="carousel-inner">
 	            <div class="carousel-item active">
-	              <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
+	              <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%"fill="#212121" stroke="#808080"/></svg>
 	              <div class="container">
 	                <div class="carousel-caption">
 	                  <h1>회원 정보</h1>
@@ -28,15 +28,7 @@
 	        <hr class="featurette-divider">
 	        
 	        <div class="category-container">
-	       	 <div class="item"  style="width: 250px;">
-			        <p>아이디: &nbsp; ${sessionScope.loginUser.id}</p>
-			        <p>이름: &nbsp; ${sessionScope.loginUser.name}</p>
-			         <button type="button" class="btn btn-style" id="logout">로그아웃</button>
-			        <hr class="featurette-divider" style="margin: 0; margin-block: 30px;">
-			        <h5><a href="#">예약 확인</a></h5>
-			        <h5 ><a href="#">이용 내역</a></h5>
-			        <h5><a href="#">내 리뷰 보기</a></h5>
-		        </div>
+	       	  <jsp:include page="./sidebar.jsp"></jsp:include>  
 	        
 		        <div class="item" style="flex-grow: 2;">
 		        	<table class="table table-sm">
@@ -103,7 +95,7 @@
 			if(status == 0) {
 			  	$('.table tbody tr')[i].children[4].innerText = '예약';
 			} else if (status == 1) {
-				$('.table tbody tr')[i].children[4].innerText = '예약 취소';
+				$('.table tbody tr')[i].children[4].innerText = '취소';
 			} 
 		}
 	});

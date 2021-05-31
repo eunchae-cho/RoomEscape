@@ -1,5 +1,8 @@
 package com.sdc.escape.service.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 
 import com.sdc.escape.dao.UserDao;
@@ -15,8 +18,16 @@ public class DefaultUserService implements UserService{
 	}
 	
 	@Override
-	public User get(String id, String password) throws Exception {
+	public User getByIdPassword(String id, String password) throws Exception {
 		return userDao.findByIdPassword(id, password);
+	}
+	
+	@Override
+	public User findIdByNameEmail(String name, String email) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		map.put("name", name);
+		map.put("email", email);
+		return userDao.findIdByNameEmail(map);
 	}
 	
 	@Override
@@ -32,6 +43,11 @@ public class DefaultUserService implements UserService{
 	@Override
 	public User findPassword(String password) throws Exception {
 		return userDao.findPassword(password);
+	}
+	
+	@Override
+	public User findSameId(String id) throws Exception {
+		return userDao.findSameId(id);
 	}
 	
 	@Override

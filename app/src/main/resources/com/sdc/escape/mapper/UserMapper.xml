@@ -48,9 +48,28 @@
     		u_password = password(#{password})
     </select>
     
+     <select id="findIdByNameEmail" resultMap="UserMap" parameterType="map">
+    	SELECT
+    			u_no
+    		 ,	u_id
+    	FROM 
+    		escape_user
+    	WHERE	
+    		u_name = #{name}
+    			AND
+    		u_email = #{email}
+    </select>
+    
     <select id="findPassword" resultMap="UserMap" parameterType="String">
     	SELECT
     		 password(#{password}) AS u_password
+    </select>
+    
+    <select id="findSameId" resultMap="UserMap" parameterType="String">
+    	SELECT
+    		 u_id
+    	FROM escape_user
+    	WHERE u_id = #{id}
     </select>
     
     <insert id="add" parameterType="User">

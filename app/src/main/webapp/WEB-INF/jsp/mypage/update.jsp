@@ -4,7 +4,7 @@
   <html>
   <head>
   <meta charset="UTF-8">
-  <title>[room escape] 마이페이지</title>
+  <title>[room escape] 마이페이지 - 회원 정보 수정</title>
   </head>
   <body>
   <jsp:include page="../header.jsp"></jsp:include>  
@@ -13,7 +13,7 @@
 	        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
 	          <div class="carousel-inner">
 	            <div class="carousel-item active">
-	              <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
+	              <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#212121" stroke="#808080"/></svg>
 	              <div class="container">
 	                <div class="carousel-caption">
 	                  <h1>회원 정보</h1>
@@ -42,23 +42,27 @@
 			      <form action="update" method="post">
 			      	<input type="hidden" name="no" value="${sessionScope.loginUser.no}">
 		        	<div style="width: 500px; margin: 0 auto;">
-			        	<p>아이디: &nbsp; ${sessionScope.loginUser.id}</p>
-			        	<p>이름: &nbsp; ${sessionScope.loginUser.name}</p>
+			        	<p>아이디: &emsp;&emsp;&emsp;&emsp;&emsp; ${sessionScope.loginUser.id}</p>
+			        	<p>이름: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ${sessionScope.loginUser.name}</p>
 			        	<div style="margin-bottom: 1rem;">
 				        	<label for="email">이메일: </label>
-				        	<input type="email" name="email" class="inputBox">
+				        	<input type="email"  id="email" name="email" class="inputBox" style="margin-left: 79px;" value="${sessionScope.loginUser.email}" required>
+			        		<div id="email-feedback" style="padding-left: 28%; margin-top:3px; font-size: 14px; color: crimson;"></div>
 			        	</div>
 			        	<div style="margin-bottom: 1rem;">
 			        		<label for="phone">연락처: </label>
-			        		<input type="text" name="phone" class="inputBox">
+			        		<input type="tel" id="phone" name="phone" class="inputBox" style="margin-left: 79px;" value="${sessionScope.loginUser.phone}" required>
+			        		<div id="phone-feedback" style="padding-left: 28%; margin-top:3px; font-size: 14px; color: crimson;"></div>
 			        	</div>
 			        	<div style="margin-bottom: 1rem;">
-			        		<label for="password">비밀번호: </label>
-			        		<input type="password" name="password" class="inputBox">
+			        		<label for="password">새 비밀번호: </label>
+			        		<input type="password" id="password" name="password" class="inputBox" style="margin-left: 44px;" minlength="8" maxlength="16" required>
+							<div id="password-feedback" style="padding-left: 28%; margin-top:3px; font-size: 14px; color: crimson;"></div>	        	    
 		        	    </div>
 		        	    <div style="margin-bottom: 1rem;">
-			        		<label for="againPassword">비밀번호 확인: </label>
-			        		<input type="password" name="againPassword" class="inputBox">
+			        		<label for="againPassword">새 비밀번호 확인: </label>
+			        		<input type="password" id="confirmPassword" name="confirmPassword" class="inputBox"minlength="8" maxlength="16" required>
+			        		<div id="confirmPassword-feedback" style="padding-left: 28%; margin-top:3px; font-size: 14px;"></div>
 		        	    </div>
 		        	</div>
 		        	<div style="text-align: center; margin-top: 50px;">
@@ -75,6 +79,7 @@
 
  <jsp:include page="../footer.jsp"></jsp:include>  
  <script>
+ 	
 	// 로그아웃 버튼 클릭 시
 	$('#logout').on('click', function() {
 		var result = confirm('로그아웃 하시겠습니까?');
@@ -86,12 +91,72 @@
 	
 	// 수정 버튼 클릭 시
 	$('#updateBtn').on('click', function() {
-		var result = confirm('수정 하시겠습니까?');
-		if(result) {
-			location.replace('<%=request.getContextPath()%>/mypage/');
-		} else {
+		 if (!checkEmail($('#email').val())) {
+			return false;
 		}
+		 if (!checkPhone($('#phone').val())) {
+			 return false;
+		 }
+		 if (!checkPassword($('#password').val())) {
+			 return false;
+		 } 
+		 if (!checkConfirm()) {
+			 return false;
+		 }
+			 confirm('수정하시겠습니까?');
+			 return true;
 	});
+	
+	function empty(value) {
+		if (value == '') {
+			return true;
+		}
+		return false;
+	}
+	
+	function checkEmail(email) {
+		var emailRegExp = /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
+		if (!emailRegExp.test(email) || empty(email)) {
+			$('#email-feedback').html('이메일 형식으로 입력해주세요.');
+			return false;
+		}
+		return true;
+	}
+	
+	function checkPhone(phone) {
+		var phoneRegExp = /^0[0-9]{1,2}-[0-9]{3,4}-[0-9]{4}$/;
+		if (!phoneRegExp.test(phone) || empty(phone)) {
+			$('#phone-feedback').html(' "-"을 포함해 입력해주세요.');
+		}
+		$('#phone-feedback').html('');
+		return true;
+	}
+	
+	// 비밀번호 조건 확인
+	function checkPassword(password) {
+		if (password < 8 || password > 16 || empty(password)) {
+			$('#password-feedback').html('최소 8 ~ 16자 이내로 입력해주세요.');
+			return false;
+		}
+		$('#password-feedback').html('');
+		return true;
+	}
+	
+	function checkConfirm() {
+		// 비밀번호 확인
+	 	$('#confirmPassword').on('keyup', function(){
+	 		if ($('#password').val() == $('#confirmPassword').val()) {
+	 			$('#confirmPassword-feedback').css('color', 'lightgreen');
+	 			$('#confirmPassword-feedback').html('  비밀번호가 일치합니다.');
+	 			return true;
+	 		}	else {
+	 			$('#confirmPassword-feedback').css('color', 'crimson');
+	 			$('#confirmPassword-feedback').html('  비밀번호가 같지 않습니다.');
+	 			return false;
+	 		}
+	 	});
+	}
+	
 </script>
  </body>
  </html>

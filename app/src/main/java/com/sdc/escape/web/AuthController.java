@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sdc.escape.domain.User;
@@ -21,11 +22,13 @@ public class AuthController {
 	
 	@Autowired UserService userService;
 
+	// 회원 가입
 	@GetMapping("/signup")
 	public String signup() throws Exception {
 		return "auth/signup";
 	}
 	
+	// 회원 가입
 	@PostMapping("/signup")
 	public String signupForm(
 			String name, 
@@ -45,6 +48,25 @@ public class AuthController {
 		return "redirect:../";
 	}
 	
+	// 아이디 중복 확인
+	@ResponseBody
+	@GetMapping("/confirmId")
+	public int confirmId(String id) throws Exception {
+		int check = 0;
+		try {
+			User user = userService.findSameId(id);
+			if (id.equals(user.getId())) {
+				// 중복되는 아이디일 때 '1'
+				check = 1;
+			} 
+			// 중복되지 않는 아이디일 때 '0'으로 리턴
+		} catch (NullPointerException e) {
+			check = 0;
+		}
+		return check;
+	}
+	
+	// 로그인
 	@GetMapping("/login")
 	public ModelAndView login(HttpServletRequest req) throws Exception {
 		
@@ -65,12 +87,13 @@ public class AuthController {
 		return mv;
 	}
 	
+	// 로그인
+	@ResponseBody
 	@PostMapping("/login")
 	public String loginForm(
 			String id, 
 			String password, 
 			String rememberMe,
-			boolean check,
 			HttpServletResponse res,
 			HttpSession session) throws Exception {
 		
@@ -83,17 +106,14 @@ public class AuthController {
 		}
 		res.addCookie(idCookie);
 		
-		User loginUser = userService.get(id, password);
-	
-		// 아이디나 비밀번호가 일치하지 않을 
-		if (loginUser == null) {
-			check = false;
-		 	return "auth/login";
-		}
+		User loginUser = userService.getByIdPassword(id, password);
 		
-		check = true;
+		if (loginUser == null) {
+			return "fail";
+		}
+	
 		session.setAttribute("loginUser", loginUser);
-		return "redirect:../";
+		return "ok";
 	}
 	
 	@GetMapping("/logout")
@@ -103,5 +123,23 @@ public class AuthController {
 			session.invalidate();
 		}
 		return "redirect:../";
+	}
+	
+	// 아이디 찾기
+	@GetMapping("/findId")
+	public String findId() throws Exception{
+		return "auth/findId";
+	}
+	
+	@ResponseBody
+	@PostMapping("/findId")
+	public User findIdAjax(String name, String email) throws Exception{
+		return userService.findIdByNameEmail(name, email);
+	}
+	
+	// 패스워드 찾기
+	@GetMapping("/findPassword")
+	public String findPassword() throws Exception{
+		return "auth/findPassword";
 	}
 }

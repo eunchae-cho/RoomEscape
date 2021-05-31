@@ -1,5 +1,6 @@
 package com.sdc.escape.web;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -40,6 +41,8 @@ public class MypageController {
 	public String confirmPassword(String password, HttpSession session) throws Exception {
 		User user = userService.findPassword(password);
 		User loginUser = (User) session.getAttribute("loginUser");
+		System.out.println(user.getPassword());
+		System.out.println(loginUser.getPassword());
 		if (loginUser.getPassword().equals(user.getPassword())) {
 			return "ok";
 		}
@@ -60,6 +63,9 @@ public class MypageController {
 		userService.update(user);
 		
 		// 로그인유저도 정보 업데이트
+		// 비밀번호 암호화 상태로 세션에 저장하기 위해
+		// 업데이트 후 새로 조회
+		user = userService.userByNo(no);
 		session.setAttribute("loginUser", user);
 		return "redirect:./";
 	}
@@ -84,6 +90,20 @@ public class MypageController {
 		res.setStatus(1);	// 예약 취소 
 		reservationService.cancel(res);
 		
-		return "redirect:mypage/reservation";
+		return "redirect:/mypage/reservation";
+	}
+	
+	@GetMapping("/history")
+	public String history(Model model, HttpSession session) throws Exception {
+		User loginUser = (User) session.getAttribute("loginUser");
+		List<Reservation> list = reservationService.listByUno(loginUser.getNo());
+		List<Reservation> historyList = new ArrayList<>();
+		for (int i = 0; i < list.size(); i++) {
+			if(list.get(i).getStatus() == 2) {
+				historyList.add(list.get(i));
+			}
+		}
+		model.addAttribute("historyList", historyList);
+		return "mypage/history";
 	}
 }
