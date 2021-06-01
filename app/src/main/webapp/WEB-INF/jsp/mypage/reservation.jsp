@@ -67,15 +67,6 @@
 
  <jsp:include page="../footer.jsp"></jsp:include>  
  <script>
-	// 로그아웃 버튼 클릭 시
-	$('#logout').on('click', function() {
-		var result = confirm('로그아웃 하시겠습니까?');
-		if(result) {
-			location.replace('<%=request.getContextPath()%>/auth/logout');
-		} else {
-		}
-	});
-	
 	// 예약 취소 버튼 클릭 시
 	$('#cancelBtn').on('click', function() {
 		var result = confirm('예약을 취소 하시겠습니까?');

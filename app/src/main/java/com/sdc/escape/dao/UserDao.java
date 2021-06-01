@@ -14,4 +14,5 @@ public interface UserDao {
 	User findPassword(String password) throws Exception;
 	User findSameId(String id) throws Exception;
 	int update(User user) throws Exception;
+	int deleteByNo(int no) throws Exception;
 }

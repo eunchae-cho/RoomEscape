@@ -54,4 +54,9 @@ public class DefaultUserService implements UserService{
 	public int update(User user) throws Exception {
 		return userDao.update(user);
 	}
+	
+	@Override
+	public int deleteByNo(int no) throws Exception {
+		return userDao.deleteByNo(no);
+	}
 }

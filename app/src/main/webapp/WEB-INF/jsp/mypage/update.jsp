@@ -28,15 +28,7 @@
 	        <hr class="featurette-divider">
 	        
 	        <div class="category-container">
-	       	 <div class="item"  style="width: 250px;">
-			        <p>아이디: &nbsp; ${sessionScope.loginUser.id}</p>
-			        <p>이름: &nbsp; ${sessionScope.loginUser.name}</p>
-			         <button type="button" class="btn btn-style" id="logout">로그아웃</button>
-			        <hr class="featurette-divider" style="margin: 0; margin-block: 30px;">
-			        <h5><a href="<%=request.getContextPath()%>/mypage/reservation" id="category">예약 확인</a></h5>
-			        <h5 ><a href="#">이용 내역</a></h5>
-			        <h5><a href="#">내 리뷰 보기</a></h5>
-		        </div>
+	         <jsp:include page="./sidebar.jsp"></jsp:include>  
 	          
 		        <div id="edit" class="item" style="flex-grow: 2;">
 			      <form action="update" method="post">
@@ -46,22 +38,22 @@
 			        	<p>이름: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ${sessionScope.loginUser.name}</p>
 			        	<div style="margin-bottom: 1rem;">
 				        	<label for="email">이메일: </label>
-				        	<input type="email"  id="email" name="email" class="inputBox" style="margin-left: 79px;" value="${sessionScope.loginUser.email}" required>
+				        	<input type="email"  id="email" name="email" class="inputBox" style="margin-left: 79px;" value="${sessionScope.loginUser.email}">
 			        		<div id="email-feedback" style="padding-left: 28%; margin-top:3px; font-size: 14px; color: crimson;"></div>
 			        	</div>
 			        	<div style="margin-bottom: 1rem;">
 			        		<label for="phone">연락처: </label>
-			        		<input type="tel" id="phone" name="phone" class="inputBox" style="margin-left: 79px;" value="${sessionScope.loginUser.phone}" required>
+			        		<input type="tel" id="phone" name="phone" class="inputBox" style="margin-left: 79px;" value="${sessionScope.loginUser.phone}">
 			        		<div id="phone-feedback" style="padding-left: 28%; margin-top:3px; font-size: 14px; color: crimson;"></div>
 			        	</div>
 			        	<div style="margin-bottom: 1rem;">
 			        		<label for="password">새 비밀번호: </label>
-			        		<input type="password" id="password" name="password" class="inputBox" style="margin-left: 44px;" minlength="8" maxlength="16" required>
+			        		<input type="password" id="password" name="password" class="inputBox" style="margin-left: 44px;" minlength="8" maxlength="16">
 							<div id="password-feedback" style="padding-left: 28%; margin-top:3px; font-size: 14px; color: crimson;"></div>	        	    
 		        	    </div>
 		        	    <div style="margin-bottom: 1rem;">
 			        		<label for="againPassword">새 비밀번호 확인: </label>
-			        		<input type="password" id="confirmPassword" name="confirmPassword" class="inputBox"minlength="8" maxlength="16" required>
+			        		<input type="password" id="confirmPassword" name="confirmPassword" class="inputBox"minlength="8" maxlength="16">
 			        		<div id="confirmPassword-feedback" style="padding-left: 28%; margin-top:3px; font-size: 14px;"></div>
 		        	    </div>
 		        	</div>
@@ -79,83 +71,87 @@
 
  <jsp:include page="../footer.jsp"></jsp:include>  
  <script>
- 	
-	// 로그아웃 버튼 클릭 시
-	$('#logout').on('click', function() {
-		var result = confirm('로그아웃 하시겠습니까?');
-		if(result) {
-			location.replace('<%=request.getContextPath()%>/auth/logout');
-		} else {
-		}
-	});
-	
 	// 수정 버튼 클릭 시
-	$('#updateBtn').on('click', function() {
-		 if (!checkEmail($('#email').val())) {
-			return false;
-		}
-		 if (!checkPhone($('#phone').val())) {
+ 	$('#updateBtn').on('click', function() {
+ 		var resultEmail = checkEmail($('#email').val());
+ 		var resultPhone = checkPhone($('#phone').val());
+ 		var resultPassword = checkPassword($('#password').val());
+ 		var resultConfirmPassword = checkAgainPassword($('#password').val(), $('#confirmPassword').val());
+		var validCnt = resultEmail + resultPhone + resultPassword + resultConfirmPassword;
+		 
+		 if (validCnt == 0) {
+			 var result = confirm('수정 하시겠습니까?');
+				if(result) {
+					location.href('<%=request.getContextPath()%>/mypage/');
+				} else {
+				}
+		 } else {
 			 return false;
 		 }
-		 if (!checkPassword($('#password').val())) {
-			 return false;
-		 } 
-		 if (!checkConfirm()) {
-			 return false;
-		 }
-			 confirm('수정하시겠습니까?');
-			 return true;
-	});
+ 	});
 	
-	function empty(value) {
+	// 값이 비었는지 확인
+	function checkEmpty(value) {
 		if (value == '') {
 			return true;
 		}
 		return false;
 	}
 	
+	// 이메일 확인
 	function checkEmail(email) {
 		var emailRegExp = /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
-		if (!emailRegExp.test(email) || empty(email)) {
+		if (!emailRegExp.test(email) || checkEmpty(email)) {
 			$('#email-feedback').html('이메일 형식으로 입력해주세요.');
-			return false;
+			return 1;
 		}
-		return true;
+		return 0;
 	}
 	
+	// 연락처 확인
 	function checkPhone(phone) {
 		var phoneRegExp = /^0[0-9]{1,2}-[0-9]{3,4}-[0-9]{4}$/;
-		if (!phoneRegExp.test(phone) || empty(phone)) {
+		if (!phoneRegExp.test(phone) || checkEmpty(phone)) {
 			$('#phone-feedback').html(' "-"을 포함해 입력해주세요.');
+			return 1;
 		}
 		$('#phone-feedback').html('');
-		return true;
+		return 0;
 	}
 	
-	// 비밀번호 조건 확인
+	// 새 비밀번호 확인 
 	function checkPassword(password) {
-		if (password < 8 || password > 16 || empty(password)) {
+		if (password.length< 8 || password.length > 16) {
 			$('#password-feedback').html('최소 8 ~ 16자 이내로 입력해주세요.');
-			return false;
+			return 1;
 		}
 		$('#password-feedback').html('');
-		return true;
+		return 0;
 	}
 	
-	function checkConfirm() {
-		// 비밀번호 확인
-	 	$('#confirmPassword').on('keyup', function(){
-	 		if ($('#password').val() == $('#confirmPassword').val()) {
-	 			$('#confirmPassword-feedback').css('color', 'lightgreen');
-	 			$('#confirmPassword-feedback').html('  비밀번호가 일치합니다.');
-	 			return true;
-	 		}	else {
-	 			$('#confirmPassword-feedback').css('color', 'crimson');
-	 			$('#confirmPassword-feedback').html('  비밀번호가 같지 않습니다.');
-	 			return false;
-	 		}
-	 	});
+	// 새 비밀번호 확인의 확인
+	function checkAgainPassword(password, confirmPassword) {
+		if (password != confirmPassword || checkEmpty(confirmPassword)) {
+			$('#confirmPassword-feedback').css('color', 'crimson');
+	 		$('#confirmPassword-feedback').html('비밀번호가 같지 않습니다.');
+			return 1;
+		}
+		$('#confirmPassword-feedback').html('');
+		return 0;
 	}
+	
+	// 비밀번호 확인
+	$('#confirmPassword').on('keyup', function() {
+	 	if ($('#password').val() == $('#confirmPassword').val()) {
+	 		$('#confirmPassword-feedback').css('color', 'lightgreen');
+	 		$('#confirmPassword-feedback').html('비밀번호가 일치합니다.');
+	 		return true;
+	 	}	else {
+	 		$('#confirmPassword-feedback').css('color', 'crimson');
+	 		$('#confirmPassword-feedback').html('비밀번호가 같지 않습니다.');
+	 		return false;
+	 	}
+	 });
 	
 </script>
  </body>

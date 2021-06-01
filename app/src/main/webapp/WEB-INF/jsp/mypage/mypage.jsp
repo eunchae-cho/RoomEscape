@@ -50,14 +50,6 @@
 
  <jsp:include page="../footer.jsp"></jsp:include>  
  <script>
-	// 로그아웃 버튼 클릭 시
-	$('#logout').on('click', function() {
-		var result = confirm('로그아웃 하시겠습니까?');
-		if(result) {
-			location.replace('<%=request.getContextPath()%>/auth/logout');
-		} else {
-		}
-	});
 	
 	// 회원 정보 수정 버튼 클릭 시
 	 $('#editBtn').on('click', function() {
@@ -95,8 +87,6 @@
 				},
 				dataType: 'text',
 				success: function(data) {
-					console.log(data);
-					
 					if (data == 'ok') {
 						location.href = '<%=request.getContextPath()%>/mypage/update';
 					} else {
@@ -108,6 +98,13 @@
 					console.log('error');
 				}
 		});
+	});
+	
+	// 비밀번호 입력 후 엔터 시
+	$(document).on('keydown', '#password', function(e) {
+		if (e.keyCode == 13) {
+			$('#passwordBtn').click();
+		}
 	});
 
 </script>

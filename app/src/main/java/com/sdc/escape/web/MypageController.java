@@ -41,8 +41,6 @@ public class MypageController {
 	public String confirmPassword(String password, HttpSession session) throws Exception {
 		User user = userService.findPassword(password);
 		User loginUser = (User) session.getAttribute("loginUser");
-		System.out.println(user.getPassword());
-		System.out.println(loginUser.getPassword());
 		if (loginUser.getPassword().equals(user.getPassword())) {
 			return "ok";
 		}
@@ -105,5 +103,15 @@ public class MypageController {
 		}
 		model.addAttribute("historyList", historyList);
 		return "mypage/history";
+	}
+	
+	@GetMapping("/removeAccount") 
+	public String removeAccount() throws Exception {
+		return "mypage/removeAccount";
+	}
+	
+	@PostMapping("/removeAccount/remove")
+	public void remove(int no) throws Exception {
+		userService.deleteByNo(no);
 	}
 }

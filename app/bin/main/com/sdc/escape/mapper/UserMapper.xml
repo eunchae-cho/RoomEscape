@@ -87,4 +87,10 @@
     			,	u_password = password(#{password})
     	WHERE u_no = #{no}
     </update>
+    
+    <delete id="deleteByNo" parameterType="int">
+    	DELETE 
+    	FROM escape_user
+    	WHERE u_no = #{no}
+    </delete>
   </mapper>

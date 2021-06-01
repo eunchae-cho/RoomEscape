@@ -65,15 +65,6 @@
 
  <jsp:include page="../footer.jsp"></jsp:include>  
  <script>
-	// 로그아웃 버튼 클릭 시
-	$('#logout').on('click', function() {
-		var result = confirm('로그아웃 하시겠습니까?');
-		if(result) {
-			location.replace('<%=request.getContextPath()%>/auth/logout');
-		} else {
-		}
-	});
-	
 	$(function() {
 		// 상태 번호별로 알맞게 출력
 		var length = $('.table tbody tr').length;

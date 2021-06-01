@@ -38,11 +38,10 @@
 </main>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script>
-// 로그인 버튼 클릭 시
-// 아이디와 비밀번호가 올바른지 확인
+	// 로그인 버튼 클릭 시
+	// 아이디와 비밀번호가 올바른지 확인
 	$('#loginBtn').on('click', function() {
 		var formData = $('#form').serialize();
-		
 		 $.ajax({
 				 url: 'login',
 				 type: 'POST',
@@ -58,9 +57,14 @@
 				 error: function() {
 					 console.log('error');
 				 }
-		 });
+		});
 	});
-	
+	// 로그인 버튼 엔터 시
+	$('#password').on('keydown', function(e) {
+		if (e.keyCode == 13) {
+			$('#loginBtn').click();
+		}
+	});
 </script>
 </body>
 </html>
