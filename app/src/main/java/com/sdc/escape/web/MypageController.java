@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.sdc.escape.domain.Reservation;
+import com.sdc.escape.domain.Room;
 import com.sdc.escape.domain.User;
 import com.sdc.escape.service.ReservationService;
 import com.sdc.escape.service.UserService;
@@ -26,8 +28,28 @@ public class MypageController {
 	@Autowired UserService userService;
 	
 	@GetMapping("/")
-	public String mypage() throws Exception {
-		return "mypage/mypage";
+	public ModelAndView mypage(HttpSession session) throws Exception {
+		User loginUser = (User) session.getAttribute("loginUser");
+		ModelAndView mv = new ModelAndView();
+		// 만약 로그인되어 있지 않다면 로그인 페이지로 리턴
+		if (loginUser == null) {
+			mv.setViewName("auth/login");
+			return mv;
+		}
+		List<Reservation> list = reservationService.listByUno(loginUser.getNo());
+		int size = list.size();
+		Reservation reservation = new Reservation();
+		reservation.setNo(list.get(0).getNo());
+		reservation.setReservatedDate(list.get(0).getReservatedDate());
+		reservation.setRoomTime(list.get(0).getRoomTime());
+		Room room = new Room();
+		room.setTitle(list.get(0).getRoom().getTitle());
+		reservation.setRoom(room);
+		
+		mv.addObject("recentRes", reservation);
+		mv.addObject("size", size);
+		mv.setViewName("mypage/mypage");
+		return mv;
 	}
 	
 	@ResponseBody
@@ -45,6 +67,11 @@ public class MypageController {
 			return "ok";
 		}
 		return "fail";
+	}
+	
+	@GetMapping("info")
+	public String info() throws Exception {
+		return "mypage/info";
 	}
 	
 	@GetMapping("update")
@@ -110,8 +137,12 @@ public class MypageController {
 		return "mypage/removeAccount";
 	}
 	
-	@PostMapping("/removeAccount/remove")
-	public void remove(int no) throws Exception {
-		userService.deleteByNo(no);
+	@GetMapping("/removeAccount/remove")
+	public void remove(HttpSession session) throws Exception {
+		User loginUser =(User)  session.getAttribute("loginUser");
+		if (loginUser != null) {
+			userService.deleteByNo(loginUser.getNo());
+			session.invalidate();
+		}
 	}
 }

@@ -24,33 +24,23 @@
 	        </div>
 	        
 	        <div class="mypage-container">
+	        <h3 style="margin-left: 70px;"><a href="<%=request.getContextPath()%>/mypage/" style="text-decoration: none; color: white;">내 정보</a></h3>
 	        <hr class="featurette-divider">
-	     
-	        <div class="my_wrap">
-	        	
-	         <jsp:include page="./sidebar.jsp"></jsp:include>  
-	        	
-	        	<div class="article_right">
-	        		<h5 style="margin-bottom: 10px; margin-left: 10px;">최근 예약</h5>
-	        		<table class="table">
-					  <thead>
-					    <tr>
-					      <th scope="col" style="width: 15%">예약 번호</th>
-					      <th scope="col" style="width: 20%">날짜</th>
-					      <th scope="col" style="width: 20%">시간</th>
-					      <th scope="col" style="width: 45%">룸 테마</th>
-					    </tr>
-					  </thead>
-					  <tbody style="border-bottom: #41464b; border-bottom-style: hidden;">
-					    <tr>
-					      <td style="padding-block: 15px;">${recentRes.no}</td>
-					      <td style="padding-block: 15px;">${recentRes.reservatedDate}</td>
-					      <td style="padding-block: 15px;">${recentRes.roomTime}</td>
-					      <td style="padding-block: 15px;">${recentRes.room.title}   &nbsp;&nbsp; 외 ${size}건</td>
-					    </tr>
-					  </tbody>
-					</table>
-	        	</div>
+	        
+	        <div class="category-container">
+	       	  <jsp:include page="./sidebar.jsp"></jsp:include>  
+	        
+		        <div id="edit" class="item" style="flex-grow: 2;">
+		        	<div style="width: 500px; margin: 0 auto;">
+			        	<p>아이디: &nbsp; ${sessionScope.loginUser.id}</p>
+			        	<p>이름: &nbsp; ${sessionScope.loginUser.name}</p>
+			        	<p>이메일: &nbsp; ${sessionScope.loginUser.email}</p>
+			        	<p>연락처: &nbsp; ${sessionScope.loginUser.phone}</p>
+		        	</div>
+		        	<div style="text-align: center; margin-top: 50px;">
+		        	<button type="button" id="editBtn" class="btn btn-style">회원 정보 수정</button>
+		        	</div>
+		        </div>
 	        </div>
 	        
 	        <hr class="featurette-divider">

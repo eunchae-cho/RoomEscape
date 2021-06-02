@@ -84,6 +84,7 @@
 				if(result) {
 					location.href('<%=request.getContextPath()%>/mypage/');
 				} else {
+					return false;
 				}
 		 } else {
 			 return false;

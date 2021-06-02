@@ -47,6 +47,6 @@ public class ReservationController {
 		reservation.setRno(roomNo);
 		reservation.setUno(1);
 		reservationService.add(reservation);
-		return "redirect:../room/list";
+		return "redirect:/reservation/";
 	}
 }

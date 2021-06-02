@@ -29,7 +29,6 @@
     		<div id="password-feedback" style="font-size: smaller; margin-left: 127px; text-align: left;"></div>
     </div>
     <div style="text-align: center; margin-top: 45px;">
-    	<input type="hidden" name="no" value="${sessionScope.loginUser.no}">
 	    <a id="removeBtn" class="btn btn-lg btn-primary" href="#" role="submit" style="font-size: unset; padding-block: 4px;'">탈퇴하기</a>
     </div>
   </div>
@@ -96,7 +95,7 @@
  		} else {
  			var result = confirm('회원 탈퇴를 하시겠습니까?');
  			if (result) {
- 				location.href('<%=request.getContextPath()%>/mypage/removeAccount/remove');
+ 				location.href = '<%=request.getContextPath()%>/mypage/removeAccount/remove';
  				self.close();
  				window.opener.location.href='<%=request.getContextPath()%>/';
  			}

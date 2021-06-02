@@ -81,6 +81,10 @@ public class AuthController {
 				}
 			}
 		}
+		// 이전페이지 기억하고 세션에 저장
+		String referer = req.getHeader("Referer");
+		req.getSession().setAttribute("prevPage", referer);
+		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("id", id);
 		mv.setViewName("auth/login");

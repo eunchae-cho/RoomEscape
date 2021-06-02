@@ -24,14 +24,15 @@
 	        </div>
 	        
 	        <div class="mypage-container">
-	        <h3 style="margin-left: 70px;"><a href="<%=request.getContextPath()%>/mypage/" style="text-decoration: none; color: white;">내 정보</a></h3>
 	        <hr class="featurette-divider">
 	        
-	        <div class="category-container">
-	       	  <jsp:include page="./sidebar.jsp"></jsp:include>  
-	        
-		        <div class="item" style="flex-grow: 2;">
-		        	<table class="table table-sm">
+	         <div class="my_wrap">
+	        	
+	         <jsp:include page="./sidebar.jsp"></jsp:include>  
+	        	
+	        	<div class="article_right">
+	        		<h5 style="margin-bottom: 10px; margin-left: 10px;">예약 내역</h5>
+	        		<table class="table">
 					  <thead>
 					    <tr>
 					      <th scope="col" style="width: 10%">예약 번호</th>
@@ -42,22 +43,23 @@
 					      <th scope="col" style="width: 15%"></th>
 					    </tr>
 					  </thead>
-					  <tbody>
-					  <c:forEach items="${list}" var="res">
-					    <tr>
-					      <td scope="row">${res.no}</td>
-					      <td>${res.reservatedDate}</td>
-					      <td>${res.roomTime}</td>
-					      <td>${res.room.title}</td>
-					      <td id="td_status"><input type="hidden" id="status" value="${res.status}"></td>
-					       <c:if test="${res.cancel == 0}">
-					       		<td><button type="button" id="cancelBtn" class="btn btn-cancel me-2" value="${res.no}">예약 취소</button></td>
-					       </c:if>
-					    </tr>
-					    </c:forEach>
+					  <tbody style="border-bottom: #41464b; border-bottom-style: hidden;">
+					    <c:forEach items="${list}" var="res">
+						    <tr>
+						      <td style="padding-block: 15px;">${res.no}</td>
+						      <td style="padding-block: 15px;">${res.reservatedDate}</td>
+						      <td style="padding-block: 15px;">${res.roomTime}</td>
+						      <td style="padding-block: 15px;">${res.room.title}</td>
+						       <td id="td_status" style="padding-block: 15px;"><input type="hidden" id="status" value="${res.status}"></td>
+						       <td style="padding-block: 15px;">
+						       <c:if test="${res.cancel == 0}">
+					       		<button type="button" id="cancelBtn" class="btn btn-cancel me-2" value="${res.no}">예약 취소</button>
+					       	   </c:if></td>
+						    </tr>
+					     </c:forEach>
 					  </tbody>
 					</table>
-		        </div>
+	        	</div>
 	        </div>
 	        
 	        <hr class="featurette-divider">

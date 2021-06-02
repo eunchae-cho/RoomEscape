@@ -21,13 +21,7 @@
       color: aliceblue;
   }
   
-
-@font-face {
-     font-family: 'S-CoreDream-3Light';
-     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
-     font-weight: normal;
-     font-style: normal;
-}
+ @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap');
 
 
   /* GLOBAL STYLES
@@ -39,14 +33,31 @@ body {
     padding-bottom: 3rem;
     color: aliceblue;
     background-color: black;
-    font-family: 'S-CoreDream-3Light';
+   font-family: 'Noto Sans KR', sans-serif;
   }
+  
   
   a:hover {
   	color: darksalmon;
   }
   
+  li {
+ list-style: none;	
+ margin: 0;
+ padding: 0;
+ font-weight: 100;
+ }
   
+  ul {
+  display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+    padding: 0px;
+  }
   /* CUSTOMIZE THE CAROUSEL
   -------------------------------------------------- */
   
@@ -273,18 +284,23 @@ body {
   
   .table {
   	text-align: center;
+  	border-top-style: solid;
   }
-   .table td {
-  	color: lightslategray;
-  }
+   .table>thead {
+  	vertical-align: bottom;
+   }
   
   .table th {
-  	color: peachpuff;
+  	color: #fff;
+  }
+  
+   .table td {
+  	color: #fff;
   }
   
   thead, tbody, tfoot, tr, td, th {
     border-color: inherit;
-    border-style: unset;
+    border-style: solid;
     border-width: 0;
 }
   
@@ -333,6 +349,49 @@ body {
 	background-color: #00c278;
 	border-color: mediumspringgreen;
    }
+   
+   .my_wrap {
+  	display: flex;
+  	position: relative;
+    min-width: 900px;
+    max-width: 1500px;
+    margin: 40px auto 0;
+    padding: 0 50px 100px;
+  }
+  
+  .article_left {
+    -webkit-box-flex: 0;
+    flex: none;
+    width: 230px;
+    padding: 0 50px 0 0;
+    box-sizing: border-box;
+  }
+  
+  .my_my {
+  	margin-bottom: 38px;
+  	display: block;
+  }
+
+  .my_list {
+  	padding-bottom: 27px;
+  }
+  
+  .my_list a {
+  	text-decoration: none;
+  	color: #fff;
+  }
+   
+  .my_list a :hover {
+  	color: unset;
+  }
+  
+  .article_right {
+    -webkit-box-flex: 1;
+    flex: 1;
+    padding-top: 100px;
+    margin-left: 20px;
+  }
+  
 
   /* FOOTER CSS
   -------------------------------------------------- */

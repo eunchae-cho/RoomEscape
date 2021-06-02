@@ -42,16 +42,17 @@
 	// 아이디와 비밀번호가 올바른지 확인
 	$('#loginBtn').on('click', function() {
 		var formData = $('#form').serialize();
+		var prevPage = '${sessionScope.prevPage}'
 		 $.ajax({
 				 url: 'login',
 				 type: 'POST',
 				 data: formData,
 				 success: function(data) {
 					 if (data == 'ok') {
+						 //location.href = prevPage;
 						 location.href = '<%=request.getContextPath() %>/';
 					 } else if (data == 'fail') {
 						 alert('아이디 혹은 비밀번호가 맞지 않습니다.');
-						 location.reload();
 					 }
 				 },
 				 error: function() {
