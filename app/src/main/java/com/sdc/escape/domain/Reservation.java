@@ -6,6 +6,7 @@ public class Reservation {
     private int no;
     private String roomTime;
     private Date reservatedDate;
+    private Date doDate;
     // cancel =>  default: 0, 예약 취소: 1
     private int cancel;
     private Date canceledDate;
@@ -40,8 +41,16 @@ public class Reservation {
     public void setReservatedDate(Date reservatedDate) {
         this.reservatedDate = reservatedDate;
     }
+    
+    public Date getDoDate() {
+		return doDate;
+	}
 
-    public int getCancel() {
+	public void setDoDate(Date doDate) {
+		this.doDate = doDate;
+	}
+
+	public int getCancel() {
         return this.cancel;
     }
 

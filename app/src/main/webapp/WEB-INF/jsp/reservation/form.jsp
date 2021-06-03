@@ -5,91 +5,109 @@
   <head>
   <meta charset="UTF-8">
   <title>[room escape] 예약하기</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
   </head>
   <body>
   <jsp:include page="../header.jsp"></jsp:include>  
 
   <main>
-    <div class="container marketing" style="padding-top: 50px;">
-        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#212121" stroke="#808080"/></svg>
-              <div class="container">
-                <div class="carousel-caption">
-                  <h1>예약 안내</h1>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
+    <div class="container marketing" style="padding-top: 50px; margin-bottom: 700px;">
         <div class="reservation-container">
-            <hr class="featurette-divider">
-              
-               <form id="reserveForm" action="reserve" method="POST">
-              
-                   <div class="reservation-content">
+        
+				<div class="left-box">
+					<div class="room-list">
+					
+						<div class="card border-light mb-3" style="width: 100%; background-color: black; flex-direction: unset; padding-block: 10px;">
+						  <div class="card-header" style="text-align: center; padding-top: 17px;">
+						  	<h4>날짜 선택</h4>
+						  </div>
+						  <div class="card-body">
+							  <input type="date" id="selectDate" name="date" style="width: 50%;">
+						  </div>
+						</div>
+						
+						<ul class="thema-list">
+							<c:forEach items="${roomList}" var="room">
+							<input type="hidden" id="no" value="${room.no}">
+							<li>
+								<p style="width: 140px; height: 180px; float: left;">
+									<img src="${room.photo}"  style="width: 100%;">
+								</p>
+								<div class="thema-content">
+									<h5 style="margin-left: 5px; color: darksalmon;">■ ${room.title}</h5>
+									<ul class="time-list">
+										<c:forEach items="${roomTimeList}" var="roomTime">
+											 <c:if test="${room.no == roomTime.rno }">
+											<li><button class="res-btn" value="${roomTime.roomTime}">${roomTime.roomTime}</button></li>
+											</c:if> 
+										</c:forEach>
+									</ul>
+								</div>
+							</li>
+							</c:forEach>
+						</ul>
+					</div>
+						
+					<div style="border-bottom-style: solid; border-bottom-width: thin; height: 155px;"> 
+						<ul style="margin-top: 30px; margin-bottom: 60px; float: right; font-size: 14px;">
+							<li><span class="poss"></span>예약 가능</li>
+							<li><span class="sold"></span>예약 뷸가능</li>
+							<li><span class="select"></span>선택</li>
+						</ul>
+					</div>
+					
+					<div class="res-box">
+						<dl>
+							<dt>
+								<label for="name">예약자: </label>
+							</dt>
+							<dd>
+								<input type="text" id="name" name="name" value="${sessionScope.loginUser.name}">
+							</dd>
+						</dl>
+						<dl>
+							<dt>
+								<label for="phone">연락처: </label>
+							</dt>
+							<dd>
+								<input type="text" id="phone" name="phone" value="${sessionScope.loginUser.phone}">
+							</dd>
+						</dl>
 						<div class="select-box">
-	                        <label for="selectRoom">룸테마: </label>
-	                        <select id="selectRoom" name="roomNo" onchange="setRoomNo(this.value);" style="width: 200px; margin-left: 36px; padding-block: 3px;">
-	                            <option selected>선택</option>
-	                            <c:forEach items="${roomList}" var="room">
-	                                <option value="${room.no}">${room.title}</option>
-	                            </c:forEach>
-	                          </select>
-                          </div>
-                          
-                           <div class="select-box">
-	                        <label for="selectDate">날짜: </label>
-	                            <input type="date" id="selectDate" name="date" style="width: 200px; margin-left: 50px;">
-	                        </div>
-                   
-                   			<div class="select-box">
-	                        <label for="selectTime">시간: </label>
-	                        <select id="selectTime" name="roomTime" style="width: 200px; margin-left: 50px; padding-block: 3px; ">
-								<option value="">선택</option>	                        
-	                        </select>
-                          </div>
-                          
-                          <div class="select-box">
 	                        <label for="selectParticipant">인원: </label>
-	                        <input type="radio" id="participant" name="participant" style="margin-left:50px" value="2"> 2
-	                        <input type="radio" id="participant" name="participant" style="margin-left:50px" value="3"> 3
-	                        <input type="radio" id="participant" name="participant" style="margin-left:50px" value="4"> 4
-	                        <input type="radio" id="participant" name="participant" style="margin-left:50px" value="5"> 5
-	                        <input type="radio" id="participant" name="participant" style="margin-left:50px" value="6"> 6
+	                        <input type="radio" id="participant" name="participant" style="margin-left:56px" value="2"> 2
+	                        <input type="radio" id="participant" name="participant" style="margin-left:30px" value="3"> 3
+	                        <input type="radio" id="participant" name="participant" style="margin-left:30px" value="4"> 4
+	                        <input type="radio" id="participant" name="participant" style="margin-left:30px" value="5"> 5
+	                        <input type="radio" id="participant" name="participant" style="margin-left:30px" value="6"> 6
                           </div>
-
-		                   <br>
-		                    
-		                   <div class="select-box">
-		                       예약자:
-		                       <input type="text" style="margin-left: 35px; border-radius: 5px;" value="${sessionScope.loginUser.name}" readonly>
-		                   </div>
-		                   <div class="select-box">
-		                       연락처:
-		                       <input type="text" style="margin-left: 35px; border-radius: 5px;" value="${sessionScope.loginUser.phone}" readonly>
-		                   </div>
-		
-		                   <br>
-		
-		                   <div class="select-container">
+						<div class="select-container">
 		                   		<div>가격: </div>
 		                   		<div id="selectPrice"></div>
 		                   		<input type="hidden" id="price" name="price" value="">
 		                   		<div>원</div>
-		                   </div>
-                </div>
-            <hr class="featurette-divider">
-            <div style="text-align: center;">
-                <button type="submit" id="reservationBtn" class="btn btn-find" style="padding-block: 5px;">예약하기</button>
-            </div>
-		  
-		  </form>
-        
-        </div>
-
+		                </div>
+					</div>
+					  <div style="text-align: center;">
+                		<button type="submit" id="reservationBtn" class="btn btn-find" style="width: 100% ;padding-top: 6px; padding-block: 10px;">예약하기</button>
+            		</div>
+				</div>
+				
+				<div class="right-box">
+					<ul class="info">
+						<li>
+							<p style="color: darksalmon; font-size: 16px;">■ 예약 방법</p>
+							<p>
+								1. 날짜선택<br>
+								2. 테마와 시간대를 선택<br>
+								3. 이름, 연락처 등 예약정보를 입력하고<br>
+								꼭! 주의 사항 안내를 읽은 후  동의 체크<br>
+								4. 비밀번호 입력 후 예약버튼 누르기
+							</p>
+						</li>
+					</ul>
+				</div>
+	 	</div>
     </div>
   </main>
 
@@ -97,42 +115,37 @@
  <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
  <script>
  
-		/*  [룸테마] 선택(onchange) 시 발생  */
-     	function setRoomNo(param) {
-     		var $target = $('#selectTime option:selected').val();
-     		
-     		if (param == '') {
-     			$target.append('<option value="">선택</option>');
-     			return;
-     		}
-     		
-     		
-     		
-     		$.ajax({
-     			url: 'roomTimeList',
-     			type: 'POST',
-     			data: {
-     				no : param
-     			},
-     			dataType: 'json',
-     			success: function(data) {
-     				// onchange 시 전 데이터 초기화 해서 출력
-     				$('#selectTime').html('');
-     				console.log(data);
-     				if (data.length < 1) { 
-     					$('#selectTime').append('<option value="">선택</option>');
-     				} else {
-     					$('#selectTime').append('<option value="">선택</option>');
-     					$(data).each(function(i){
-     						$('#selectTime').append('<option value="'+ data[i].roomTime +'">'+ data[i].roomTime +'</option>');
-     					})
-     				}
-     			},
-     			error: function() {
-     				console.log("error");
-     			}
-     		});
-     	}
+ $(function() {
+		$('#selectDate').on('change', function() {
+			var no = $('#no').val();
+			var roomTime = $('.res-btn').val();
+			console.log(no);
+			console.log(roomTime);
+			
+			$.ajax({
+				url: 'selectDate',
+				type: 'post',
+				data: {
+					date : $(this).val()
+				},
+				dataType: 'json',
+				success: function(data) {
+					console.log(data);
+					$(data).each(function() {
+					 	if (no == this.rno && roomTime == this.roomTime) {
+						 	console.log(00000);
+					 		$('.res-btn').attr('disabled', true);
+					 	}
+					});
+				},
+				error: function() {
+					console.log('error');
+				}
+			
+			});
+		});
+		
+ });
      	
      	/*  [인원] 라디오 버튼 선택 시 발생  */
        $('input:radio[name=participant]').on('click', function() {

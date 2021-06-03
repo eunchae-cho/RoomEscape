@@ -8,6 +8,7 @@
        <id column="res_no" property="no"></id>
         <result column="res_time" property="roomTime"></result>
         <result column="res_rdt" property="reservatedDate"></result>
+         <result column="res_date" property="doDate"></result>
         <result column="res_cancel" property="cancel"></result>
         <result column="res_cancel_date" property="canceledDate"></result>
         <result column="res_participant" property="participant"></result>
@@ -67,6 +68,17 @@
     			ON res.r_no = r.r_no
      	WHERE res_no = #{no}
     	ORDER BY res_rdt DESC
+    </select>
+    
+    <select id="findReservation" resultMap="ReservationMap" parameterType="Date">
+    	SELECT 
+    			r_no
+    		,	res_time
+    		,	res_date
+    	FROM  escape_reservation
+    	WHERE res_date = #{date} 
+    		AND res_cancel = 0
+    
     </select>
     
     <insert id="add" parameterType="Reservation">

@@ -5,9 +5,17 @@
 
   <mapper namespace="com.sdc.escape.dao.RoomTimeDao">
     <resultMap type="roomTime" id="RoomTimeMap">
+    	<result column="r_no" property="rno"></result> 
         <result column="r_time" property="roomTime"></result>
     </resultMap>
 
+ <select id="findAll" resultMap="RoomTimeMap">
+    	SELECT
+    			r_no
+    		,	r_time
+    	FROM escape_room_time
+    </select> 
+    
     <select id="findByNo" resultMap="RoomTimeMap" parameterType="int">
     	SELECT
     		r_time

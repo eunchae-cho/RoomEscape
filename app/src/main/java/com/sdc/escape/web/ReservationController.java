@@ -1,7 +1,10 @@
 package com.sdc.escape.web;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sdc.escape.domain.Reservation;
+import com.sdc.escape.domain.Room;
 import com.sdc.escape.domain.RoomTime;
 import com.sdc.escape.service.ReservationService;
 import com.sdc.escape.service.RoomService;
@@ -27,14 +31,19 @@ public class ReservationController {
 
 	@GetMapping("/")
     public String reservation(Model model) throws Exception {
-		model.addAttribute("roomList", roomService.list());
+		List<Room> roomList = roomService.list();
+		List<RoomTime> roomTimeList = roomTimeService.list();
+	
+		model.addAttribute("roomList", roomList);
+		model.addAttribute("roomTimeList", roomTimeList);
         return "reservation/form";
     }
 	
 	@ResponseBody
-	@PostMapping("/roomTimeList")
-	public List<RoomTime> roomTimeList(int no) throws Exception {
-		return roomTimeService.timeByNo(no);
+	@PostMapping("/selectDate")
+	public List<Reservation> selectDate(Date date) throws Exception {
+		List<Reservation> list = reservationService.findReservation(date);
+		return list;
 	}
 	
 	@PostMapping("/reserve")

@@ -15,6 +15,11 @@ public class DefaultRoomTimeService implements RoomTimeService{
     public DefaultRoomTimeService(RoomTimeDao roomTimeDao) {
         this.roomTimeDao = roomTimeDao;
     }
+    
+    @Override
+    public List<RoomTime> list() throws Exception {
+    	return roomTimeDao.findAll();
+    }
    
     @Override
     public List<RoomTime> timeByNo(int no) throws Exception {

@@ -1,5 +1,6 @@
 package com.sdc.escape.service.impl;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -41,5 +42,10 @@ public class DefaultReservationService implements ReservationService{
 	@Override
 	public int cancel(Reservation reservation) throws Exception {
 		return reservationDao.updateCancel(reservation);
+	}
+	
+	@Override
+	public List<Reservation> findReservation(Date date) throws Exception {
+		return reservationDao.findReservation(date);
 	}
 }

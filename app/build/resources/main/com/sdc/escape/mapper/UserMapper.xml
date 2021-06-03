@@ -65,6 +65,13 @@
     		 password(#{password}) AS u_password
     </select>
     
+    <select id="findSameId" resultMap="UserMap" parameterType="String">
+    	SELECT
+    		 u_id
+    	FROM escape_user
+    	WHERE u_id = #{id}
+    </select>
+    
     <insert id="add" parameterType="User">
     	INSERT INTO escape_user
     		(u_name, u_id, u_password, u_phone, u_email)
@@ -80,4 +87,10 @@
     			,	u_password = password(#{password})
     	WHERE u_no = #{no}
     </update>
+    
+    <delete id="deleteByNo" parameterType="int">
+    	DELETE 
+    	FROM escape_user
+    	WHERE u_no = #{no}
+    </delete>
   </mapper>

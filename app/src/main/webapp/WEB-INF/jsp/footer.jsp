@@ -6,7 +6,7 @@
 <title>footer</title>
 </head>
 <body>
-  <footer id="footer" style="margin-top: 500px; margin-bottom: 100px;">
+  <footer id="footer">
     <div class="container">
       <hr>
       <span class="content" style="display: flex; justify-content: center; color: darksalmon;">sandoll escape</span>

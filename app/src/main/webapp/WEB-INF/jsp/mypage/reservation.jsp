@@ -10,22 +10,8 @@
   <jsp:include page="../header.jsp"></jsp:include>  
 	<main>
 	    <div class="container marketing" style="padding-top: 50px;">
-	        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-	          <div class="carousel-inner">
-	            <div class="carousel-item active">
-	              <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%"fill="#212121" stroke="#808080"/></svg>
-	              <div class="container">
-	                <div class="carousel-caption">
-	                  <h1>회원 정보</h1>
-	                </div>
-	              </div>
-	            </div>
-	          </div>
-	        </div>
 	        
 	        <div class="mypage-container">
-	        <hr class="featurette-divider">
-	        
 	         <div class="my_wrap">
 	        	
 	         <jsp:include page="./sidebar.jsp"></jsp:include>  
@@ -62,7 +48,6 @@
 	        	</div>
 	        </div>
 	        
-	        <hr class="featurette-divider">
 	    	</div>
 	     </div>
 	  </main>

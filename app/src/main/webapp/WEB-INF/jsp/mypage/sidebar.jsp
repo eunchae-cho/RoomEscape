@@ -32,8 +32,8 @@
 	        			<div>
 	        				<h5>나의 예약정보</h5>
 	        				<ul>
-	        					<li><a href="<%=request.getContextPath()%>/mypage/reservation" id="category">예약 확인/취소</a></li>
-	        					<li><a href="<%=request.getContextPath()%>/mypage/history">이용 내역</a></li>
+	        					<li style="font-weight: 100;"><a href="<%=request.getContextPath()%>/mypage/reservation" id="category">예약 확인/취소</a></li>
+	        					<li style="font-weight: 100;"><a href="<%=request.getContextPath()%>/mypage/history">이용 내역</a></li>
 	        				</ul>
 	        			</div>
 	        		</section>
@@ -41,7 +41,7 @@
 	        			<div>
 	        				<h5>나의 리뷰보기</h5>
 	        				<ul>
-	        					<li><a href="#">리뷰 조회</a></li>
+	        					<li style="font-weight: 100;"><a href="#">리뷰 조회</a></li>
 	        				</ul>
 	        			</div>
 	        		</section>
@@ -49,8 +49,8 @@
 	        			<div>
 	        				<h5>나의 계정설정</h5>
 	        				<ul>
-	        					<li><a href="<%=request.getContextPath()%>/mypage/info">회원 정보 수정</a></li>
-	        					<li>회원 탈퇴</li>
+	        					<li style="font-weight: 100;"><a href="<%=request.getContextPath()%>/mypage/info">회원 정보 수정</a></li>
+	        					<li style="font-weight: 100;">회원 탈퇴</li>
 	        				</ul>
 	        			</div>
 	        		</section>
