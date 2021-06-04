@@ -74,18 +74,17 @@
     	SELECT 
     			r_no
     		,	res_time
-    		,	res_date
+    		,	date_format(res_date,'%Y-%m-%d') res_date
     	FROM  escape_reservation
     	WHERE res_date = #{date} 
     		AND res_cancel = 0
-    
     </select>
     
     <insert id="add" parameterType="Reservation">
      	INSERT INTO escape_reservation
-     		(res_time, res_rdt, res_participant, res_price, u_no, r_no)
+     		(res_time, res_rdt, res_date, res_participant, res_price, u_no, r_no)
      	VALUES
-     		(#{roomTime}, #{reservatedDate}, #{participant}, #{price}, #{uno}, #{rno})
+     		(#{roomTime}, now(), #{doDate}, #{participant}, #{price}, #{uno}, #{rno})
     </insert>
     
     <update id="updateCancel" parameterType="Reservation">

@@ -218,7 +218,7 @@ body {
  
  .sold {
  	display: inline-block;
-    background-color: #444444;
+    background-color: dimgray;
     width: 13px;
     height: 13px;
     margin-right: 4px;
@@ -504,8 +504,8 @@ body {
  	position: absolute;
  	left: 0;
     width: 100%;
-	padding-top: 500px;
-    padding-bottom: 100px;
+	margin-top: 500px;
+    margin-bottom: 100px;
   } 
   
   .container {

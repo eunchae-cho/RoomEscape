@@ -13,7 +13,9 @@
   <main>
     <div class="container marketing" style="padding-top: 50px; margin-bottom: 700px;">
         <div class="reservation-container">
-        
+        	
+        	<form action='reserve' method='post'>
+		
 				<div class="left-box">
 					<div class="room-list">
 					
@@ -28,7 +30,6 @@
 						
 						<ul class="thema-list">
 							<c:forEach items="${roomList}" var="room">
-							<input type="hidden" id="no" value="${room.no}">
 							<li>
 								<p style="width: 140px; height: 180px; float: left;">
 									<img src="${room.photo}"  style="width: 100%;">
@@ -37,8 +38,10 @@
 									<h5 style="margin-left: 5px; color: darksalmon;">■ ${room.title}</h5>
 									<ul class="time-list">
 										<c:forEach items="${roomTimeList}" var="roomTime">
+										<input type="hidden" id="roomNo" name = "roomNo" value="">
+										<input type="hidden" id="roomTime" name="roomTime" value="">
 											 <c:if test="${room.no == roomTime.rno }">
-											<li><button class="res-btn" value="${roomTime.roomTime}">${roomTime.roomTime}</button></li>
+											<li><button type="button" class="res-btn" value="${roomTime.rno}">${roomTime.roomTime}</button></li>
 											</c:if> 
 										</c:forEach>
 									</ul>
@@ -51,7 +54,7 @@
 					<div style="border-bottom-style: solid; border-bottom-width: thin; height: 155px;"> 
 						<ul style="margin-top: 30px; margin-bottom: 60px; float: right; font-size: 14px;">
 							<li><span class="poss"></span>예약 가능</li>
-							<li><span class="sold"></span>예약 뷸가능</li>
+							<li><span class="sold"></span>예약 불가능</li>
 							<li><span class="select"></span>선택</li>
 						</ul>
 					</div>
@@ -92,6 +95,8 @@
                 		<button type="submit" id="reservationBtn" class="btn btn-find" style="width: 100% ;padding-top: 6px; padding-block: 10px;">예약하기</button>
             		</div>
 				</div>
+			
+			</form>
 				
 				<div class="right-box">
 					<ul class="info">
@@ -114,13 +119,10 @@
  <jsp:include page="../footer.jsp"></jsp:include>  
  <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
  <script>
- 
- $(function() {
+	
+ 		// 날짜 선택 시
 		$('#selectDate').on('change', function() {
-			var no = $('#no').val();
-			var roomTime = $('.res-btn').val();
-			console.log(no);
-			console.log(roomTime);
+			var selectedDate = $(this).val();
 			
 			$.ajax({
 				url: 'selectDate',
@@ -131,12 +133,28 @@
 				dataType: 'json',
 				success: function(data) {
 					console.log(data);
-					$(data).each(function() {
-					 	if (no == this.rno && roomTime == this.roomTime) {
-						 	console.log(00000);
-					 		$('.res-btn').attr('disabled', true);
-					 	}
-					});
+						// 예약된 각각의 데이터들
+						$(data).each(function() {
+							// 넘어오는 각 데이터를 담은 변수
+							var rno = this.rno;
+							var roomTime = this.roomTime;
+							var doDate = this.doDate;
+							console.log("dodate: "+doDate)
+							console.log("selectedDate: " +selectedDate)
+								// 날짜마다 존재하는 테마별 모든 시간대들의 각 데이터들
+								$('.res-btn').each(function(i) {
+									if ($(this).val() == rno 
+											&& $(this).text() == roomTime 
+											&& selectedDate == doDate) {
+												console.log(roomTime)
+												$(this).addClass('disable');
+												$('.res-btn').css('background-color', 'white');
+												$('.disable').css('background-color', 'dimgrey');
+												$(this).attr('disabled',  true);
+										}
+								})
+							
+						});
 				},
 				error: function() {
 					console.log('error');
@@ -145,8 +163,22 @@
 			});
 		});
 		
- });
-     	
+ 	// 시간대 선택하는 버튼 클릭 시
+ 	var cnt = 0;
+ 	 $('.res-btn').on('click', function(e) {
+	 		 var date = document.getElementById('selectDate').value;
+	 		 if (date == '') {
+	 			 alert('날짜를 먼저 선택해주세요.');
+	 			 return false;
+	 		 }
+	 		 
+		 	 $('.res-btn').css('background-color', 'white');
+		 	 $('.disable').css('background-color', 'dimgrey');
+	 		 $(this).css('background-color', 'darksalmon');
+	 		 $('#roomTime').val($(this).text());
+	 		 $('#roomNo').val($(this).val());
+ 	 });
+ 	
      	/*  [인원] 라디오 버튼 선택 시 발생  */
        $('input:radio[name=participant]').on('click', function() {
 	     	var price = 22000;
@@ -156,10 +188,20 @@
 		   	$('#price').val(total);
 	   	});
      	
-     	$('#reservationBtn').on('click', function() {
-     		 alert("예약되었습니다.");
-     	});
      	
+     	$('#reservationBtn').on('click', function() {
+     		if ( $('#roomTime').val() == '') {
+     			alert('원하는 시간대를 선택해주세요.');
+     			return false;
+     		}
+     		if (!$('input:radio[name=participant]:checked').val()) {
+     			alert('인원 수를 선택해주세요.');
+     			return false;
+     		}
+     		
+     		alert("예약되었습니다.");
+     		return true;
+     	});
  </script>
  </body>
  </html>

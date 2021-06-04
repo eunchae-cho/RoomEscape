@@ -1,10 +1,9 @@
 package com.sdc.escape.web;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sdc.escape.domain.Reservation;
 import com.sdc.escape.domain.Room;
 import com.sdc.escape.domain.RoomTime;
+import com.sdc.escape.domain.User;
 import com.sdc.escape.service.ReservationService;
 import com.sdc.escape.service.RoomService;
 import com.sdc.escape.service.RoomTimeService;
@@ -43,18 +43,23 @@ public class ReservationController {
 	@PostMapping("/selectDate")
 	public List<Reservation> selectDate(Date date) throws Exception {
 		List<Reservation> list = reservationService.findReservation(date);
+		System.out.println(list.get(0).getDoDate());
 		return list;
 	}
 	
 	@PostMapping("/reserve")
-	public String selectValue(String roomTime, Date date, int participant, String price, int roomNo) throws Exception {
+	public String selectValue(String roomTime, String date, int participant, String price, int roomNo, HttpSession session) throws Exception {
 		Reservation reservation = new Reservation();
-		reservation.setRoomTime(roomTime);
-		reservation.setReservatedDate(date);
+		System.out.println(roomTime);
+		// 값이 넘어올 때 뒤에',,,,,,,,,'을 포함해서 오기 때문에 ',' 찾아서 삭제
+		String roomTimeStr = roomTime.replace(",", ""); 
+		reservation.setRoomTime(roomTimeStr);
+		reservation.setDoDate(date);
 		reservation.setParticipant(participant);
 		reservation.setPrice(price);
 		reservation.setRno(roomNo);
-		reservation.setUno(1);
+		User loginUser = (User) session.getAttribute("loginUser");
+		reservation.setUno(loginUser.getNo());
 		reservationService.add(reservation);
 		return "redirect:/reservation/";
 	}

@@ -2,11 +2,15 @@ package com.sdc.escape.domain;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+
 public class Reservation {
     private int no;
     private String roomTime;
     private Date reservatedDate;
-    private Date doDate;
+   // @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+    private String doDate;
     // cancel =>  default: 0, 예약 취소: 1
     private int cancel;
     private Date canceledDate;
@@ -42,11 +46,11 @@ public class Reservation {
         this.reservatedDate = reservatedDate;
     }
     
-    public Date getDoDate() {
+    public String getDoDate() {
 		return doDate;
 	}
 
-	public void setDoDate(Date doDate) {
+	public void setDoDate(String doDate) {
 		this.doDate = doDate;
 	}
 
