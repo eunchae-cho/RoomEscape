@@ -123,7 +123,9 @@
  		// 날짜 선택 시
 		$('#selectDate').on('change', function() {
 			var selectedDate = $(this).val();
-			
+			$('.res-btn').removeClass('disable');
+			$('.res-btn').attr('disabled', false);
+			$('.res-btn').css('background-color', 'white');
 			$.ajax({
 				url: 'selectDate',
 				type: 'post',
@@ -133,6 +135,9 @@
 				dataType: 'json',
 				success: function(data) {
 					console.log(data);
+					if (data.length < 0) {
+						
+					} else {
 						// 예약된 각각의 데이터들
 						$(data).each(function() {
 							// 넘어오는 각 데이터를 담은 변수
@@ -143,10 +148,10 @@
 							console.log("selectedDate: " +selectedDate)
 								// 날짜마다 존재하는 테마별 모든 시간대들의 각 데이터들
 								$('.res-btn').each(function(i) {
+									
 									if ($(this).val() == rno 
 											&& $(this).text() == roomTime 
 											&& selectedDate == doDate) {
-												console.log(roomTime)
 												$(this).addClass('disable');
 												$('.res-btn').css('background-color', 'white');
 												$('.disable').css('background-color', 'dimgrey');
@@ -155,6 +160,7 @@
 								})
 							
 						});
+					}
 				},
 				error: function() {
 					console.log('error');
@@ -162,6 +168,7 @@
 			
 			});
 		});
+ 		
 		
  	// 시간대 선택하는 버튼 클릭 시
  	var cnt = 0;

@@ -43,7 +43,6 @@ public class ReservationController {
 	@PostMapping("/selectDate")
 	public List<Reservation> selectDate(Date date) throws Exception {
 		List<Reservation> list = reservationService.findReservation(date);
-		System.out.println(list.get(0).getDoDate());
 		return list;
 	}
 	

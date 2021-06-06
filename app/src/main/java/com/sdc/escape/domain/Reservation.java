@@ -9,7 +9,7 @@ public class Reservation {
     private int no;
     private String roomTime;
     private Date reservatedDate;
-   // @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+  // @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     private String doDate;
     // cancel =>  default: 0, 예약 취소: 1
     private int cancel;
