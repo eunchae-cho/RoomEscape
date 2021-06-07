@@ -16,7 +16,12 @@
 	        	
 	         <jsp:include page="./sidebar.jsp"></jsp:include>  
 	        	
-	        	<div class="article_right">
+	        	<div class="article_right" style="padding-top: 0px;">
+	        		<div class="mypage-caution">
+	        		* 리뷰 작성은 방탈출 이용 후에만 가능합니다.<br>
+	        		* 리뷰 작성은 <i>[나의 예약정보] - [이용 내역] - [리뷰 쓰기]</i> 에서 가능합니다.
+	        		
+	        		</div>
 	        		<h5 style="margin-bottom: 10px; margin-left: 10px;">최근 예약</h5>
 	        		<table class="table">
 					  <thead>

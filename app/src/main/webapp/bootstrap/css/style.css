@@ -23,6 +23,13 @@
   
  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;700&display=swap');
 
+@font-face {
+    font-family: 'twaysky';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twaysky.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 
   /* GLOBAL STYLES
 -------------------------------------------------- */
@@ -135,24 +142,134 @@ body {
       margin-top: 7rem;
     }
   }
-
-
+  
+  /* REVIEW CONTENT
+  -------------------------------------------------- */
+  .review-container {
+  	width: 900px;
+  	margin: 0 auto;
+  }
+  
+  .gallery {
+    margin-block: 50px;
+  }
+  
+  .gallery-img {
+   width: 100%;
+   height: auto; 
+   margin-top: 0px;
+   opacity: 1;
+  }
+  
+  .gallery-list {
+  	position: relative;
+    display: inline-block;
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    cursor: pointer;
+   }
+   
+   .gallery-list-last {
+    position: absolute;
+    top: 0;
+    right: 89px;
+    width: 120px;
+    height: 120px;
+    background: rgba(17,17,17,0.65);
+    box-sizing: border-box;
+    cursor: pointer;
+    padding-block: 20px;
+}
+   
+   .gallery-list-count {
+   font-size: 36px;
+    color: #fff;
+    text-align: center;
+    font-weight: 200;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+   }
+	
+	.gallery-list-more {
+	font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+	}
+	
+	.review-list {
+		padding-block: 30px;
+		padding-inline: 20px;
+	}
+	
+	.review-user-info {
+	    margin-bottom: 13px;
+	}
+	
+	.review-photo {
+	margin-bottom: 19px;
+    font-size: 0;
+	}
+	
+	.review-photo-list {
+	position: relative;
+    display: inline-block;
+    width: 87px;
+    height: 87px;
+    cursor: pointer;
+    overflow: hidden;
+    margin-inline: 2px;
+	}
+	
+	.reivew-img {
+	width: 100%;
+    height: auto;
+    margin-top: -14.5453px;
+    opacity: 1;
+	}
+	
+	.review-title {
+	margin-bottom: 8px;
+    font-size: 13px;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+	}
+	
+	.review-content-conainer {
+	   word-wrap: break-word;
+	}
+	
+	.review-content {
+		font-size: 13px;
+    	line-height: 19px;
+    	margin-top: 30px;
+	}
+	
+	.user-info {
+		margin-bottom:10px;
+		float: right;
+	}
+	
   /* RESERVATION CSS
   -------------------------------------------------- */
 
  .reservation-container {
-   margin-top: 100px;
-    margin-inline: 50px;
-    padding: 40px 0 60px 0;
+    padding: 100px 0 60px 0;
     min-height: 450px;
+    width: 980px;
+    margin: 0 auto;
  }
  
   .reservation-container p {
   	font-weight: 300;
   }
 
- .reservation-container h4 {
-   margin-left: 220px;
+ .reservation-container h5 {
+   margin-left: 222px;
  }
 
  .reservation-content {
@@ -176,7 +293,7 @@ body {
  
  .left-box {
  	 float: left;
-    width: 720px;
+    width: 670px;
  }
  
  .left-box ul.thema-list li {
@@ -190,7 +307,6 @@ body {
  
   .left-box ul.thema-list li .thema-content ul.time-list li {
     float: left;
-    margin-inline: 5px;
     width: 85px;
     height: 30px;
     border: 0px none;
@@ -203,7 +319,7 @@ body {
  
  .thema-content {
     margin-left: 60px;
-    width: 520px;
+    width: 470px;
     float: left;
  }
  
@@ -409,7 +525,7 @@ body {
 }
   
   .btn-cancel {
-  	font-size: 14px;
+  	font-size: 13px;
     padding-block: 2px;
     color: rgb(236 0 236);
     border-color: rgb(183 12 183);
@@ -442,7 +558,7 @@ body {
   }
   
   .btn-review {
-   font-size: 14px;
+   font-size: 13px;
    padding-block: 2px;
     color: mediumspringgreen;
     border-color: mediumspringgreen;
@@ -457,10 +573,8 @@ body {
    .my_wrap {
   	display: flex;
   	position: relative;
-    min-width: 900px;
-    max-width: 1500px;
     margin: 40px auto 0;
-    padding: 0 50px 100px;
+    width: 900px;
   }
   
   .article_left {
@@ -493,9 +607,27 @@ body {
     -webkit-box-flex: 1;
     flex: 1;
     padding-top: 90px;
-    margin-left: 20px;
   }
   
+  .mypage-caution {
+ 	 width: 100%;
+    height: 140px;
+    margin-bottom: 50px;
+    background-color: white;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 0.2rem;
+    color: black;
+    padding: 15px;
+  }
+  
+  .table th {
+  	font-size: 14px;
+  }
+  
+  table td {
+  	font-size: 14px;
+  }
 
   /* FOOTER CSS
   -------------------------------------------------- */

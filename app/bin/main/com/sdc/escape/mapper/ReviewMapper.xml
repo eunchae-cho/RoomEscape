@@ -10,8 +10,36 @@
         <result column="rev_content" property="content"></result>
         <result column="rev_cdt" property="createdDate"></result>
         <result column="rev_photo" property="photo"></result>
+        
+        <association property="user" javaType="user">
+        	<id column="u_no" property="no"></id>
+        	<result column="u_id" property="id"></result>
+        </association>
+        
+        <association property="room" javaType="room">
+        	<id column="r_no" property="no"></id>
+        	<result column="r_title" property="title"></result>
+        </association>
     </resultMap>
 
     <select id="findAll" resultMap="ReviewMap">
+    </select>
+    
+    <select id="findByUno" resultMap="ReviewMap" parameterType="int">
+    	SELECT
+	    		rev_no
+	    	,	rev_title
+	    	,	rev_content
+	    	,	rev_cdt
+	    	,	rev_photo
+	    	,	u.u_id
+	    	,	r.r_title 
+	    FROM escape_review rev
+	    	INNER JOIN escape_user u
+	    		ON rev.u_no = u.u_no
+	    	INNER JOIN escape_room r
+	    		ON rev.r_no = r.r_no
+	    WHERE rev.u_no = #{no}
+    	ORDER BY rev_no DESC
     </select>
   </mapper>

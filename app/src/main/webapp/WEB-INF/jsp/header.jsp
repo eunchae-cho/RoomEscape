@@ -18,8 +18,8 @@
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
           <li><a href="<%=request.getContextPath()%>/" class="nav-link px-2 font-light" style="font-weight: 700">Home</a></li>
           <li><a href="<%=request.getContextPath()%>/room/list" class="nav-link px-2 font-light" style="font-weight: 700">Room</a></li>
-          <li><a href="<%=request.getContextPath()%>/reservation/" class="nav-link px-2 font-light needLogin" onClick="checkLogin()" style="font-weight: 700">Reservation</a></li>
-          <li><a href="<%=request.getContextPath()%>/mypage/" class="nav-link px-2 font-light needLogin" onClick="checkLogin()" style="font-weight: 700">My page</a></li>
+          <li><a href="<%=request.getContextPath()%>/reservation/" class="nav-link px-2 font-light needLogin" onClick="checkLogin()" style="font-weight: 700; color: #fff;">Reservation</a></li>
+          <li><a href="<%=request.getContextPath()%>/mypage/" class="nav-link px-2 font-light needLogin" onClick="checkLogin()" style="font-weight: 700; color: #fff;">My page</a></li>
         </ul>
         
         <c:if test="${not empty sessionScope.loginUser}">

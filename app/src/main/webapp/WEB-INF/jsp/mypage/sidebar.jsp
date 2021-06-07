@@ -41,7 +41,7 @@
 	        			<div>
 	        				<h5>나의 리뷰보기</h5>
 	        				<ul>
-	        					<li style="font-weight: 100;"><a href="#">리뷰 조회</a></li>
+	        					<li style="font-weight: 100;"><a href="<%=request.getContextPath()%>/mypage/review/list">리뷰 조회</a></li>
 	        				</ul>
 	        			</div>
 	        		</section>

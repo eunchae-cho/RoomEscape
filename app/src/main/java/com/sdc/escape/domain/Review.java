@@ -8,6 +8,8 @@ public class Review {
     private String content;
     private Date createdDate;
     private String photo;
+    private User user;
+    private Room room;
 
     public int getNo() {
         return this.no;
@@ -48,5 +50,21 @@ public class Review {
     public void setPhoto(String photo) {
         this.photo = photo;
     }
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Room getRoom() {
+		return room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
+	}
 
 }

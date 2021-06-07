@@ -21,11 +21,11 @@
 	        		<table class="table">
 					  <thead>
 					    <tr>
-					      <th scope="col" style="width: 10%">예약 번호</th>
+					      <th scope="col" style="width: 11%">예약 번호</th>
 					      <th scope="col" style="width: 15%">날짜</th>
-					      <th scope="col" style="width: 15%">시간</th>
+					      <th scope="col" style="width: 11%">시간</th>
 					      <th scope="col" style="width: 30%">룸 테마</th>
-					      <th scope="col" style="width: 15%">상태</th>
+					      <th scope="col" style="width: 10%">상태</th>
 					      <th scope="col" style="width: 15%"></th>
 					    </tr>
 					  </thead>

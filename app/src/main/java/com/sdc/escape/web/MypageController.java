@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sdc.escape.domain.Reservation;
+import com.sdc.escape.domain.Review;
 import com.sdc.escape.domain.Room;
 import com.sdc.escape.domain.User;
 import com.sdc.escape.service.ReservationService;
+import com.sdc.escape.service.ReviewService;
 import com.sdc.escape.service.UserService;
 
 @Controller
@@ -26,6 +28,7 @@ public class MypageController {
 	
 	@Autowired ReservationService reservationService;
 	@Autowired UserService userService;
+	@Autowired ReviewService reviewService;
 	
 	@GetMapping("/")
 	public ModelAndView mypage(HttpSession session) throws Exception {

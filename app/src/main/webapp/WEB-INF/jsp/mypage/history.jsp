@@ -21,11 +21,11 @@
 	        		<table class="table">
 					  <thead>
 					    <tr>
-					      <th scope="col" style="width: 10%">예약 번호</th>
+					      <th scope="col" style="width: 11%">예약 번호</th>
 					      <th scope="col" style="width: 15%">날짜</th>
-					      <th scope="col" style="width: 15%">시간</th>
+					      <th scope="col" style="width: 11%">시간</th>
 					      <th scope="col" style="width: 30%">룸 테마</th>
-					      <th scope="col" style="width: 15%">상태</th>
+					      <th scope="col" style="width: 10%">상태</th>
 					      <th scope="col" style="width: 15%"></th>
 					    </tr>
 					  </thead>
@@ -37,7 +37,8 @@
 						      <td style="padding-block: 15px;">${res.roomTime}</td>
 						      <td style="padding-block: 15px;">${res.room.title}</td>
 						       <td id="td_status" style="padding-block: 15px;"><input type="hidden" id="status" value="${res.status}"></td>
-						       <td style="padding-block: 15px;"><button type="button" id="reviewBtn" class="btn btn-review me-2" value="">리뷰 쓰기</button></td>
+						       <td style="padding-block: 15px;"><button type="button" id="reviewBtn" class="btn btn-review me-2" 
+						       onClick="location.href='<%=request.getContextPath()%>/mypage/review/add'">리뷰 쓰기</button></td>
 						    </tr>
 					     </c:forEach>
 					  </tbody>
@@ -57,7 +58,6 @@
 		
 		for(var i = 0; i < length; i++) {
 			var status = $('#status').val();
-			console.log(status);
 			if(status == 2) {
 			  	$('.table tbody tr')[i].children[4].innerText = '종료';
 			} else {
@@ -65,6 +65,7 @@
 			} 
 		}
 	});
+	
 </script>
  </body>
  </html>
