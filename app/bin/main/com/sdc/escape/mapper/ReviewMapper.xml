@@ -9,7 +9,6 @@
         <result column="rev_title" property="title"></result>
         <result column="rev_content" property="content"></result>
         <result column="rev_cdt" property="createdDate"></result>
-        <result column="rev_photo" property="photo"></result>
         
         <association property="user" javaType="user">
         	<id column="u_no" property="no"></id>
@@ -31,8 +30,9 @@
 	    	,	rev_title
 	    	,	rev_content
 	    	,	rev_cdt
-	    	,	rev_photo
+	    	,  u.u_no
 	    	,	u.u_id
+	    	,  r.r_no
 	    	,	r.r_title 
 	    FROM escape_review rev
 	    	INNER JOIN escape_user u
@@ -42,4 +42,18 @@
 	    WHERE rev.u_no = #{no}
     	ORDER BY rev_no DESC
     </select>
+    
+    <insert id="addReview" parameterType="Review">
+    	INSERT INTO escpae_review
+    		(rev_no, r_no, u_no, rev_title, rev_content, rev_cdt)
+    	VALUES
+    		(#{no}, #{room.no}, #{user.no}, #{title}, #{content}, #{createdDate})
+    </insert>
+    
+    <insert id="addPhotos" parameterType="map">
+    	INSERT INTO escpae_review_photo
+    		(rev_no,  rev_photo)
+    	VALUES
+    		(#{no}, #{photo})
+    </insert>
   </mapper>

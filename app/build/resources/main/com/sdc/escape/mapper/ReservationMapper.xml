@@ -16,6 +16,8 @@
         <result column="u_no" property="uno"></result>
         <result column="r_no" property="rno"></result>
         <result column="res_status" property="status"></result>
+        <result column="res_escape" property="escape"></result>
+        <result column="res_escape_time" property="escapedTime"></result>
         
         <association property="room" javaType="room">
         	<id column="r_no" property="no"></id>
@@ -38,14 +40,17 @@
     		,	res.u_no
     		,	res.r_no
     		,	res_status
+    		,  date_format(res_date,'%Y-%m-%d') res_date
     		,	r.r_title r_title
+    		,  IF (res_escape = 1, '성공', '실패') AS res_escape
+    		,  res_escape_time
     	FROM escape_reservation res
     		INNER JOIN escape_user u
     			ON res.u_no = u.u_no
     		INNER JOIN escape_room r
     			ON res.r_no = r.r_no
      	WHERE res.u_no = #{no}
-    	ORDER BY res_rdt DESC
+    	ORDER BY res_date DESC
     </select>
     
     <select id="findByNo" resultMap="ReservationMap" parameterType="int">
@@ -60,25 +65,27 @@
     		,	res.u_no
     		,	res.r_no
     		,	res_status
+    		,  date_format(res_date,'%Y-%m-%d') res_date
     		,	r.r_title r_title
+    		,  IF (res_escape = 1, '성공', '실패') AS res_escape
+    		,  res_escape_time
     	FROM escape_reservation res
     		INNER JOIN escape_user u
     			ON res.u_no = u.u_no
     		INNER JOIN escape_room r
     			ON res.r_no = r.r_no
      	WHERE res_no = #{no}
-    	ORDER BY res_rdt DESC
+    	ORDER BY res_date DESC
     </select>
     
     <select id="findReservation" resultMap="ReservationMap" parameterType="Date">
     	SELECT 
     			r_no
     		,	res_time
-    		,	res_date
+    		,	date_format(res_date,'%Y-%m-%d') res_date
     	FROM  escape_reservation
     	WHERE res_date = #{date} 
     		AND res_cancel = 0
-    
     </select>
     
     <insert id="add" parameterType="Reservation">

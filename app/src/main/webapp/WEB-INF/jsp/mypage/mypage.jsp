@@ -27,7 +27,7 @@
 					  <thead>
 					    <tr>
 					      <th scope="col" style="width: 15%">예약 번호</th>
-					      <th scope="col" style="width: 20%">날짜</th>
+					      <th scope="col" style="width: 20%">예약 날짜</th>
 					      <th scope="col" style="width: 20%">시간</th>
 					      <th scope="col" style="width: 45%">룸 테마</th>
 					    </tr>
@@ -35,7 +35,7 @@
 					  <tbody style="border-bottom: #41464b; border-bottom-style: hidden;">
 					    <tr>
 					      <td style="padding-block: 15px;">${recentRes.no}</td>
-					      <td style="padding-block: 15px;">${recentRes.reservatedDate}</td>
+					      <td style="padding-block: 15px;">${recentRes.doDate}</td>
 					      <td style="padding-block: 15px;">${recentRes.roomTime}</td>
 					      <td style="padding-block: 15px;">${recentRes.room.title}   &nbsp;&nbsp; 외 ${size}건</td>
 					    </tr>

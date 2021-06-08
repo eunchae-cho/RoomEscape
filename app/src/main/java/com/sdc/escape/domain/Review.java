@@ -7,7 +7,6 @@ public class Review {
     private String title;
     private String content;
     private Date createdDate;
-    private String photo;
     private User user;
     private Room room;
 
@@ -43,15 +42,7 @@ public class Review {
         this.createdDate = createdDate;
     }
 
-    public String getPhoto() {
-        return this.photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
-	public User getUser() {
+    public User getUser() {
 		return user;
 	}
 

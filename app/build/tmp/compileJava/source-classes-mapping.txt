@@ -2,8 +2,12 @@ com/sdc/escape/dao/RoomAttributeDao.java
  com.sdc.escape.dao.RoomAttributeDao
 com/sdc/escape/config/DatabaseConfig.java
  com.sdc.escape.config.DatabaseConfig
+com/sdc/escape/service/ReviewService.java
+ com.sdc.escape.service.ReviewService
 com/sdc/escape/domain/RoomTime.java
  com.sdc.escape.domain.RoomTime
+com/sdc/escape/web/ReviewController.java
+ com.sdc.escape.web.ReviewController
 com/sdc/escape/service/RoomService.java
  com.sdc.escape.service.RoomService
 com/sdc/escape/service/impl/DefaultReservationService.java
@@ -14,10 +18,10 @@ com/sdc/escape/config/RootConfig.java
  com.sdc.escape.config.RootConfig
 com/sdc/escape/service/impl/DefaultRoomAttributeService.java
  com.sdc.escape.service.impl.DefaultRoomAttributeService
-com/sdc/escape/domain/Room.java
- com.sdc.escape.domain.Room
 com/sdc/escape/domain/Review.java
  com.sdc.escape.domain.Review
+com/sdc/escape/domain/Room.java
+ com.sdc.escape.domain.Room
 com/sdc/escape/web/filter/CharacterEncodingFilter.java
  com.sdc.escape.web.filter.CharacterEncodingFilter
 com/sdc/escape/config/AppWebApplicationInitializer.java
@@ -34,12 +38,16 @@ com/sdc/escape/dao/RoomTimeDao.java
  com.sdc.escape.dao.RoomTimeDao
 com/sdc/escape/service/RoomTimeService.java
  com.sdc.escape.service.RoomTimeService
+com/sdc/escape/web/filter/CommonsRequestLoggingFilter.java
+ com.sdc.escape.web.filter.CommonsRequestLoggingFilter
 com/sdc/escape/domain/User.java
  com.sdc.escape.domain.User
 com/sdc/escape/service/RoomAttributeService.java
  com.sdc.escape.service.RoomAttributeService
 com/sdc/escape/config/MybatisConfig.java
  com.sdc.escape.config.MybatisConfig
+com/sdc/escape/service/impl/DefaultReviewService.java
+ com.sdc.escape.service.impl.DefaultReviewService
 com/sdc/escape/web/AuthController.java
  com.sdc.escape.web.AuthController
 com/sdc/escape/dao/UserDao.java

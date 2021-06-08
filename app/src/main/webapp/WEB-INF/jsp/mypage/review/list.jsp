@@ -35,7 +35,6 @@
 						      <td style="height: 150px; table-layout: fixed ;vertical-align: middle;">${review.no}</td>
 						      <td style="height: 150px; table-layout: fixed; padding-block: 20px;">
 						      	<div style="width: 100px; height: 120px; margin: 0 auto;">
-						      	<img src="${review.photo}" width="100%" height="auto" style="max-height: 150px;">
 						      	</div>
 						      	</td>
 						      <td style="height: 150px; table-layout: fixed;word-break:break-all; vertical-align: middle;">${review.room.title}</td>

@@ -2,8 +2,6 @@ package com.sdc.escape.domain;
 
 import java.sql.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 
 public class Reservation {
     private int no;
@@ -21,6 +19,8 @@ public class Reservation {
     // status => default / 예약: 0, 예약취소: 1, 종료: 2
     private int status;
     private Room room;
+    private String escape;
+    private String escapedTime;
 
     public int getNo() {
         return this.no;
@@ -117,4 +117,21 @@ public class Reservation {
 	public void setRoom(Room room) {
 		this.room = room;
 	}
+
+	public String getEscape() {
+		return escape;
+	}
+
+	public void setEscape(String escape) {
+		this.escape = escape;
+	}
+
+	public String getEscapedTime() {
+		return escapedTime;
+	}
+
+	public void setEscapedTime(String escapedTime) {
+		this.escapedTime = escapedTime;
+	}
+	
 }

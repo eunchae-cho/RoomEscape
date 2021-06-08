@@ -43,7 +43,7 @@ public class MypageController {
 		int size = list.size();
 		Reservation reservation = new Reservation();
 		reservation.setNo(list.get(0).getNo());
-		reservation.setReservatedDate(list.get(0).getReservatedDate());
+		reservation.setDoDate(list.get(0).getDoDate());
 		reservation.setRoomTime(list.get(0).getRoomTime());
 		Room room = new Room();
 		room.setTitle(list.get(0).getRoom().getTitle());

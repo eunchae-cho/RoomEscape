@@ -22,9 +22,9 @@
 					  <thead>
 					    <tr>
 					      <th scope="col" style="width: 11%">예약 번호</th>
-					      <th scope="col" style="width: 15%">날짜</th>
+					      <th scope="col" style="width: 15%">예약 날짜</th>
 					      <th scope="col" style="width: 11%">시간</th>
-					      <th scope="col" style="width: 30%">룸 테마</th>
+					      <th scope="col" style="width: 24%">룸 테마</th>
 					      <th scope="col" style="width: 10%">상태</th>
 					      <th scope="col" style="width: 15%"></th>
 					    </tr>
@@ -33,7 +33,7 @@
 					    <c:forEach items="${list}" var="res">
 						    <tr>
 						      <td style="padding-block: 15px;">${res.no}</td>
-						      <td style="padding-block: 15px;">${res.reservatedDate}</td>
+						      <td style="padding-block: 15px;">${res.doDate}</td>
 						      <td style="padding-block: 15px;">${res.roomTime}</td>
 						      <td style="padding-block: 15px;">${res.room.title}</td>
 						       <td id="td_status" style="padding-block: 15px;"><input type="hidden" id="status" value="${res.status}"></td>

@@ -21,24 +21,27 @@
 	        		<table class="table">
 					  <thead>
 					    <tr>
-					      <th scope="col" style="width: 11%">예약 번호</th>
-					      <th scope="col" style="width: 15%">날짜</th>
-					      <th scope="col" style="width: 11%">시간</th>
-					      <th scope="col" style="width: 30%">룸 테마</th>
+					      <th scope="col" style="width: 9%">예약 번호</th>
+					      <th scope="col" style="width: 12%">예약 날짜</th>
+					      <th scope="col" style="width: 8%">시간</th>
+					      <th scope="col" style="width: 18%">룸 테마</th>
+					      <th scope="col" style="width: 12%">탈출</th>
 					      <th scope="col" style="width: 10%">상태</th>
-					      <th scope="col" style="width: 15%"></th>
+					      <th scope="col" style="width: 12%"></th>
 					    </tr>
 					  </thead>
 					  <tbody style="border-bottom: #41464b; border-bottom-style: hidden;">
 					      <c:forEach items="${historyList}" var="res">
 						    <tr>
 						      <td style="padding-block: 15px;">${res.no}</td>
-						      <td style="padding-block: 15px;">${res.reservatedDate}</td>
+						      <td style="padding-block: 15px;">${res.doDate}</td>
 						      <td style="padding-block: 15px;">${res.roomTime}</td>
 						      <td style="padding-block: 15px;">${res.room.title}</td>
+						      <td style="padding-block: 15px;">${res.escape} 
+						      	<c:if test="${room.escape == '성공'}"> (${res.escapedTime})</c:if></td>
 						       <td id="td_status" style="padding-block: 15px;"><input type="hidden" id="status" value="${res.status}"></td>
 						       <td style="padding-block: 15px;"><button type="button" id="reviewBtn" class="btn btn-review me-2" 
-						       onClick="location.href='<%=request.getContextPath()%>/mypage/review/add'">리뷰 쓰기</button></td>
+						       onClick="location.href='<%=request.getContextPath()%>/mypage/review/add?resNo=${res.no}'">리뷰 쓰기</button></td>
 						    </tr>
 					     </c:forEach>
 					  </tbody>
@@ -59,9 +62,9 @@
 		for(var i = 0; i < length; i++) {
 			var status = $('#status').val();
 			if(status == 2) {
-			  	$('.table tbody tr')[i].children[4].innerText = '종료';
+			  	$('.table tbody tr')[i].children[5].innerText = '종료';
 			} else {
-				$('.table tbody tr')[i].children[4].innerText = '';
+				$('.table tbody tr')[i].children[5].innerText = '';
 			} 
 		}
 	});
