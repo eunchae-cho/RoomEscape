@@ -58,6 +58,8 @@ com/sdc/escape/web/ReservationController.java
  com.sdc.escape.web.ReservationController
 com/sdc/escape/config/AppWebConfig.java
  com.sdc.escape.config.AppWebConfig
+com/sdc/escape/web/adminController.java
+ com.sdc.escape.web.adminController
 com/sdc/escape/service/ReservationService.java
  com.sdc.escape.service.ReservationService
 com/sdc/escape/web/RoomController.java
@@ -70,5 +72,7 @@ com/sdc/escape/dao/ReservationDao.java
  com.sdc.escape.dao.ReservationDao
 com/sdc/escape/service/impl/DefaultRoomTimeService.java
  com.sdc.escape.service.impl.DefaultRoomTimeService
+com/sdc/escape/domain/Photo.java
+ com.sdc.escape.domain.Photo
 com/sdc/escape/service/impl/DefaultRoomService.java
  com.sdc.escape.service.impl.DefaultRoomService

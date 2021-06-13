@@ -41,6 +41,11 @@ public class MypageController {
 		}
 		List<Reservation> list = reservationService.listByUno(loginUser.getNo());
 		int size = list.size();
+		if (list.size() == 0) {
+			mv.addObject("size", size);
+			mv.setViewName("mypage/mypage");
+			return mv;
+		}
 		Reservation reservation = new Reservation();
 		reservation.setNo(list.get(0).getNo());
 		reservation.setDoDate(list.get(0).getDoDate());
@@ -101,12 +106,7 @@ public class MypageController {
 	@GetMapping("/reservation")
 	public String reservation(Model model, HttpSession session) throws Exception {
 		User loginUser = (User) session.getAttribute("loginUser");
-		List<Reservation> list = reservationService.listByUno(loginUser.getNo());
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i).getStatus() == 2) {
-				list.remove(i);
-			}
-		}
+		List<Reservation> list = reservationService.reservatedList(loginUser.getNo());
 		model.addAttribute("list", list);
 		return "mypage/reservation";
 	}
@@ -126,13 +126,30 @@ public class MypageController {
 		User loginUser = (User) session.getAttribute("loginUser");
 		List<Reservation> list = reservationService.listByUno(loginUser.getNo());
 		List<Reservation> historyList = new ArrayList<>();
+		
 		for (int i = 0; i < list.size(); i++) {
-			if(list.get(i).getStatus() == 2) {
+			// 상태만 따로 추출
+			if (list.get(i).getStatus() == 2) {
 				historyList.add(list.get(i));
 			}
 		}
 		model.addAttribute("historyList", historyList);
 		return "mypage/history";
+	}
+	
+	@ResponseBody
+	@GetMapping("/hasReview")
+	public int[] historyAjax(int[] resNoArr) throws Exception {
+		if (resNoArr == null) {
+			return new int[0];
+		}
+		int length = resNoArr.length;
+		int[] intArr = new int[length];
+		for(int i = 0; i < resNoArr.length; i++) {
+			System.out.println(reviewService.selectNoByResNo(resNoArr[i]));
+				intArr[i] = reviewService.selectNoByResNo(resNoArr[i]);
+		}
+		return intArr;
 	}
 	
 	@GetMapping("/removeAccount") 

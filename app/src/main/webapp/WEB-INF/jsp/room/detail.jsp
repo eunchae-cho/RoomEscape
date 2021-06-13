@@ -38,111 +38,84 @@
     
     <div style="margin-top: 300px;">
     	<div class="review-container" style="border-top: solid; border-width: thin;">
-    		<h4 style="margin: 20px;">Review (65)</h4>
+    		<h4 style="margin: 20px;">Review (${countReview})</h4>
     	</div>
     	<div class="review-container">
     		<section >
     		<div class="gallery">
-    			<ul style="position:relative; margin-left: 70px;">
-    				<li class="gallery-list"><img class="gallery-img" src="https://thumbnail7.coupangcdn.com/thumbnails/local/320/image2/PRODUCTREVIEW/202003/1/2535897684266459244/695e44c6-a354-4185-bbba-e2389d90e881.jpg" 
-    				data-reviewid="104476367" alt="갤러리 이미지" title="갤러리 상세 보기"></li>
-    				<li class="gallery-list"><img class="gallery-img"  src="https://thumbnail7.coupangcdn.com/thumbnails/local/320/image2/PRODUCTREVIEW/202003/1/2535897684266459244/695e44c6-a354-4185-bbba-e2389d90e881.jpg" 
-    				data-reviewid="104476367" alt="갤러리 이미지" title="갤러리 상세 보기"></li>
-    				<li class="gallery-list"><img class="gallery-img"  src="https://thumbnail7.coupangcdn.com/thumbnails/local/320/image2/PRODUCTREVIEW/202003/1/2535897684266459244/695e44c6-a354-4185-bbba-e2389d90e881.jpg" 
-    				data-reviewid="104476367" alt="갤러리 이미지" title="갤러리 상세 보기"></li>
-    				<li class="gallery-list"><img class="gallery-img"  src="https://thumbnail7.coupangcdn.com/thumbnails/local/320/image2/PRODUCTREVIEW/202003/1/2535897684266459244/695e44c6-a354-4185-bbba-e2389d90e881.jpg" 
-    				data-reviewid="104476367" alt="갤러리 이미지" title="갤러리 상세 보기"></li>
-    				<li class="gallery-list"><img class="gallery-img"  src="https://thumbnail7.coupangcdn.com/thumbnails/local/320/image2/PRODUCTREVIEW/202003/1/2535897684266459244/695e44c6-a354-4185-bbba-e2389d90e881.jpg" 
-    				data-reviewid="104476367" alt="갤러리 이미지" title="갤러리 상세 보기"></li>
-    				<li class="gallery-list"><img class="gallery-img"  src="https://thumbnail7.coupangcdn.com/thumbnails/local/320/image2/PRODUCTREVIEW/202003/1/2535897684266459244/695e44c6-a354-4185-bbba-e2389d90e881.jpg" 
-    				data-reviewid="104476367" alt="갤러리 이미지" title="갤러리 상세 보기">
-    				</li>
+    			<ul class="dd" style="position:relative; margin-left: 70px; margin-bottom: 80px;">
+    			<c:forEach items="${photoList}" var="ph">
+    				<li class="gallery-list">
+    				<input type="hidden" id="img" value="${ph.revNo}">
+    				<img class="gallery-img" src="<%=request.getContextPath()%>/upload/${ph.photo}"
+    				alt="갤러리 이미지" title="갤러리 상세 보기"></li>
+    			</c:forEach>
     				<li class="gallery-list-last">
-    					<div class="gallery-list-count">55</div>
+    					<div class="gallery-list-count">${countPhoto}</div>
     					<div class="gallery-list-more">더보기></div>
     				</li>
     			</ul>
     		</div>
     		</section>
+    		
     		<section>
+    		<c:forEach items="${reviewList}" var="rev">
     			<article class="review-list">
     				<div class="review-user-info">
     				  	<div class="user-info">
-    				  	<span style="font-size:14px;">2021-06-07</span><br>
-    				  	<span style="font-size:14px;">닉네임</span>
-    				  	</div>				
-	    				<div class="do-info">◇  참여 날짜: 2021-06-05</div>
-	    				<div class="escape-or-not">◇  탈출 여부: <span style="font-weight: bold; color: darksalmon;">성공 (45분 66초)</span></div>
+    				  	<span style="font-size:14px;">${rev.createdDate}</span><br>
+    				  	<span style="font-size:14px;">${rev.user.id}</span>
+    				  	</div>	
+    				  	<c:forEach items="${resList}"	 var="res">
+    				  	  <c:if test="${res.no == rev.resNo}">	
+	    					<div class="do-info">◇  참여 날짜: ${res.doDate}</div>
+	    					<div class="escape-or-not">◇  탈출 여부: 
+	    					<span style="font-weight: bold; color: darksalmon;">${res.escape} 
+	    						<c:if test="${res.escape == '성공'}">(${res.escapedTime})</c:if></span></div>
+	    					</c:if>
+    					</c:forEach>
     				</div>
     				<div class="review-photo">
+    				<c:forEach items="${photoList}" var="photo">
+    					<c:if test="${photo.revNo == rev.no}">
     					<div class="review-photo-list">
-    						<img class="reivew-img" src="https://thumbnail7.coupangcdn.com/thumbnails/local/320/image2/PRODUCTREVIEW/202003/1/2535897684266459244/695e44c6-a354-4185-bbba-e2389d90e881.jpg">
+    						<img class="reivew-img" src="<%=request.getContextPath()%>/upload/${photo.photo}">
     					</div>
-    					<div class="review-photo-list">
-    						<img class="reivew-img" src="https://thumbnail7.coupangcdn.com/thumbnails/local/320/image2/PRODUCTREVIEW/202003/1/2535897684266459244/695e44c6-a354-4185-bbba-e2389d90e881.jpg">
-    					</div>
-    					<div class="review-photo-list">
-    						<img class="reivew-img" src="https://thumbnail7.coupangcdn.com/thumbnails/local/320/image2/PRODUCTREVIEW/202003/1/2535897684266459244/695e44c6-a354-4185-bbba-e2389d90e881.jpg">
-    					</div>
-    					<div class="review-photo-list">
-    						<img class="reivew-img" src="https://thumbnail7.coupangcdn.com/thumbnails/local/320/image2/PRODUCTREVIEW/202003/1/2535897684266459244/695e44c6-a354-4185-bbba-e2389d90e881.jpg">
-    					</div>
+    					</c:if>
+    				</c:forEach>
     				</div>
     				<div class="review-title">
-    					대만족. 조립하고 스스로 정리정돈도합니다..
+    					${rev.title}
     				</div>
     				<div class="review-content-conainer">
     					<div class="review-content">
-    						레고 첫 시작으로 좋아요.<br>
-    						어린 나이에도 할 수 있겠네요.<br>
-    						쉬워서 금방 완성합니다.<br>
-    						<br>
-    					 	너무 강추해요.<br>
-    					 	아이들이 좋아해요.<br>
-    					 	사시면 후회 안하실 거에요.<br>
+    						${rev.content}
     					</div>
     				</div>
     			</article>
     			<hr>
-    			<article class="review-list">
-    				<div class="review-user-info">
-    				  	<div class="user-info">
-    				  	<span style="font-size:14px;">2021-06-07</span><br>
-    				  	<span style="font-size:14px;">닉네임</span>
-    				  	</div>				
-	    				<div class="do-info">◇  참여 날짜: 2021-06-05</div>
-	    				<div class="escape-or-not">◇  탈출 여부: <span style="font-weight: bold; color: dimgrey;">실패</span></div>
-    				</div>
-    				<div class="review-photo">
-    					<div class="review-photo-list">
-    						<img class="reivew-img" src="https://thumbnail7.coupangcdn.com/thumbnails/local/320/image2/PRODUCTREVIEW/202003/1/2535897684266459244/695e44c6-a354-4185-bbba-e2389d90e881.jpg">
+    			</c:forEach>
+    		</section>
+    		
+    		<section>
+    			<div class="modal" tabindex="-1">
+				  <div class="modal-dialog" style="margin: 0 auto; margin-top: 70px; max-width: 700px; color: black;">
+				    <div class="modal-content" style="width: 100%; height: auto;">
+				      <div class="modal-header">
+				        <h5 class="modal-title">갤러리</h5>
+				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin: 0;"></button>
+				      </div>
+				      <div class="modal-body" style="margin: 0 auto;">
+				      	<div style="margin-block: 100px; max-width: 500px;">
+				       	 	<img id="modal-img" class="gallery-img" src="" 
+    						alt="갤러리 이미지" title="갤러리 상세 보기" style="width: 100%; height: auto;">
     					</div>
-    					<div class="review-photo-list">
-    						<img class="reivew-img" src="https://thumbnail7.coupangcdn.com/thumbnails/local/320/image2/PRODUCTREVIEW/202003/1/2535897684266459244/695e44c6-a354-4185-bbba-e2389d90e881.jpg">
+    					<div>
     					</div>
-    					<div class="review-photo-list">
-    						<img class="reivew-img" src="https://thumbnail7.coupangcdn.com/thumbnails/local/320/image2/PRODUCTREVIEW/202003/1/2535897684266459244/695e44c6-a354-4185-bbba-e2389d90e881.jpg">
-    					</div>
-    					<div class="review-photo-list">
-    						<img class="reivew-img" src="https://thumbnail7.coupangcdn.com/thumbnails/local/320/image2/PRODUCTREVIEW/202003/1/2535897684266459244/695e44c6-a354-4185-bbba-e2389d90e881.jpg">
-    					</div>
-    				</div>
-    				<div class="review-title">
-    					대만족. 조립하고 스스로 정리정돈도합니다..
-    				</div>
-    				<div class="review-content-conainer">
-    					<div class="review-content">
-    						레고 첫 시작으로 좋아요.<br>
-    						어린 나이에도 할 수 있겠네요.<br>
-    						쉬워서 금방 완성합니다.<br>
-    						<br>
-    					 	너무 강추해요.<br>
-    					 	아이들이 좋아해요.<br>
-    					 	사시면 후회 안하실 거에요.<br>
-    					</div>
-    				</div>
-    			</article>
-    			<hr>
+				      </div>
+				    </div>
+				  </div>
+				</div>
     		</section>
     	</div>
     </div>
@@ -151,6 +124,15 @@
 
 <jsp:include page="../footer.jsp"></jsp:include>  
 <script>
+
+$(function() {
+	console.log($('.gallery-list:eq(3)').html())
+	var leng = $('.gallery-list').length;
+	for (var i = 7; i < leng; i++) {
+		$('.gallery-list:eq(i)').css('display', 'none');
+	}
+});
+
 //로그인이 필요한 링크 알림 설정
 function checkLogin() {
 	var loginUser = $('#loginUser').val();
@@ -160,6 +142,28 @@ function checkLogin() {
 		$('.needLogin').attr('href', '<%=request.getContextPath()%>/auth/login');
 	}
 };
+
+$('.gallery-img').on('click', function(e) {
+	e.preventDefault();
+	$('.modal').modal('show');
+	var src = $(this).attr('src');
+	$('#modal-img').attr('src', src);
+	
+	if (('#img').va l() == ('#img-revNo').val()) {
+		$('#review-title').append('${rev.title}');
+	}
+});
+
+$('.reivew-img').on('click', function(e) {
+	e.preventDefault();
+	$('.modal').modal('show');
+	
+	if (('#img').val() == ('#img-revNo').val()) {
+		$('#review-title').append('${rev.title}');
+	}
+});
+
+
 </script>
 </body>
 </html>

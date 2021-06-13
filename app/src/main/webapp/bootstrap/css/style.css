@@ -64,6 +64,10 @@ body {
     padding-inline-start: 40px;
     padding: 0px;
   }
+
+  .gallery ul li:nth-of-type(n+6) {
+    display: none;
+  }
   /* CUSTOMIZE THE CAROUSEL
   -------------------------------------------------- */
   

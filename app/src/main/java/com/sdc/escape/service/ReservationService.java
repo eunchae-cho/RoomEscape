@@ -11,5 +11,7 @@ public interface ReservationService {
 	Reservation reservationByNo(int no) throws Exception;
 	int cancel(Reservation reservation) throws Exception;
 	List<Reservation> findReservation(Date date) throws Exception;
-	
-}
+	List<Reservation> reservatedList(int no) throws Exception;
+	List<Reservation> listByRoom(int no) throws Exception;
+	Reservation reservationByResNo(int no) throws Exception;
+ }

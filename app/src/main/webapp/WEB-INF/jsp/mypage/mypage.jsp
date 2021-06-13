@@ -37,7 +37,7 @@
 					      <td style="padding-block: 15px;">${recentRes.no}</td>
 					      <td style="padding-block: 15px;">${recentRes.doDate}</td>
 					      <td style="padding-block: 15px;">${recentRes.roomTime}</td>
-					      <td style="padding-block: 15px;">${recentRes.room.title}   &nbsp;&nbsp; 외 ${size}건</td>
+					      <td style="padding-block: 15px;">${recentRes.room.title}   &nbsp;&nbsp;<c:if test="${size != 0}"> 외 ${size}건</c:if></td>
 					    </tr>
 					  </tbody>
 					</table>

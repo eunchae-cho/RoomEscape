@@ -40,8 +40,10 @@
 						      <td style="padding-block: 15px;">${res.escape} 
 						      	<c:if test="${room.escape == '성공'}"> (${res.escapedTime})</c:if></td>
 						       <td id="td_status" style="padding-block: 15px;"><input type="hidden" id="status" value="${res.status}"></td>
-						       <td style="padding-block: 15px;"><button type="button" id="reviewBtn" class="btn btn-review me-2" 
-						       onClick="location.href='<%=request.getContextPath()%>/mypage/review/add?resNo=${res.no}'">리뷰 쓰기</button></td>
+						       <td style="padding-block: 15px;">
+						       <input type="hidden" id="writeReivew" value="0">
+						       <button type="button" id="reviewBtn" class="btn btn-review me-2" 
+						       onClick="location.href='<%=request.getContextPath()%>/mypage/review/add?resNo=${res.no}'" >리뷰 쓰기</button></td>
 						    </tr>
 					     </c:forEach>
 					  </tbody>
@@ -67,6 +69,36 @@
 				$('.table tbody tr')[i].children[5].innerText = '';
 			} 
 		}
+		
+		// 리뷰가 작성된 내역은 버튼이 안보이게
+		var resNoArr = new Array();
+		for(var i = 0; i < length; i++) {
+				  resNoArr[i] = $('.table tbody tr')[i].children[0].innerText;
+			} 
+		console.log(resNoArr)
+		
+
+		$.ajax({
+			url: 'hasReview',
+			type: 'get',
+			traditional: true,
+			data: {
+				resNoArr : resNoArr	
+			},
+			dataType: 'json',
+			success: function(data) {
+				console.log(data);
+				for(var i = 0; i < length; i++) {
+					if(data[i] == 1){
+					  $('.table tbody tr:eq('+ i +')').find('td:eq(6)').find('button').hide();
+					}
+				} 
+				
+			},
+			error: function() {
+				console.log('error');
+			}
+		});
 	});
 	
 </script>

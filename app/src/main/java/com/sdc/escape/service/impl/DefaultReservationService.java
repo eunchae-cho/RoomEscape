@@ -48,4 +48,19 @@ public class DefaultReservationService implements ReservationService{
 	public List<Reservation> findReservation(Date date) throws Exception {
 		return reservationDao.findReservation(date);
 	}
+	
+	@Override
+	public List<Reservation> reservatedList(int no) throws Exception {
+		return reservationDao.findByUnoReservated(no);
+	}
+	
+	@Override
+	public List<Reservation> listByRoom(int no) throws Exception {
+		return reservationDao.findByRoom(no);
+	}
+	
+	@Override
+	public Reservation reservationByResNo(int no) throws Exception {
+		return reservationDao.findByResNo(no);
+	}
 }

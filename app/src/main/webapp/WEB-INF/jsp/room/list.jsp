@@ -10,19 +10,21 @@
   <jsp:include page="../header.jsp"></jsp:include>  
 
   <main>
-    <div class="container marketing" style="padding-top: 100px;">
+    <div class="container marketing" style="padding-top: 100px; width: 900px;">
 
       <c:forEach items="${roomList}" var="room">
           <div class="row featurette">
-            <div class="col-md-7">
-              <h2 class="featurette-heading"><a href="./detail?no=${room.no}" class="nav-link px-2" style="color: indianred;">${room.title}</a></h2><br>
+            <div class="col-md-7" style="width: 50%;">
+              <h4 class="featurette-heading">
+              <a href="./detail?no=${room.no}" class="nav-link px-2" style="color: white; font-family: twaysky;font-size: xx-large; text-shadow: 4px 4px 6px darkgrey;">${room.title}</a>
+              </h4><br>
               <div style="margin: 20px;">
-	              <p class="lead">난이도: &nbsp ${room.level}</p>
-	              <p class="lead">인원: &nbsp ${room.participant} &nbsp 명</p>
+	              <p class="lead" style="font-size: 14px; font-weight: 400;''">난이도: &nbsp ${room.level}</p>
+	              <p class="lead" style="font-size: 14px; font-weight: 400;'">인원: &nbsp ${room.participant} &nbsp 명</p>
               </div>
             </div>
-            <div class="col-md-5">
-              <img src="${room.photo}" width="500px" height="500px">
+            <div class="col-md-5" style="width: 50%;">
+              <img src="${room.photo}" width="100%" height="100%">
             </div>
           </div>
           <hr class="featurette-divider">

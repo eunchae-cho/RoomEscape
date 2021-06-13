@@ -9,7 +9,7 @@
         <result column="rev_title" property="title"></result>
         <result column="rev_content" property="content"></result>
         <result column="rev_cdt" property="createdDate"></result>
-        <result column="rev_photo" property="photo"></result>
+        <result column="res_no" property="resNo"></result>
         
         <association property="user" javaType="user">
         	<id column="u_no" property="no"></id>
@@ -21,7 +21,12 @@
         	<result column="r_title" property="title"></result>
         </association>
     </resultMap>
-
+	
+	<resultMap type="photo" id="PhotoMap">
+		<id column="rev_no" property="revNo"></id>
+		<result column="rev_Photo" property="photo"></result>
+	</resultMap>
+    
     <select id="findAll" resultMap="ReviewMap">
     </select>
     
@@ -31,7 +36,10 @@
 	    	,	rev_title
 	    	,	rev_content
 	    	,	rev_cdt
+	    	,	res_no
+	    	,  u.u_no
 	    	,	u.u_id
+	    	,  r.r_no
 	    	,	r.r_title 
 	    FROM escape_review rev
 	    	INNER JOIN escape_user u
@@ -41,4 +49,145 @@
 	    WHERE rev.u_no = #{no}
     	ORDER BY rev_no DESC
     </select>
+    
+    <select id="findByNo" resultMap="ReviewMap" parameterType="int">
+	    SELECT 
+					rev_no
+				,	rev_title
+		    	,	rev_content
+		    	,	rev_cdt
+		    	,	res_no
+		FROM escape_review 
+		WHERE rev_no = #{no}
+    </select>
+    
+    <select id="findReviewByRoom" resultMap="ReviewMap" parameterType="int">
+	    SELECT 
+					er.rev_no
+				,	rev_title
+		    	,	rev_content
+		    	,	rev_cdt
+		    	,	res_no
+		    	,  	u.u_no
+		    	,	u.u_id
+		FROM escape_review er 
+			INNER JOIN escape_user u
+				    		ON er.u_no = u.u_no
+		WHERE r_no = #{no}
+		ORDER BY rev_no DESC
+    </select>
+    
+    <select id="selectNoByResNo" resultType="int" parameterType="int">
+    	SELECT EXISTS 
+			(SELECT 
+				1
+				FROM escape_review
+				WHERE res_no = #{no}) 
+    </select>
+    
+    <select id="selectOne" resultMap="ReviewMap" >
+	    SELECT 
+	    	rev_no
+	    FROM escape_review
+	    ORDER BY rev_cdt DESC 
+	    limit 1
+    </select>
+    
+    <select id="countReview" resultType="int" parameterType="int" >
+	    SELECT 
+	    	COUNT (*)
+	    FROM escape_review rev
+	    	INNER JOIN escape_room er 
+					ON er.r_no = rev.r_no 
+	    WHERE rev.r_no = #{no}
+    </select>
+    
+    <select id="findPhotosByRno" resultMap="PhotoMap" parameterType="int">
+    	SELECT
+    			ph.rev_no
+    		,	rev_photo
+    	FROM escape_review_photo ph
+    		INNER JOIN escape_review rev
+    				ON ph.rev_no = rev.rev_no
+    		INNER JOIN escape_room r
+    				ON rev.r_no = r.r_no
+    	WHERE r.r_no = #{no} 
+    </select>
+    
+     <select id="findPhotosByUno" resultMap="PhotoMap" parameterType="int">
+    	SELECT
+    			ph.rev_no
+    		,	rev_photo
+    	FROM escape_review_photo ph
+    		INNER JOIN escape_review rev
+    				ON ph.rev_no = rev.rev_no
+    		INNER JOIN escape_user u
+    				ON rev.u_no = u.u_no
+    		WHERE u.u_no = #{no}
+    		ORDER BY ph.rev_no
+    </select>
+    
+    <select id="findPhotosByResNo" resultMap="PhotoMap" parameterType="int">
+    	SELECT
+    			ph.rev_no
+    		,	rev_photo
+    	FROM escape_review_photo ph
+    		INNER JOIN escape_review rev
+    				ON ph.rev_no = rev.rev_no
+    		WHERE ph.rev_no = #{no}
+    </select>
+    
+    <select id="countPhoto" resultType="int" parameterType="int">
+    	SELECT
+			COUNT(*) 
+    	FROM escape_review_photo ph
+    	INNER JOIN escape_review er 
+    			ON ph.rev_no  = er.rev_no 
+    	INNER JOIN  escape_room r 
+    			ON er.r_no = r.r_no 
+    	WHERE r.r_no = #{no}
+    </select>
+    
+    <select id="hasPhoto" resultType="int" parameterType="int">
+    	SELECT
+			COUNT(*) 
+    	FROM escape_review_photo ph
+    	INNER JOIN escape_review er 
+    			ON ph.rev_no  = er.rev_no 
+    	WHERE ph.rev_no = #{no}
+    </select>
+    
+    <insert id="addReview" parameterType="Review">
+    	INSERT INTO escape_review
+    		(rev_no, r_no, u_no, rev_title, rev_content, rev_cdt, res_no)
+    	VALUES
+    		(#{no}, #{room.no}, #{user.no}, #{title}, #{content}, now(), #{resNo})
+    </insert>
+    
+    <insert id="addPhotos" parameterType="map">
+    	INSERT INTO escape_review_photo
+    		(rev_no,  rev_photo)
+    	VALUES
+    		(#{no}, #{photo})
+    </insert>
+    
+    <delete id="deleteByNo" parameterType="int">
+    	DELETE
+    	FROM escape_review
+    	WHERE rev_no = #{no}
+    </delete>
+    
+    <delete id="deletePhotoByNo" parameterType="int">
+    	DELETE
+    	FROM escape_review_photo
+    	WHERE rev_no = #{no}
+    </delete>
+    
+    <update id="update" parameterType="Review">
+    	UPDATE escape_review
+    	SET
+    			rev_title = #{title}
+    		,	rev_content = #{content}
+    	WHERE rev_no = #{no}
+    </update>
   </mapper>

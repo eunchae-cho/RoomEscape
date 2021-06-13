@@ -34,15 +34,20 @@
 					    	<tr>
 						      <td style="height: 150px; table-layout: fixed ;vertical-align: middle;">${review.no}</td>
 						      <td style="height: 150px; table-layout: fixed; padding-block: 20px;">
-						      	<div style="width: 100px; height: 120px; margin: 0 auto;">
-						      	</div>
+							      	<div style="width: 100px; height: 120px; margin: 0 auto;">
+							      		<c:if test="${photo.revNo == review.no}">
+							      			<img src="<%=request.getContextPath()%>/upload/${photo.photo}" style="width: 100%; height: auto;">
+							      		</c:if>
+							      	</div>
 						      	</td>
 						      <td style="height: 150px; table-layout: fixed;word-break:break-all; vertical-align: middle;">${review.room.title}</td>
-						      <td style="height: 150px; table-layout: fixed;word-break:break-all; vertical-align: middle;">${review.title}</td>
+						      <td style="height: 150px; table-layout: fixed;word-break:break-all; vertical-align: middle;">
+						      	<a href="<%=request.getContextPath()%>/mypage/review/detail?no=${review.no}" style="color: white;">${review.title}</a></td>
 						      <td style="height: 150px; table-layout: fixed; vertical-align: middle;">${review.user.id}</td>
 						      <td style="height: 150px; table-layout: fixed; vertical-align: middle;">
-						      	<div style="padding-bottom: 5px;"><a href="" style="color: darksalmon;">수정</a></div>
-						      	<div><a href="" style="color: darksalmon;">삭제</a></div>
+						      	<div style="padding-bottom: 5px;">
+						      	<a href="<%=request.getContextPath()%>/mypage/review/update?no=${review.no}" style="color: darksalmon;">수정</a></div>
+						      	<div><a href="<%=request.getContextPath()%>/mypage/review/delete?no=${review.no}" onclick="checkDelete();"style="color: darksalmon;">삭제</a></div>
 						      </td>
 					   	   </tr>
 					    </c:forEach>
@@ -58,7 +63,14 @@
  <jsp:include page="../../footer.jsp"></jsp:include>  
  <script>
 	
-	
+	function checkDelete() {
+		var result = confirm('해당 리뷰를 삭제하시겠습니까?');
+		if(result) {
+			alert('삭제되었습니다.');
+		} else {
+			alert('삭제가 취소되었습니다.');
+		}
+	}
  </script>
  </body>
  </html>

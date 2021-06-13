@@ -30,7 +30,7 @@ public class ReservationController {
 	@Autowired ReservationService reservationService;
 
 	@GetMapping("/")
-    public String reservation(Model model) throws Exception {
+    public String reservation(Model model, HttpSession session) throws Exception {
 		List<Room> roomList = roomService.list();
 		List<RoomTime> roomTimeList = roomTimeService.list();
 	

@@ -1,6 +1,7 @@
 package com.sdc.escape.domain;
 
 import java.sql.Date;
+import java.util.List;
 
 public class Review {
     private int no;
@@ -9,6 +10,8 @@ public class Review {
     private Date createdDate;
     private User user;
     private Room room;
+    private int  resNo;
+    private boolean reviewed;
 
     public int getNo() {
         return this.no;
@@ -58,4 +61,20 @@ public class Review {
 		this.room = room;
 	}
 
+	public int getResNo() {
+		return resNo;
+	}
+
+	public void setResNo(int resNo) {
+		this.resNo = resNo;
+	}
+
+	public boolean getReviewed() {
+		return reviewed;
+	}
+
+	public void setReviewed(boolean reviewed) {
+		this.reviewed = reviewed;
+	}
 }
+	

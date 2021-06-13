@@ -19,6 +19,7 @@ public class Reservation {
     // status => default / 예약: 0, 예약취소: 1, 종료: 2
     private int status;
     private Room room;
+    private User user;
     private String escape;
     private String escapedTime;
 
@@ -116,6 +117,14 @@ public class Reservation {
 
 	public void setRoom(Room room) {
 		this.room = room;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getEscape() {

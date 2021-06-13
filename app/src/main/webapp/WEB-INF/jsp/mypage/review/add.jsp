@@ -52,13 +52,13 @@
 	        	 	</div>
 	        	 	<div style="padding-block: 20px;">
 	        	 		<label> 사진 선택: </label>
-	        	 		<input  type="file" id="photos" name="photos[]" style="margin-left: 20px;" multiple>
+	        	 		<input  type="file" id="photos" name="photos" style="margin-left: 20px;">
 	        	 		<div style="color: darkgrey; margin-left: 86px; margin-top: 5px;">최대 10장</div>
 	        	 		<div id="img-box">
 	        	 			<ul id="img-wrap"></ul>
 	        	 		</div>
 	        	 		<div style="text-align: center; margin-block: 100px;">
-	        	 			<button type="button" id="addBtn" class="btn btn-find">완료</button>
+	        	 			<button type="submit" id="addBtn" class="btn btn-find">완료</button>
 	        	 		</div>
 	        	 	</div>
 	        	 </div>
@@ -85,7 +85,9 @@
 		var files = e.target.files;
 		var filesArr = Array.prototype.slice.call(files);
 		
-		if (count > 1) {
+		console.log(filesArr)
+		
+		if (count > 9) {
 			alert('최대 10개의 사진 첨부만 가능합니다.');
 			return;
 		} 
@@ -112,7 +114,6 @@
 			}
 			reader.readAsDataURL(f);
 			count = count + 1;
-			console.log(count);
 		});
 	}
 	
@@ -122,8 +123,26 @@
 		if (count == 0) {
 			$('#photos').val('');
 		}
-		console.log(count)
 	}
+	
+	$("#addBtn").on('click', function() {
+		if($('#review-text').val() == '') {
+			alert('제목을 작성해주세요.');
+			return false;
+		}
+		if ($('#review-textarea').val() == '') {
+			alert('내용을 작성해주세요.');
+			return false;
+		} 
+		else {
+			var result = confirm('리뷰를 작성하시겠습니까?');
+			if(result) {
+				alert('리뷰가 작성되었습니다.');
+			} else {
+			}
+			
+		}
+	});
 	
  </script>
  </body>
