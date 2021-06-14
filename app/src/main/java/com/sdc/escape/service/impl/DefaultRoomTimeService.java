@@ -25,4 +25,9 @@ public class DefaultRoomTimeService implements RoomTimeService{
     public List<RoomTime> timeByNo(int no) throws Exception {
         return roomTimeDao.findByNo(no);
     }
+    
+    @Override
+    public int add(RoomTime roomTime) throws Exception {
+    	return roomTimeDao.add(roomTime);
+    }
 }

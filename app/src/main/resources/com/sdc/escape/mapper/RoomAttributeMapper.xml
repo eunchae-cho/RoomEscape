@@ -5,6 +5,7 @@
 
   <mapper namespace="com.sdc.escape.dao.RoomAttributeDao">
     <resultMap type="roomAttribute" id="RoomAttributeMap">
+       <id column="r_no" property="rno"></id>
         <result column="attr_reasoning" property="reasoning"></result>
         <result column="attr_observation" property="observation"></result>
         <result column="attr_horror" property="horror"></result>
@@ -48,4 +49,11 @@
    		FROM escape_room_attr
    		WHERE r_no = #{no}
     </select>
+    
+    <insert id="add" parameterType="roomAttribute">
+    	INSERT INTO escape_room_attr
+    	    (r_no,attr_reasoning, attr_observation, attr_horror, attr_activity)
+    	VALUES
+    		(#{rno}, #{reasoning}, #{observation}, #{horror}, #{activity})
+    </insert>
   </mapper>

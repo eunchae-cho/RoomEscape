@@ -30,6 +30,8 @@ public class AppWebConfig implements WebMvcConfigurer {
     	.addResourceLocations("/bootstrap/");
     	registry.addResourceHandler("/upload/**")
     	.addResourceLocations("/upload/");
+    	registry.addResourceHandler("/img/**")
+    	.addResourceLocations("/img/");
     }
     
     

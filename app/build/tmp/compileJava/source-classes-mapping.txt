@@ -34,6 +34,8 @@ com/sdc/escape/web/IndexController.java
  com.sdc.escape.web.IndexController
 com/sdc/escape/dao/RoomDao.java
  com.sdc.escape.dao.RoomDao
+com/sdc/escape/web/AdminController.java
+ com.sdc.escape.web.AdminController
 com/sdc/escape/dao/RoomTimeDao.java
  com.sdc.escape.dao.RoomTimeDao
 com/sdc/escape/service/RoomTimeService.java
@@ -58,8 +60,6 @@ com/sdc/escape/web/ReservationController.java
  com.sdc.escape.web.ReservationController
 com/sdc/escape/config/AppWebConfig.java
  com.sdc.escape.config.AppWebConfig
-com/sdc/escape/web/adminController.java
- com.sdc.escape.web.adminController
 com/sdc/escape/service/ReservationService.java
  com.sdc.escape.service.ReservationService
 com/sdc/escape/web/RoomController.java

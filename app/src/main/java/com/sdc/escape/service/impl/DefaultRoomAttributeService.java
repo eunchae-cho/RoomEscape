@@ -18,4 +18,9 @@ public class DefaultRoomAttributeService implements RoomAttributeService{
     public RoomAttribute roomAttrByNo(int no) throws Exception {
         return roomAttributeDao.findByNo(no);
     }
+    
+    @Override
+    public int add(RoomAttribute roomAttribute) throws Exception {
+    	return roomAttributeDao.add(roomAttribute);
+    }
 }

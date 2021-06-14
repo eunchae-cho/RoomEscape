@@ -24,4 +24,11 @@
     		ON rt.r_no = r.r_no
     	WHERE rt.r_no = #{no}
     </select>
+    
+    <insert id="add" parameterType="roomTime">
+    	INSERT INTO escape_room_time
+    		(r_no, r_time)
+    	VALUES
+    		(#{rno}, #{roomTime})
+    </insert>
   </mapper>

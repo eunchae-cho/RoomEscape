@@ -25,4 +25,14 @@ public class DefaultRoomService implements RoomService{
     public Room roomByNo(int no) throws Exception {
         return roomDao.findByNo(no);
     }
+    
+    @Override
+    public int add(Room room) throws Exception {
+    	return roomDao.add(room);
+    }
+    
+    @Override
+    public int recentNo() throws Exception {
+    	return roomDao.recentNo();
+    }
 }

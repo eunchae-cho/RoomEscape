@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="com.sdc.escape.dao.EventDao">
+    <resultMap type="event" id="EventMap">
+        <result column="ev_no" property="no"></result>
+        <result column="ev_title" property="title"></result>
+        <result column="ev_content" property="content"></result>
+        <result column="ev_photo" property="photo"></result>
+         <result column="ad_no" property="adminNo"></result>
+        
+        <association property="admin" javaType="admin">
+        	<id column="ad_no" property="no"></id>
+        	<result column="ad_id" property="id"></result>
+        </association>
+    </resultMap>
+    
+    <select id="findAll" resultMap="EventMap">
+    	SELECT
+    			ev_no
+    		,	ev_title
+    		,	ev_content
+    		,	ev_photo
+    		,	e.ad_no
+    		,	ad_id
+    	FROM escape_event e
+    		INNER JOIN escape_admin a
+   					ON e.ad_no = a.ad_no
+    </select>
+    
+     <select id="findByNo" resultMap="EventMap" parameterType="int">
+    	SELECT
+    			ev_no
+    		,	ev_title
+    		,	ev_content
+    		,	ev_photo
+    		,	e.ad_no
+    		,	ad_id
+    	FROM escape_event e
+    		INNER JOIN escape_admin a
+   					ON e.ad_no = a.ad_no
+   		WHERE ev_no = #{no}
+    </select>
+    
+    <insert id="add" parameterType="event">
+    	INSERT INTO escape_event
+    		(ev_title, ev_content, ad_no, ev_photo)
+    	VALUES
+    		(#{title}, #{content}, #{adminNo}, #{photo})
+    </insert>
+    
+    <update id="update" parameterType="int">
+    	UPDATE escape_event
+    		SET
+    			ev_title = #{title}
+    		,	ev_content = #{content}
+    		,	ev_photo = #{photo}
+    	WHERE ev_no = #{no}
+    </update>
+    
+    <delete id="delete" parameterType="int">
+    	DELETE FROM escape_event
+    	WHERE ev_no = #{no}
+    </delete>
+
+  </mapper>

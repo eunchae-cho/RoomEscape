@@ -46,4 +46,19 @@
     	FROM escape_room 
     	WHERE r_no = #{no}
     </select>
+    
+    <select id="recentNo" resultType="int">
+    	SELECT
+    		r_no
+    	FROM escape_room
+    	ORDER BY r_no DESC
+    	LIMIT 1
+    </select>
+    
+    <insert id="add" parameterType="room">
+    	INSERT INTO escape_room
+    		(r_title, r_content, r_level, r_participant, r_photo)
+    	VALUES
+    		(#{title}, #{content}, #{level}, #{participant}, #{photo})
+    </insert>
   </mapper>

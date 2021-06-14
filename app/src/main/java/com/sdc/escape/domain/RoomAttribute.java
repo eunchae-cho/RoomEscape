@@ -1,12 +1,22 @@
 package com.sdc.escape.domain;
 
 public class RoomAttribute {
+	private int rno;
     private String reasoning;
     private String observation;
     private String horror;
     private String activity;
 
-    public String getReasoning() {
+    
+    public int getRno() {
+		return rno;
+	}
+
+	public void setRno(int rno) {
+		this.rno = rno;
+	}
+
+	public String getReasoning() {
         return this.reasoning;
     }
 

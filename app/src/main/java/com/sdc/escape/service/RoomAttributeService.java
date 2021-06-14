@@ -4,4 +4,5 @@ import com.sdc.escape.domain.RoomAttribute;
 
 public interface RoomAttributeService {
     RoomAttribute roomAttrByNo(int no) throws Exception;
+    int add(RoomAttribute roomAttribute) throws Exception;
 }
