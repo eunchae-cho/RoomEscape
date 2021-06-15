@@ -27,18 +27,18 @@
 <jsp:include page="../sidebar.jsp"></jsp:include>  
       
  <main  class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
- <h2 style="margin-block: 50px;">이벤트 보기</h2>  
-  <p style="margin-left: 50px;">no. ${event.no}</p>
+ <h3 style="margin-block: 50px;">이벤트 보기</h3>  
+  <p style="margin-left: 50px;"><b>no. ${event.no}</b></p>
   <div style="margin: 50px;">
   <div style="margin-block: 50px;">
   	<img src="<%=request.getContextPath()%>/img/${event.photo}">
   </div>
 	 <div style="margin-bottom: 30px;">
-	 	<label>제목: </label>
+	 	<label><b>제목: </b></label>
 	 	<div style="width: 94%; float: right;">${event.title}</div>
 	</div>
 	<div>
- 	 	<label>내용: </label>
+ 	 	<label><b>내용: </b></label>
 	 	<div style="width: 94%; float: right;">${event.content}</div>
 	</div>
 	<div style="text-align: center; margin-top: 100px;">
@@ -49,7 +49,6 @@
  </main>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
 <script>
 	$('.updateBtn').on('click', function() {
 		location.href = '<%=request.getContextPath()%>/admin/event/update?no=${event.no}';

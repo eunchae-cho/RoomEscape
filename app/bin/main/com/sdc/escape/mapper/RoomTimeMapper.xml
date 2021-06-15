@@ -31,4 +31,9 @@
     	VALUES
     		(#{rno}, #{roomTime})
     </insert>
+    
+    <delete id="delete" parameterType="int">
+    	DELETE FROM escape_room_time
+    	WHERE r_no = #{rno}
+    </delete>
   </mapper>

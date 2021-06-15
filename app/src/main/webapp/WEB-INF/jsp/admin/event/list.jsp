@@ -27,7 +27,7 @@
 <jsp:include page="../sidebar.jsp"></jsp:include>  
       
  <main  class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
- <h2 style="margin-block: 50px;">이벤트</h2>  
+ <h3 style="margin-block: 50px;">이벤트</h3>  
  <div style="text-align: right; margin-right: 10px;">
  	<button type="button" class="btn btn-light addBtn" style="font-size: 12px;">추가</button>
  </div>
@@ -36,7 +36,7 @@
         <table class="table table-striped table-sm">
           <thead>
             <tr>
-              <th style="width: 10%;">no</th>
+              <th style="width: 10%;">no.</th>
               <th style="width: 20%;">제목</th>
               <th style="width: 50%; overflow:hidden; text-overflow: ellipsis; white-space: nowrap;">내용</th>
               <th style="width: 20%;">작성자</th>
@@ -59,7 +59,6 @@
  </main>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
 <script>
 	$('.addBtn').on('click', function() {
 		location.href = '<%=request.getContextPath()%>/admin/event/add';

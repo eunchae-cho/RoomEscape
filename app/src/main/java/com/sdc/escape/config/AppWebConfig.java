@@ -32,6 +32,8 @@ public class AppWebConfig implements WebMvcConfigurer {
     	.addResourceLocations("/upload/");
     	registry.addResourceHandler("/img/**")
     	.addResourceLocations("/img/");
+    	registry.addResourceHandler("/fullcalendar/**")
+    	.addResourceLocations("/fullcalendar/");
     }
     
     

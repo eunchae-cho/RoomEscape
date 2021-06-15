@@ -20,7 +20,22 @@ public class DefaultRoomAttributeService implements RoomAttributeService{
     }
     
     @Override
+    public RoomAttribute roomAttrByNoWithoutStar(int no) throws Exception {
+    	return roomAttributeDao.findByNoWithoutStar(no);
+    }
+    
+    @Override
     public int add(RoomAttribute roomAttribute) throws Exception {
     	return roomAttributeDao.add(roomAttribute);
+    }
+    
+    @Override
+    public int delete(int no) throws Exception {
+    	return roomAttributeDao.delete(no);
+    }
+    
+    @Override
+    public int update(RoomAttribute roomAttribute) throws Exception {
+    	return roomAttributeDao.update(roomAttribute);
     }
 }

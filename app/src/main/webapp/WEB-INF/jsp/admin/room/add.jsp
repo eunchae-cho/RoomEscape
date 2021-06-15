@@ -29,7 +29,7 @@
   <form action="add" method="post" enctype="multipart/form-data">
   
  <main  class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
- <h2 style="margin-block: 50px;">룸 테마 등록</h2>  
+ <h3 style="margin-block: 50px;">룸 테마 등록</h3>  
   <div style="margin-block: 50px;">
 	 <div class="input-group input-group-sm mb-3">
 	  <span class="input-group-text" id="inputGroup-sizing-sm">제목</span>
@@ -171,7 +171,7 @@
 	
 	<div class="input-group input-group-sm mb-3" style="margin-block: 30px; width: 300px;">
   <span class="input-group-text" id="inputGroup-sizing-sm">참여 가능 인원</span>
-  <input type="text" name="participant" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+  <input type="text" id="participant" name="participant" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
 </div>
 	
 	<div class="mb-3" style="margin-block: 30px;">
@@ -179,19 +179,17 @@
 	</div>
 	
 	<div style="text-align: center; margin-block: 50px;">
-	<button type="submit" name="photo" class="btn btn-secondary addBtn" style="font-size: 12px;">등록</button>
+	<button type="submit" class="btn btn-secondary addBtn" style="font-size: 12px;">등록</button>
  	</div>
  </div>
  </main>
 </form>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
 <script>
 
-
 $('.addBtn').on('click', function() {
-	/* if ($('#title').val() == '') {
+	 if ($('#title').val() == '') {
 		alert('제목을 입력해주세요.');
 		return false;
 	}
@@ -199,18 +197,51 @@ $('.addBtn').on('click', function() {
 		alert('내용을 입력해주세요.');
 		return false;
 	}
+	
+	var cnt = 0;
+	var chkbox = $('.checkRoomTime');
+	for (var i = 0; i < chkbox.length; i++) {
+		if (chkbox[i].checked == true) {
+			cnt++;
+		}
+	}
+	if (cnt == 0) {
+		alert('시간대를 선택해 주세요.');
+		return false;
+	}
+
+	if ($('select[name=level]').val() == '선택') {
+		alert('난이도를 선택해주세요.');
+		return false;
+	}
+	if ($('select[name=reasoning]').val() == '선택' ) {
+		alert('추리력을 선택해주세요.');
+		return false;
+	}
+	if ($('select[name=observation]').val() == '선택') {
+		alert('관찰력을 선택해주세요.');
+		return false;
+	}
+	if ($('select[name=horror]').val() == '선택') {
+		alert('공포를 선택해주세요.');
+		return false;
+	}
+	if ($('select[name=activity]').val() == '선택') {
+		alert('활동력을 선택해주세요.');
+		return false;
+	}
+	if ($('#participant').val() == '') {
+		alert('참여 가능 인원을 입력해주세요.');
+		return false;
+	}
 	else {
-		var result = confirm('이벤트를 등록하시겠습니까?');
+		var result = confirm('룸 테마를 등록하시겠습니까?');
 		if(result) {
 			alert('등록되었습니다.');
 		}
 		else {
 		}
-	} */
-	$('.checkRoomTime:checked').each(function(i, value) {
-		 var test = $(this).val();
-		console.log(test);
-	});
+	} 
 });
 </script>
 </body>

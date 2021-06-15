@@ -26,10 +26,30 @@
         
         <association property="user" javaType="user">
         	<id column="u_no" property="no"></id>
+        	<result column="u_name" property="name"></result>
         </association>
     </resultMap>
 
     <select id="findAll" resultMap="ReservationMap">
+    	SELECT
+    			res_no
+    		,	res_time
+    		,	res_rdt
+    		,	res_cancel
+    		,	res_cancel_date
+    		,	res_participant
+    		,	res_price
+    		,	res.u_no
+    		,	res.r_no
+    		,	res_status
+    		,  date_format(res_date,'%Y-%m-%d') res_date
+    		,  IF (res_escape = 1, '성공', '실패') AS res_escape
+    		,  res_escape_time
+    		,	r.r_title r_title
+    	FROM escape_reservation res
+    		INNER JOIN escape_room r
+    			ON res.r_no = r.r_no
+    	ORDER BY res_date DESC
     </select>
     
     <select id="findByUno" resultMap="ReservationMap" parameterType="int">
@@ -162,6 +182,32 @@
 	    			ON r.r_no = er.r_no
 	     	WHERE er.rev_no= #{no}
 	     		AND res.res_no = er.res_no
+    </select>
+    
+    <select id="findByDate" resultMap="ReservationMap" parameterType="String">
+    	SELECT
+    			res_no
+    		,	res_time
+    		,	res_rdt
+    		,	res_cancel
+    		,	res_cancel_date
+    		,	res_participant
+    		,	res_price
+    		,	res.u_no
+    		,	res.r_no
+    		,	res_status
+    		,  date_format(res_date,'%Y-%m-%d') res_date
+    		,  IF (res_escape = 1, '성공', '실패') AS res_escape
+    		,  res_escape_time
+    		,	r.r_title 
+    		,	u.u_name 
+    	FROM escape_reservation res
+    		INNER JOIN escape_room r
+    			ON res.r_no = r.r_no
+    		INNER JOIN escape_user u
+    			ON res.u_no = u.u_no
+    	WHERE res_date = #{doDate}
+    	ORDER BY r_no, res_time 
     </select>
     
     <insert id="add" parameterType="Reservation">

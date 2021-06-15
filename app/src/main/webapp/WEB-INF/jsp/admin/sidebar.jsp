@@ -26,7 +26,7 @@
 </head>
 
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Sandoll Escape</a>
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="<%=request.getContextPath() %>/admin/">Sandoll Escape</a>
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -43,7 +43,7 @@
     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="position-sticky pt-3">
       
-      <h5 style="margin-bottom: 50px; margin-left: 15px;"> ${sessionScope.loginAdmin.id}님</h5>
+      <h5 style="margin-top: 34px; margin-bottom: 80px; margin-left: 15px;"> <u>${sessionScope.loginAdmin.id}</u> 님</h5>
 
 	 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
           <span>work process</span>
@@ -54,7 +54,7 @@
         
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">
+            <a class="nav-link" aria-current="page" href="<%=request.getContextPath() %>/admin/reservation">
               <span data-feather="home"></span>
               예약 관리
             </a>
@@ -72,40 +72,6 @@
             </a>
           </li>
          </ul>
-
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-          <span style="margin-top: 50px;">Saved reports</span>
-          <a class="link-secondary" href="#" aria-label="Add a new report">
-            <span data-feather="plus-circle"></span>
-          </a>
-        </h6>
-        
-        <ul class="nav flex-column mb-2">
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text"></span>
-              Current month
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text"></span>
-              Last quarter
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text"></span>
-              Social engagement
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text"></span>
-              Year-end sale
-            </a>
-          </li>
-        </ul>
       </div>
     </nav>
     </div>

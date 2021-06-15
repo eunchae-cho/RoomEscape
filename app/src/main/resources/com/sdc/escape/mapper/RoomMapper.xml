@@ -20,6 +20,8 @@
     		, r_title
     		, r_content
     			, CASE  
+    				WHEN r_level=1 THEN ' ⭐'
+    				WHEN r_level=2 THEN ' ⭐ ⭐'
     				WHEN r_level=3 THEN ' ⭐ ⭐ ⭐'
     				WHEN r_level=4 THEN ' ⭐ ⭐ ⭐ ⭐'
     				WHEN r_level=5 THEN ' ⭐ ⭐ ⭐ ⭐ ⭐'
@@ -47,6 +49,18 @@
     	WHERE r_no = #{no}
     </select>
     
+    <select id="findByNoWithoutStar" resultMap="RoomMap" parameterType="int">
+    	SELECT
+    			r_no
+    		,	r_title
+    		,	r_content
+	    	, 	r_level
+    		, 	r_participant
+    		, 	r_photo
+    	FROM escape_room 
+    	WHERE r_no = #{no}
+    </select>
+    
     <select id="recentNo" resultType="int">
     	SELECT
     		r_no
@@ -61,4 +75,20 @@
     	VALUES
     		(#{title}, #{content}, #{level}, #{participant}, #{photo})
     </insert>
+    
+     <delete id="delete" parameterType="int">
+    	DELETE FROM escape_room
+    	WHERE r_no = #{no}
+    </delete>
+    
+    <update id="update" parameterType="room">
+    	UPDATE escape_room
+    	SET
+    			r_title = #{title}
+    		, 	r_content = #{content}
+	    	,  	r_level = #{level}
+    		, 	r_participant = #{participant}
+    		, 	r_photo = #{photo}
+    	WHERE r_no = #{no}
+    </update>
   </mapper>

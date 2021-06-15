@@ -30,4 +30,9 @@ public class DefaultRoomTimeService implements RoomTimeService{
     public int add(RoomTime roomTime) throws Exception {
     	return roomTimeDao.add(roomTime);
     }
+    
+    @Override
+    public int delete(int no) throws Exception {
+    	return roomTimeDao.delete(no);
+    }
 }

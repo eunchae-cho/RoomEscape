@@ -35,4 +35,19 @@ public class DefaultRoomService implements RoomService{
     public int recentNo() throws Exception {
     	return roomDao.recentNo();
     }
+    
+    @Override
+    public int delete(int no) throws Exception {
+    	return roomDao.delete(no);
+    }
+    
+    @Override
+    public Room roomByNoWithoutStar(int no) throws Exception {
+    	return roomDao.findByNoWithoutStar(no);
+    }
+    
+    @Override
+    public int update(Room room) throws Exception {
+    	return roomDao.update(room);
+    }
 }

@@ -14,4 +14,5 @@ public interface ReservationService {
 	List<Reservation> reservatedList(int no) throws Exception;
 	List<Reservation> listByRoom(int no) throws Exception;
 	Reservation reservationByResNo(int no) throws Exception;
+	List<Reservation> listByNoDate(String date) throws Exception;
  }

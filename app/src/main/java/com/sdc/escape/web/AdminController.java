@@ -1,6 +1,8 @@
 package com.sdc.escape.web;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,11 +24,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sdc.escape.domain.Admin;
 import com.sdc.escape.domain.Event;
+import com.sdc.escape.domain.Reservation;
 import com.sdc.escape.domain.Room;
 import com.sdc.escape.domain.RoomAttribute;
 import com.sdc.escape.domain.RoomTime;
 import com.sdc.escape.service.AdminService;
 import com.sdc.escape.service.EventService;
+import com.sdc.escape.service.ReservationService;
 import com.sdc.escape.service.RoomAttributeService;
 import com.sdc.escape.service.RoomService;
 import com.sdc.escape.service.RoomTimeService;
@@ -39,14 +43,15 @@ public class AdminController {
 	@Autowired AdminService adminService;
 	@Autowired RoomService roomService;
 	@Autowired RoomTimeService roomTimeService;
-	@Autowired RoomAttributeService roomAttrbuteService;
+	@Autowired RoomAttributeService roomAttributeService;
+	@Autowired ReservationService reservationService;
 
 	@GetMapping("/")
 	public String index(HttpSession session) throws Exception{
-		Admin loginAdmin = (Admin) session.getAttribute("loginAdmin");
-		if (loginAdmin == null) {
-			return "admin/login";
-		}
+//		Admin loginAdmin = (Admin) session.getAttribute("loginAdmin");
+//		if (loginAdmin == null) {
+//			return "admin/login";
+//		}
 		return "admin/index";
 	}
 	
@@ -103,8 +108,25 @@ public class AdminController {
 		}
 	
 	@GetMapping("/reservation")
-	public String reservation() throws Exception {
-		return "admin/reservation";
+	public String reservation(Model model, String date) throws Exception {
+		if (date == null) {
+			Date today = new Date();
+			SimpleDateFormat d = new SimpleDateFormat("yyyy-MM-dd");
+			date = d.format(today);
+		}
+		List<Reservation> list = reservationService.listByNoDate(date);
+		model.addAttribute("list", list);
+		return "admin/reservation/list";
+	}
+	
+	@ResponseBody
+	@GetMapping("/edit")
+	public String edit(String[] arr) throws Exception {
+		System.out.println(arr[0] +","+ arr[1] +", "+ arr[2]);
+		Reservation reservation = reservationService.reservationByNo(Integer.parseInt(arr[0]));
+		reservation.setStatus(Integer.parseInt(arr[1]));
+		reservation.setEscape(arr[2]);
+		return "ok";
 	}
 	
 	@GetMapping("/room")
@@ -118,6 +140,10 @@ public class AdminController {
 	public String roomDetail(Model model, int no) throws Exception {
 		Room room = roomService.roomByNo(no);
 		model.addAttribute("room", room);
+		List<RoomTime> roomTimeList = roomTimeService.timeByNo(no);
+		model.addAttribute("roomTimeList", roomTimeList);
+		RoomAttribute roomAttr = roomAttributeService.roomAttrByNo(no);
+		model.addAttribute("roomAttr", roomAttr);
 		return "admin/room/detail";
 	}
 	
@@ -144,7 +170,7 @@ public class AdminController {
 		room.setLevel(level);
 		room.setParticipant(participant);
 		String filename = UUID.randomUUID().toString();
-		String saveFilePath = multiReq.getSession().getServletContext().getRealPath("img/") +  filename;
+		String saveFilePath = multiReq.getSession().getServletContext().getRealPath("/img/") +  filename;
 		photo.transferTo(new File(saveFilePath));
 		room.setPhoto(filename);
 		roomService.add(room);
@@ -164,8 +190,71 @@ public class AdminController {
 		roomAttr.setObservation(observation);
 		roomAttr.setHorror(horror);
 		roomAttr.setActivity(activity);
-		roomAttrbuteService.add(roomAttr);
+		roomAttributeService.add(roomAttr);
 		
+		return "redirect:/admin/room";
+	}
+	
+	@GetMapping("/room/update")
+	public String roomUpdate(Model model, int no) throws Exception {
+		Room room = roomService.roomByNoWithoutStar(no);
+		model.addAttribute("room", room);
+		List<RoomTime> roomTimeList = roomTimeService.timeByNo(no);
+		model.addAttribute("roomTimeList", roomTimeList);
+		RoomAttribute roomAttr = roomAttributeService.roomAttrByNoWithoutStar(no);
+		model.addAttribute("roomAttr", roomAttr);
+		return "admin/room/update";
+	}
+	
+	@PostMapping("room/update")
+	public String roomUpdateForm(int no,
+														String title,
+														String content,
+														String[] roomTime,
+														String level,
+														String participant,
+														String reasoning,
+														String observation,
+														String horror,
+														String activity,
+														MultipartFile photo,
+														MultipartHttpServletRequest multiReq) throws Exception {
+	
+		Room room = roomService.roomByNoWithoutStar(no);
+		room.setTitle(title);
+		room.setContent(content);
+		room.setLevel(level);
+		room.setParticipant(participant);
+		String filename = UUID.randomUUID().toString();
+		String saveFilePath = multiReq.getSession().getServletContext().getRealPath("/img/") +  filename;
+		photo.transferTo(new File(saveFilePath));
+		room.setPhoto(filename);
+		roomService.update(room);
+		
+		for (int i = 0; i < roomTime.length; i++) {
+			RoomTime rtime = new RoomTime();
+			rtime.setRno(no);
+			rtime.setRoomTime(roomTime[i]);
+			roomTimeService.delete(no);
+			roomTimeService.add(rtime);
+		}
+		
+		RoomAttribute roomAttr = new RoomAttribute();
+		roomAttr.setRno(no);
+		roomAttr.setReasoning(reasoning);
+		roomAttr.setObservation(observation);
+		roomAttr.setHorror(horror);
+		roomAttr.setActivity(activity);
+		roomAttributeService.update(roomAttr);
+		
+		return "redirect:/admin/room/detail?no=" + no;
+	}
+	
+	@GetMapping("/room/delete")
+	public String roomDelete(int no) throws Exception {
+		roomTimeService.delete(no);
+		roomAttributeService.delete(no);
+		roomService.delete(no);
 		return "redirect:/admin/room";
 	}
 	
