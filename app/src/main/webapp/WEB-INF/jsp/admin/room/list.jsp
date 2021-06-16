@@ -27,7 +27,7 @@
 <jsp:include page="../sidebar.jsp"></jsp:include>  
       
  <main  class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
- <h3 style="margin-block: 50px;">룸 테마</h3>  
+ <h3 style="margin-block: 50px; border-bottom: solid;">룸 테마</h3>  
  <div style="text-align: right; margin-right: 10px;">
  	<button type="button" class="btn btn-light addBtn" style="font-size: 12px;">추가</button>
  </div>

@@ -15,5 +15,7 @@ public interface ReservationDao {
 	List<Reservation> findByRoom(int no) throws Exception;
 	Reservation findByResNo(int no) throws Exception;
 	List<Reservation> findByDate(String date) throws Exception;
+	int updateByAdmin(Reservation reservation) throws Exception;
+	List<Reservation> findAll() throws Exception;
 }
 

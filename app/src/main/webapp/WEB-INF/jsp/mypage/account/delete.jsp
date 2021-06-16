@@ -24,12 +24,12 @@
     <div style="text-align: center; margin-block: 20px;">
     	<label for="password" style="font-size: unset;">비밀번호: </label>
     	<input type="password" id="password" name="password">
-    	<button type="button" id="passwordBtn" class="btn" 
-    		style="padding-block:3px; font-size: unset; color: white; background-color: darkgrey; border-color: darkgray; margin-bottom: 4px;">확인</button>  
+    	<button type="button" id="passwordBtn" class="btn btn-lg btn-primary" 
+    		style="padding-block:3px; font-size: 14px; margin-bottom: 4px;">확인</button>  
     		<div id="password-feedback" style="font-size: smaller; margin-left: 127px; text-align: left;"></div>
     </div>
     <div style="text-align: center; margin-top: 45px;">
-	    <a id="removeBtn" class="btn btn-lg btn-primary" href="#" role="submit" style="font-size: unset; padding-block: 4px;'">탈퇴하기</a>
+	    <a id="removeBtn" class="btn btn-lg btn-primary" href="#" role="submit" style="font-size: 14px; padding-block: 4px;'">탈퇴하기</a>
     </div>
   </div>
 </main>
@@ -95,7 +95,7 @@
  		} else {
  			var result = confirm('회원 탈퇴를 하시겠습니까?');
  			if (result) {
- 				location.href = '<%=request.getContextPath()%>/mypage/removeAccount/remove';
+ 				location.href = '<%=request.getContextPath()%>/mypage/account/delete/do';
  				self.close();
  				window.opener.location.href='<%=request.getContextPath()%>/';
  			}

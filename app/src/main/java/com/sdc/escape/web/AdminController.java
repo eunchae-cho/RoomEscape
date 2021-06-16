@@ -2,8 +2,11 @@ package com.sdc.escape.web;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.Cookie;
@@ -28,6 +31,7 @@ import com.sdc.escape.domain.Reservation;
 import com.sdc.escape.domain.Room;
 import com.sdc.escape.domain.RoomAttribute;
 import com.sdc.escape.domain.RoomTime;
+import com.sdc.escape.domain.Scheduler;
 import com.sdc.escape.service.AdminService;
 import com.sdc.escape.service.EventService;
 import com.sdc.escape.service.ReservationService;
@@ -53,6 +57,23 @@ public class AdminController {
 //			return "admin/login";
 //		}
 		return "admin/index";
+	}
+	
+	@ResponseBody
+	@PostMapping("/scheduler")
+	public List<Scheduler> scheduler() throws Exception {
+		List<Reservation> list = reservationService.findAll();
+		List<Scheduler> schedulerList = new ArrayList<>();
+		for (int i  = 0; i < list.size(); i++) {
+			Scheduler s= new Scheduler();
+			s.setId(list.get(i).getNo());
+			String str = list.get(i).getRoomTime() +" | "+ list.get(i).getRoom().getTitle();
+			s.setTitle(str);
+			s.setStart(list.get(i).getDoDate());
+			s.setUrl("/app/admin/reservation/detail?no=" + list.get(i).getNo());
+			schedulerList.add(s);
+		}
+		return schedulerList;
 	}
 	
 	@GetMapping("/login")
@@ -113,6 +134,7 @@ public class AdminController {
 			Date today = new Date();
 			SimpleDateFormat d = new SimpleDateFormat("yyyy-MM-dd");
 			date = d.format(today);
+			model.addAttribute("dateToday", date);
 		}
 		List<Reservation> list = reservationService.listByNoDate(date);
 		model.addAttribute("list", list);
@@ -120,13 +142,29 @@ public class AdminController {
 	}
 	
 	@ResponseBody
+	@GetMapping("/selectDate")
+	public List<Reservation> selectDate(String date) throws Exception {
+		return reservationService.listByNoDate(date);
+	}
+	
+	@ResponseBody
 	@GetMapping("/edit")
-	public String edit(String[] arr) throws Exception {
-		System.out.println(arr[0] +","+ arr[1] +", "+ arr[2]);
-		Reservation reservation = reservationService.reservationByNo(Integer.parseInt(arr[0]));
-		reservation.setStatus(Integer.parseInt(arr[1]));
-		reservation.setEscape(arr[2]);
+	public String edit(int no, int status, String escape) throws Exception {
+		System.out.println(no);
+		System.out.println(status);
+		System.out.println(escape);
+		Reservation reservation = reservationService.reservationByNo(no);
+		reservation.setStatus(status);
+		reservation.setEscape(escape);
+		reservationService.updateByAdmin(reservation);
 		return "ok";
+	}
+	
+	@GetMapping("/reservation/detail")
+	public String reservationDetail(Model model, int no) throws Exception {
+		Reservation res = reservationService.reservationByNo(no);
+		model.addAttribute("res", res);
+		return "admin/reservation/detail";
 	}
 	
 	@GetMapping("/room")
@@ -318,7 +356,7 @@ public class AdminController {
 		String saveFilePath = multiReq.getSession().getServletContext().getRealPath("img/") +  filename;
 	    photo.transferTo(new File(saveFilePath));
 		event.setPhoto(filename);
-		eventService.update(no);
+		eventService.update(event);
 		return "redirect:/admin/event/detail?no="+ no;
 	}
 	

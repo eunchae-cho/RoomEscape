@@ -79,12 +79,12 @@ public class MypageController {
 	
 	@GetMapping("info")
 	public String info() throws Exception {
-		return "mypage/info";
+		return "mypage/account/info";
 	}
 	
 	@GetMapping("update")
 	public String update() throws Exception {
-		return "mypage/update";
+		return "mypage/account/update";
 	}
 	
 	@PostMapping("update")
@@ -100,7 +100,7 @@ public class MypageController {
 		// 업데이트 후 새로 조회
 		user = userService.userByNo(no);
 		session.setAttribute("loginUser", user);
-		return "redirect:./";
+		return "redirect:/mypage/account/info";
 	}
 	
 	@GetMapping("/reservation")
@@ -152,13 +152,13 @@ public class MypageController {
 		return intArr;
 	}
 	
-	@GetMapping("/removeAccount") 
-	public String removeAccount() throws Exception {
-		return "mypage/removeAccount";
+	@GetMapping("/account/delete") 
+	public String delete() throws Exception {
+		return "mypage/account/delete";
 	}
 	
-	@GetMapping("/removeAccount/remove")
-	public void remove(HttpSession session) throws Exception {
+	@GetMapping("/account/delete/do")
+	public void accountDelete(HttpSession session) throws Exception {
 		User loginUser =(User)  session.getAttribute("loginUser");
 		if (loginUser != null) {
 			userService.deleteByNo(loginUser.getNo());

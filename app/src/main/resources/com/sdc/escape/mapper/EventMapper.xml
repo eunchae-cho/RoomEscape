@@ -51,7 +51,7 @@
     		(#{title}, #{content}, #{adminNo}, #{photo})
     </insert>
     
-    <update id="update" parameterType="int">
+    <update id="update" parameterType="event">
     	UPDATE escape_event
     		SET
     			ev_title = #{title}

@@ -27,6 +27,7 @@
         <association property="user" javaType="user">
         	<id column="u_no" property="no"></id>
         	<result column="u_name" property="name"></result>
+        	<result column="u_phone" property="phone"></result>
         </association>
     </resultMap>
 
@@ -119,9 +120,13 @@
     		,  IF (res_escape = 1, '성공', '실패') AS res_escape
     		,  res_escape_time
     		,	r.r_title r_title
+    		, 	u.u_name
+    		,	u.u_phone
     	FROM escape_reservation res
     		INNER JOIN escape_room r
     			ON res.r_no = r.r_no
+    		INNER JOIN escape_user u
+    			ON u.u_no = res.u_no
      	WHERE res_no = #{no}
     	ORDER BY res_date DESC
     </select>
@@ -222,6 +227,14 @@
 	    	SET
 	    			res_cancel = #{cancel}
 	    		,	res_cancel_date = now()
+	    		,	res_status = #{status}
+    	WHERE res_no = #{no}
+    </update>
+    
+    <update id="updateByAdmin" parameterType="Reservation">
+    	UPDATE escape_reservation
+	    	SET
+	    			res_escape = #{escape}
 	    		,	res_status = #{status}
     	WHERE res_no = #{no}
     </update>

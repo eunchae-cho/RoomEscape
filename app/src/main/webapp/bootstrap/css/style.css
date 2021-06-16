@@ -45,7 +45,7 @@ body {
   
   
   a:hover {
-  	color: darksalmon;
+  	color: white;
   }
   
   li {
@@ -494,28 +494,20 @@ body {
   border-top-right-radius: 0;
 }
 
-.btn-color {
-	color: #fff;
-    background-color: darksalmon;
-    border-color: darksalmon;
-}
-
-.btn-color:hover {
-	color: #fff;
-	background: #eba489;
-}
-
 .btn-outline-color {
-	color: darksalmon;
-	border-color: darksalmon;
-}
-
-.btn-outline-color:hover {
 	color: #fff;
-	background-color: darksalmon;
-	border-color: darksalmon;
+	border-color: #fff;
+	font-size: 15px;
+	padding-block: 4px;
 }
 
+ .btn-outline-color:hover {
+	color: #fff;
+	border-color: #fff;
+	font-size: 15px;
+	padding-block: 4px;
+}
+ 
   .btn-find {
     padding-block: 2px;
     margin-block: 4px;

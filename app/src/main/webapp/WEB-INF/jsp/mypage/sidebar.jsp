@@ -8,16 +8,6 @@
   </head>
   <body>
   
-  <%-- <div class="item"  style="width: 250px;">
-	 <p>아이디: &nbsp; ${sessionScope.loginUser.id}</p>
-	 <p>이름: &nbsp; ${sessionScope.loginUser.name}</p>
-	 <button type="button" class="btn btn-style" id="logoutSidebar">로그아웃</button><br>
-	 <button type="button" class="btn btn-style" id="removeAccount">회원탈퇴</button>
-	 <hr class="featurette-divider" style="margin: 0; margin-block: 30px;">
-	 <h5><a href="<%=request.getContextPath()%>/mypage/reservation" id="category">예약 확인</a></h5>
-     <h5 ><a href="<%=request.getContextPath()%>/mypage/history">이용 내역</a></h5>
-      <h5><a href="#">내 리뷰 보기</a></h5>
-  </div> --%>
   	<div class="article_left">
 	        		<section class="my_my">
 	        			<div style="margin-bottom: 100px;">
@@ -50,7 +40,7 @@
 	        				<h5>나의 계정설정</h5>
 	        				<ul>
 	        					<li style="font-weight: 100;"><a href="<%=request.getContextPath()%>/mypage/info">회원 정보 수정</a></li>
-	        					<li style="font-weight: 100;">회원 탈퇴</li>
+	        					<li id="removeAccount" style="font-weight: 100; cursor: pointer;">회원 탈퇴</li>
 	        				</ul>
 	        			</div>
 	        		</section>
@@ -69,7 +59,7 @@ $('#logoutSidebar').on('click', function() {
 
 // 회원탈퇴 버튼 클릭 시
 $('#removeAccount').on('click', function() {
-	window.open('<%=request.getContextPath()%>/mypage/removeAccount', '회원탈퇴', 'width=700px, height=500px, crollbar=yes');
+	window.open('<%=request.getContextPath()%>/mypage/account/delete', '회원탈퇴', 'width=700px, height=500px, crollbar=yes');
 });
 </script>
 </html>

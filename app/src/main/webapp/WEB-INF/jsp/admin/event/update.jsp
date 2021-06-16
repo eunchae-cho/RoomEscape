@@ -27,7 +27,7 @@
 <jsp:include page="../sidebar.jsp"></jsp:include>  
       
  <main  class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
- <h3 style="margin-block: 50px;">이벤트 수정</h3>  
+ <h3 style="margin-block: 50px; border-bottom: solid;">이벤트 수정</h3>  
   <div style="margin-block: 50px;">
   
   <hr>

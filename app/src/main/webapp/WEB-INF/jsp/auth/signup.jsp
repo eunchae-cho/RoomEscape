@@ -35,7 +35,7 @@
               <div class="input-group has-validation" style="justify-content: space-between;">
                 <input type="text" class="id-form form-control" id="id" name="id" placeholder="id"  pattern="^[a-zA-Z0-9]{4,20}$" style="flex-grow: 0.98; border-radius: 0.25rem;" required>
                 	<div>
-              		  <button type="button" id="duplicateBtn" class="btn btn-find" style="margin: 0; padding-block: 6px;">중복 확인</button>
+              		  <button type="button" id="duplicateBtn" class="btn btn-find" style="margin: 0; padding-block: 6px; font-size: 15px;">중복 확인</button>
               	    </div>
               <div class="id-feedback invalid-feedback">
                  최소 4자 이상 영문 대소문자나 숫자로만 아이디를 입력해주세요.
@@ -81,7 +81,7 @@
 
           </div>
           <div style="text-align: center;">
-          <button class="btn btn-lg btn-find" type="submit" id="signupBtn" style="margin-top: 45px; padding-block: 5px;">회원가입</button>
+          <button class="btn btn-lg btn-find" type="submit" id="signupBtn" style="margin-top: 45px; padding-block: 5px; width: 100%; font-size: 18px;">회원가입</button>
          </div>
         </form>
         
@@ -201,7 +201,7 @@
             event.preventDefault()
             event.stopPropagation()
           } 
-          else if (btnCount == 0) {
+          /* else if (btnCount == 0) {
         	alert('중복 확인을 해주세요.');  
         	 event.preventDefault()
              event.stopPropagation()
@@ -210,7 +210,7 @@
          	alert('비밀번호를 다시 한 번 확인해주세요.');  
          	 event.preventDefault()
              event.stopPropagation()
-          } 
+          }  */
           else {
         	alert("회원가입이 완료되었습니다.");
         	location.href = '<%=request.getContextPath() %>/auth/login';

@@ -8,6 +8,6 @@ public interface EventService {
 	List<Event> list() throws Exception;
 	Event eventByNo(int no) throws Exception;
 	int add(Event event) throws Exception;
-	int update(int no) throws Exception;
+	int update(Event event) throws Exception;
 	int delete(int no) throws Exception;
 }

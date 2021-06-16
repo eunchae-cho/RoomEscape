@@ -178,7 +178,7 @@
 	 	</div>
     </div>
   </main>
-
+<div style="margin-bottom: 50%;"></div>
  <jsp:include page="../footer.jsp"></jsp:include>  
  <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
  <script>

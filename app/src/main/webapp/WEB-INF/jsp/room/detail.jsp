@@ -71,7 +71,8 @@
 	    					<div class="do-info">◇  참여 날짜: ${res.doDate}</div>
 	    					<div class="escape-or-not">◇  탈출 여부: 
 	    					<span style="font-weight: bold; color: darksalmon;">${res.escape} 
-	    						<c:if test="${res.escape == '성공'}">(${res.escapedTime})</c:if></span></div>
+	    						<%-- <c:if test="${res.escape == '성공'}">(${res.escapedTime})</c:if> --%>
+	    						</span></div>
 	    					</c:if>
     					</c:forEach>
     				</div>

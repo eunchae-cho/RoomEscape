@@ -29,7 +29,7 @@
   <form action="update" method="post" enctype="multipart/form-data">
   <input type="hidden" name="no" value="${room.no}">
  <main  class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
- <h3 style="margin-block: 50px;">룸 테마 수정</h3>  
+ <h3 style="margin-block: 50px; border-bottom: solid;">룸 테마 수정</h3>  
   <div style="margin-block: 50px;">
 	 <div class="input-group input-group-sm mb-3">
 	  <span class="input-group-text" id="inputGroup-sizing-sm">제목</span>

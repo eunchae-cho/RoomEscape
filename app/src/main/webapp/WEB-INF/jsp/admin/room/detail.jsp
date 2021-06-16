@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>[room escape] 룸 테마 보기</title>
+<title>[room escape] 관리자 - 룸 테마 보기</title>
 
     <style>
       .bd-placeholder-img {
@@ -27,7 +27,7 @@
 <jsp:include page="../sidebar.jsp"></jsp:include>  
       
  <main  class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
- <h3 style="margin-block: 50px;">룸 테마 보기</h3>  
+ <h3 style="margin-block: 50px; border-bottom: solid;">룸 테마 보기</h3>  
   <p style="margin-left: 50px;"><b>no. ${room.no}</b></p>
   <div style="margin: 50px;">
   <div style="margin-block: 50px;">

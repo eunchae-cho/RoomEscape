@@ -15,4 +15,6 @@ public interface ReservationService {
 	List<Reservation> listByRoom(int no) throws Exception;
 	Reservation reservationByResNo(int no) throws Exception;
 	List<Reservation> listByNoDate(String date) throws Exception;
+	int updateByAdmin(Reservation reservation) throws Exception;
+	List<Reservation> findAll() throws Exception;
  }

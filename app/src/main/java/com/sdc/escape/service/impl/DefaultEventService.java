@@ -32,8 +32,8 @@ public class DefaultEventService implements EventService{
 	}
 	 
 	 @Override
-	 public int update(int no) throws Exception {
-		 return eventDao.update(no);
+	 public int update(Event event) throws Exception {
+		 return eventDao.update(event);
 	 }
 	 
 	 @Override

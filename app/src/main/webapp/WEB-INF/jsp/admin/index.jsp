@@ -30,6 +30,7 @@
 
  <main  class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
+<div style="margin-top: 50px; border-bottom: solid;"><h3>SCHEDULER</h3></div>
  <div id='calendar' style="margin-block: 30px;"></div>
 
  </main>
@@ -43,17 +44,27 @@
 	      initialView: 'dayGridMonth',
 	      themeSystem : 'bootstrap',
 	      height : 700,
-
-	      events: [
-	    	    {
-	    	      id: 'a',
-	    	      title: 'my event',
-	    	      start: '2021-06-11'
-	    	    }
-	    	  ]
+		  eventSources: [{
+		      events: function(info, successCallback, failureCallback) {
+		    	  $.ajax({
+		    		  url: 'scheduler',
+		    		  type: 'post',
+		    		  dataType: 'json',
+		    		  success: function(data) {
+		    			  console.log(data)
+		    			  successCallback(data);
+		    		  }
+		    	  });
+		      }
+		  }],
+		 <%--  eventClick : function(info) {
+			  var eventObj = info.event;
+			  window.location = '<%=request.getContextPath() %>/admin/reservation/detail?no=' + eventObj.id;
+		  } --%>
 	    
 	    });
 	    calendar.render();
+	    
 	  });
   
 </script>

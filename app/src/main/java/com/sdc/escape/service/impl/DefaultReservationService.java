@@ -68,4 +68,14 @@ public class DefaultReservationService implements ReservationService{
 	public List<Reservation> listByNoDate(String date) throws Exception {
 		return reservationDao.findByDate(date);
 	}
+	
+	@Override
+	public int updateByAdmin(Reservation reservation) throws Exception {
+		return reservationDao.updateByAdmin(reservation);
+	}
+	
+	@Override
+	public List<Reservation> findAll() throws Exception {
+		return reservationDao.findAll();
+	}
 }

@@ -24,15 +24,15 @@
         
         <c:if test="${not empty sessionScope.loginUser}">
         <div class="col-md-3 text-end" style="display: flex;">
-        	<p style="color: darksalmon; margin: auto; margin-inline: 20px;">${loginUser.name}님, 반갑습니다!</p>
-        	<button type="button" id="logout" class="btn btn-color">로그아웃</button>
+        	<p style="margin: auto; margin-inline: 20px;"><u><b>${loginUser.name}</b></u> 님, 반갑습니다!</p>
+        	<button type="button" id="logout" class="btn btn-outline-color">로그아웃</button>
         </div>
         </c:if>
         
         <c:if test="${empty sessionScope.loginUser}">
         <div class="col-md-3 text-end">
-          <button type="button" class="btn btn-outline-color me-2" onClick="location.href='<%=request.getContextPath()%>/auth/login'">로그인</button>
-          <button type="button" class="btn btn-color" onClick="location.href='<%=request.getContextPath()%>/auth/signup'">회원가입</button>
+          <button type="button" class="btn btn-outline-color me-2" onClick="location.href='<%=request.getContextPath()%>/auth/login'" style="margin-right: 2px;">로그인</button>
+          <button type="button" class="btn btn-outline-color" onClick="location.href='<%=request.getContextPath()%>/auth/signup'">회원가입</button>
         </div>
         </c:if>
       </header>

@@ -26,14 +26,14 @@
 <jsp:include page="../sidebar.jsp"></jsp:include>  
 
  <main  class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-    <h3 style="margin-block: 50px;">예약 리스트</h3> 
+    <h3 style="margin-block: 50px; border-bottom: solid;">예약 리스트</h3> 
  <div id="control" style="display: flex; margin-right: 10px; justify-content: space-between;">
- 	 <input type="date" id="date" name="date">
+ 	 <input type="date" id="selectDate" name="date" value="${dateToday}">
  	<button type="button" class="btn btn-light editBtn" style="font-size: 12px;">수정</button>
  	<button type="button" class="btn btn-light ajaxBtn" style="font-size: 12px; display: none;">완료</button>
  </div>
   <div style="margin-top: 20px;">
-      <div class="table-responsive">
+      <div id=".table-responsive" class="table-responsive">
         <table class="table table-striped table-sm res-table">
           <thead>
             <tr>
@@ -70,7 +70,11 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script>
 	$(function() {
-		$('.res-table tr').each(function() {
+		statusAsString();
+	});
+	
+	function statusAsString() {
+		$('.res-table .tr').each(function() {
 			var status = $(this).find('td:eq(6)');
 			if (status.text() == 0) {
 				status.text('예약');
@@ -80,14 +84,57 @@
 				status.text('종료');
 			}
 		});
-	});
+	}
 	
-	$('.res-table tr').on('click', function() {
+	// 날짜 선택 시
+	$('#selectDate').on('change', function() {
+		$('.ajaxBtn').css('display', 'none');
+		$('.editBtn').css('display', 'inline-block');
 		
+		var selectedDate = $(this).val();
+		
+		$.ajax({
+			url: 'selectDate',
+			type: 'get',
+			data: {
+				date : selectedDate
+			},
+			dataType: 'json',
+			success: function(data) {
+				console.log(data);
+				$('.res-table tbody').text('')
+				var htmls = '';
+				
+				$(data).each(function() {
+					htmls += '<tr class="tr">';
+					htmls += '<td>'+ this.no +'</td>'; 
+					htmls += '<td>'+ this.doDate +'</td>'; 
+					htmls += '<td>'+ this.roomTime +'</td>'; 
+					htmls += '<td>'+ this.room.title +'</td>'; 
+					htmls += '<td>'+ this.user.name +'</td>'; 
+					htmls += '<td>'+ this.participant +'</td>'; 
+					htmls += '<td>'+ this.status +'</td>'; 
+					htmls += '<td>'+ this.escape +'</td>'; 
+					htmls += '</tr>';
+				})
+				$('.res-table tbody').append(htmls);
+				statusAsString();
+			},
+			error: function() {
+				console.log('error');
+			}
+		});
 	});
 	
-	// 버튼 눌러 수정하기
+	// 예약 행을 눌렀을 때
+	$('.res-table .tr').on('click', function() {
+		location.href = '<%=request.getContextPath() %>/admin/reservation/detail?no='+ $(this).find('td:eq(0)').text();
+	});
+	$(document).on('click', '.res-table .tr', function() {
+		location.href = '<%=request.getContextPath() %>/admin/reservation/detail?no='+ $(this).find('td:eq(0)').text();
+	});
 	
+	// 수정 버튼 누를 시
 	$(".editBtn").on('click', function() {
 		
 		$(".editBtn").css('display', 'none');
@@ -103,9 +150,11 @@
 			escape.text('');
 			
 			status.append('<select class="form-select select-status" style="width: 100px; padding-block: 2px; font-size:15px;">');
-			$('.select-status').append('<option value="0">예약</option>');
-			$('.select-status').append('<option value="1">예약취소</option>');
-			$('.select-status').append('<option value="2">종료</option>');
+			if ($('.select-status').empty()) {
+				$('.select-status').append('<option value="0">예약</option>');
+				$('.select-status').append('<option value="1">예약취소</option>');
+				$('.select-status').append('<option value="2">종료</option>');
+			}
 			
 			if (st_value == '예약') {
 				$('.select-status option:eq(0)').attr('selected', 'selected');
@@ -116,8 +165,10 @@
 			}
 			
 			escape.append('<select class="form-select select-escape" style="width: 100px; padding-block: 2px; font-size:15px;">');
-			$('.select-escape').append('<option value="0">실패</option>');
-			$('.select-escape').append('<option value="1">성공</option>');
+			if ($('.select-escape').empty()) {
+				$('.select-escape').append('<option value="0">실패</option>');
+				$('.select-escape').append('<option value="1">성공</option>');
+			}
 			
 			if (es_value == '실패') {
 				$('.select-escape option:eq(0)').attr('selected', 'selected');
@@ -144,6 +195,7 @@
 	
 	});
 	
+	// 완료 버튼 누를 시
 	 $('.ajaxBtn').on('click', function() {
 		 
 		 $('.ajaxBtn').css('display', 'none');
@@ -152,51 +204,33 @@
 		
 		$('.res-table tbody tr').each(function() {
 			var no = $(this).find('td:eq(0)');
-			var status = $(this).find('td:eq(6)');
-			var escape = $(this).find('td:eq(7)');
-					
-			var arr = new Array();
-			for (var i = 0; i < $('.res-table tbody tr').length; i++) {
-				arr.push(no.text());
-				
-				var st = 0;
-				if (status.text() == '예약') {
-					st = 0;
-				} else if (status.text() == '예약취소') {
-					st = 1;
-				} else if (status.text() == '종료'){
-				 	st = 2;	
-				}
-				arr.push(st);
-				
-				var es = 0;
-				if (escape.text() == '실패') {
-					es = 0;
-				} else if (escape.text() == '성공') {
-					es = 1;
-				}
-				arr.push(es);
-			}
+			var status = $(this).find('.select-status option:selected').val();
+			var escape = $(this).find('.select-escape option:selected').val();
+			var selectedDate = $('#selectDate').val();
+			console.log(selectedDate)
 			
-			console.log(arr)
-			
-		});
 			 $.ajax({
 				url: 'edit',
 				type: 'get',
 				traditional: true,
+				async: false,
 				data: {
-					arr : arr
+					no : no.text(),
+					status : status,
+					escape : escape
 				},
-				dataType: 'json',
+				dataType: 'text',
 				success: function(data) {
-					console(data);
+					console.log(data);
 					location.reload();
+					//$('#selectDate').val(selectedDate)
+					//$('#table-responsive').load(location.href + '#table-responsive');
 				},
 				error: function() {
 					console.log('error');
 				}
 			}); 
+		});
 	});
 </script>
 </body>
