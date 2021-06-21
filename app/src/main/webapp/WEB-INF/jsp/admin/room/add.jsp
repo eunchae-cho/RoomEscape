@@ -38,7 +38,7 @@
 	
 	<div class="input-group input-group-sm " style="margin-block: 30px;">
  	 <span class="input-group-text">내용</span>
- 	 <textarea id="content" name="content" class="form-control" aria-label="With textarea" style="resize: none; height: 300px;"></textarea>
+ 	 <textarea id="content" name="content" class="form-control" aria-label="With textarea" wrap="hard" style="resize: none; height: 300px;"></textarea>
 	</div>
 	
 <p style="font-size: 15px; margin-top: 30px;">시간대 선택</p>

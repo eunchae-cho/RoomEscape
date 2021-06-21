@@ -57,10 +57,10 @@
 		    	  });
 		      }
 		  }],
-		 <%--  eventClick : function(info) {
-			  var eventObj = info.event;
-			  window.location = '<%=request.getContextPath() %>/admin/reservation/detail?no=' + eventObj.id;
-		  } --%>
+		//   eventClick : function(info) {
+		// 	  var eventObj = info.event;
+		// 	  window.location = '<%=request.getContextPath() %>/admin/reservation/detail?no=' + eventObj.id;
+		//   } 
 	    
 	    });
 	    calendar.render();

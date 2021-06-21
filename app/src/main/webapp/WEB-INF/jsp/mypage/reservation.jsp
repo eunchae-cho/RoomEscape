@@ -39,7 +39,7 @@
 						       <td id="td_status" style="padding-block: 15px;"><input type="hidden" id="status" value="${res.status}"></td>
 						       <td style="padding-block: 15px;">
 						       <c:if test="${res.cancel == 0}">
-					       		<button type="button" id="cancelBtn" class="btn btn-cancel me-2" value="${res.no}">예약 취소</button>
+					       		<button type="button" class="btn btn-cancel me-2 cancelBtn" value="${res.no}">예약 취소</button>
 					       	   </c:if></td>
 						    </tr>
 					     </c:forEach>
@@ -55,9 +55,10 @@
  <jsp:include page="../footer.jsp"></jsp:include>  
  <script>
 	// 예약 취소 버튼 클릭 시
-	$('#cancelBtn').on('click', function() {
+	$('.cancelBtn').on('click', function() {
 		var result = confirm('예약을 취소 하시겠습니까?');
 		if(result) {
+			alert('예약이 취소되었습니다.');
 			location.href = "<%=request.getContextPath()%>/mypage/cancel?no=" + $(this).val();
 		} else {
 		}

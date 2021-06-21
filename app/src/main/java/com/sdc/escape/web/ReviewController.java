@@ -66,7 +66,6 @@ public class ReviewController {
 												MultipartFile[] photos, 
 												HttpSession session,
 												MultipartHttpServletRequest multiReq) throws Exception {
-		
 		Review review = new Review();
 		Room room = new Room();
 		room.setNo(roomNo);
@@ -81,20 +80,24 @@ public class ReviewController {
 		
 		// 방금 등록된 리뷰 번호 조회
 		review = reviewService.selectOne();
-		if (photos == null) {
-			return "redirect:/mypage/history";
-		}
-		for (int i = 0; i < photos.length; i++) {
-			String filename = UUID.randomUUID().toString();
-			//String saveFilePath = servletContext.getRealPath("/upload/"+ filename);
-			String saveFilePath = multiReq.getSession().getServletContext().getRealPath("upload/") +  filename;
-			photos[i].transferTo(new File(saveFilePath));
-			reviewService.addPhotos(review.getNo(), filename);
+//		if (photos == null) {
+//			return "redirect:/mypage/history";
+//		}
+		if (photos.length != 0) {
+			for (int i = 0; i < photos.length; i++) {
+				System.out.println("=====================================");
+				System.out.println(photos[i]);
+				String filename = UUID.randomUUID().toString();
+				//String saveFilePath = servletContext.getRealPath("/upload/"+ filename);
+				String saveFilePath = multiReq.getSession().getServletContext().getRealPath("/upload/") +  filename;
+				photos[i].transferTo(new File(saveFilePath));
+				reviewService.addPhotos(review.getNo(), filename);
+			}
 		}
 		return "redirect:/mypage/history";
 	}
 	
-	@GetMapping("detail")
+	@GetMapping("/detail")
 	public String detail(Model model, int no) throws Exception {
 		model.addAttribute("res" ,reservationService.reservationByResNo(no));
     	model.addAttribute("rev",  reviewService.reviewByNo(no));
@@ -132,7 +135,7 @@ public class ReviewController {
 		reviewService.update(review);
 		for (int i = 0; i < photos.length; i++) {
 			String filename = UUID.randomUUID().toString();
-			String saveFilePath = multiReq.getSession().getServletContext().getRealPath("upload/") +  filename;
+			String saveFilePath = multiReq.getSession().getServletContext().getRealPath("/upload/") +  filename;
 			photos[i].transferTo(new File(saveFilePath));
 			reviewService.deletePhotoByNo(no);
 			reviewService.addPhotos(no, filename);

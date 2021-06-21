@@ -17,8 +17,8 @@
     <div style="margin-block: 100px;">
     	<h1 style="text-align: center; padding-block:50px; font-family: twaysky; text-shadow: 4px 4px 6px darkgrey;">${room.title}</h1>
     </div>
-    <div style="text-align: center; margin-top: 50px;">
-      <img src="${room.photo}" width="500" height="500">
+    <div style="text-align: center; margin-top: 100px;">
+      <img src="<%=request.getContextPath()%>/img/${room.photo}" width="500" height="auto">
     </div>
     <div class="col-md-5" style="margin: 0 auto; margin-top: 50px; margin-bottom: 100px; text-align: center;">
       <p style="text-align: center;">${room.level}</p
@@ -29,11 +29,11 @@
       <p style="text-align: center;">공포: ${roomAttr.horror}</p>
       <p style="text-align: center;">활동성: ${roomAttr.activity}</p>
       <br>
-      <p style="text-align: center;">${room.content}</p>
+      <p style="text-align: center; white-space: pre;">${room.content}</p>
     </div>
 
     <div style="text-align: center;">
-      <h4><a href="<%=request.getContextPath()%>/reservation/" class="needLogin" onClick="checkLogin()" style="text-decoration: none; color: mediumvioletred;">예약하러 가기 >></a></h4>
+      <h4><a href="<%=request.getContextPath()%>/reservation/" class="needLogin" onClick="checkLogin()" style="text-decoration: none; color: darkorange;">예약하러 가기 >></a></h4>
     </div>
     
     <div style="margin-top: 300px;">
@@ -47,10 +47,13 @@
     			<c:forEach items="${photoList}" var="ph">
     				<li class="gallery-list">
     				<input type="hidden" id="img" value="${ph.revNo}">
-    				<img class="gallery-img" src="<%=request.getContextPath()%>/upload/${ph.photo}"
-    				alt="갤러리 이미지" title="갤러리 상세 보기"></li>
+    				<c:if test="${ph.photo != null}">
+    					<img class="gallery-img" src="<%=request.getContextPath()%>/upload/${ph.photo}"
+    				alt="갤러리 이미지" title="갤러리 상세 보기">
+    				</c:if>
+    				</li>
     			</c:forEach>
-    				<li class="gallery-list-last">
+    				<li class="gallery-list-last" style="display: block;">
     					<div class="gallery-list-count">${countPhoto}</div>
     					<div class="gallery-list-more">더보기></div>
     				</li>
@@ -80,16 +83,18 @@
     				<c:forEach items="${photoList}" var="photo">
     					<c:if test="${photo.revNo == rev.no}">
     					<div class="review-photo-list">
+    					<c:if test="${photo.photo != null}">
     						<img class="reivew-img" src="<%=request.getContextPath()%>/upload/${photo.photo}">
+    					</c:if>
     					</div>
     					</c:if>
     				</c:forEach>
     				</div>
-    				<div class="review-title">
+    				<div style="font-size: 14px; font-weight: 700;">
     					${rev.title}
     				</div>
     				<div class="review-content-conainer">
-    					<div class="review-content">
+    					<div class="review-content" style="white-space: pre-line;">
     						${rev.content}
     					</div>
     				</div>
@@ -144,24 +149,20 @@ function checkLogin() {
 	}
 };
 
+// 갤러리 사진 클릭 시 모달창
 $('.gallery-img').on('click', function(e) {
 	e.preventDefault();
 	$('.modal').modal('show');
 	var src = $(this).attr('src');
 	$('#modal-img').attr('src', src);
-	
-	if (('#img').va l() == ('#img-revNo').val()) {
-		$('#review-title').append('${rev.title}');
-	}
 });
 
+// 리뷰 사진 클릭 시 모달창
 $('.reivew-img').on('click', function(e) {
 	e.preventDefault();
 	$('.modal').modal('show');
-	
-	if (('#img').val() == ('#img-revNo').val()) {
-		$('#review-title').append('${rev.title}');
-	}
+	var src = $(this).attr('src');
+	$('#modal-img').attr('src', src);
 });
 
 

@@ -42,7 +42,7 @@
 						       <td id="td_status" style="padding-block: 15px;"><input type="hidden" id="status" value="${res.status}"></td>
 						       <td style="padding-block: 15px;">
 						       <input type="hidden" id="writeReivew" value="0">
-						       <button type="button" id="reviewBtn" class="btn btn-review me-2" 
+						       <button type="button" class="btn btn-review me-2 reviewBtn" 
 						       onClick="location.href='<%=request.getContextPath()%>/mypage/review/add?resNo=${res.no}'" >리뷰 쓰기</button></td>
 						    </tr>
 					     </c:forEach>

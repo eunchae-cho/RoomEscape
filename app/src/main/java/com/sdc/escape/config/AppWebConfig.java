@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.multipart.MultipartResolver;
@@ -22,6 +23,7 @@ import org.springframework.web.util.UrlPathHelper;
 import com.sdc.escape.web.interceptor.AuthAdminInterceptor;
 import com.sdc.escape.web.interceptor.AuthInterceptor;
 
+@Configuration
 @EnableWebMvc
 @ComponentScan("com.sdc.escape.web")
 public class AppWebConfig implements WebMvcConfigurer {
@@ -85,7 +87,7 @@ public class AppWebConfig implements WebMvcConfigurer {
     	registry.addInterceptor(new AuthInterceptor())
     				.addPathPatterns(urlPatterns)
     				.excludePathPatterns("/login")
-    				.excludePathPatterns("admin/**");
+    				.excludePathPatterns("/admin/**");
     	
     	List<String> urlPatternsNormal
 		=  Arrays.asList("/auth/**", "/mypage/**", "/reservation/**", "/room/**");

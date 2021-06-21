@@ -1,6 +1,7 @@
 package com.sdc.escape.web;
 
-import java.sql.Date;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -36,12 +37,17 @@ public class ReservationController {
 	
 		model.addAttribute("roomList", roomList);
 		model.addAttribute("roomTimeList", roomTimeList);
+		
+		Date today = new Date();
+		SimpleDateFormat d = new SimpleDateFormat("yyyy-MM-dd");
+		String date = d.format(today);
+		model.addAttribute("dateToday", date);
         return "reservation/form";
     }
 	
 	@ResponseBody
 	@PostMapping("/selectDate")
-	public List<Reservation> selectDate(Date date) throws Exception {
+	public List<Reservation> selectDate(java.sql.Date date) throws Exception {
 		List<Reservation> list = reservationService.findReservation(date);
 		return list;
 	}

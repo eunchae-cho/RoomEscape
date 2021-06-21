@@ -37,7 +37,7 @@
 	</div>
 	<div style="margin-left: 20px;">
  	 	<label><b>전화번호: </b></label>
-	 	<div style="width: 94%; float: right; padding-left: 15px;">${room.user.phone}</div>
+	 	<div style="width: 94%; float: right; padding-left: 15px;">${res.user.phone}</div>
 	</div>
 	
 	<hr style="margin-block: 30px;">
@@ -53,7 +53,16 @@
 		<p><b>예약인원:</b> &emsp;&nbsp;${res.participant}</p>
 		<p><b>결제금액:</b> &emsp;&nbsp;${res.price}</p>
 		<br>
-		<div style="display:inline-flex;"><label><b>예약상태:</b></label><p id="status" style="margin-left: 25px;">${res.status}</p></div>
+		<div style="display:inline-flex;">
+			<label><b>예약상태:</b></label>
+			<p id="status" style="margin-left: 25px;">${res.status}</p>
+		</div>
+		<c:if test="${res.status == 1}">
+			<div style="display:flex;">
+				<label><b>취소날짜:</b></label>
+				<p id="status" style="margin-left: 25px;">${res.canceledDate}</p>
+			</div>
+		</c:if>
 		<p><b>탈출여부:</b> &emsp;&nbsp;${res.escape}</p>
 	</div>
  </div>

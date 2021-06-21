@@ -50,6 +50,7 @@
     	FROM escape_reservation res
     		INNER JOIN escape_room r
     			ON res.r_no = r.r_no
+    	WHERE res_cancel = 0
     	ORDER BY res_date DESC
     </select>
     
@@ -110,7 +111,7 @@
     		,	res_time
     		,	res_rdt
     		,	res_cancel
-    		,	res_cancel_date
+    		,	date_format(res_cancel_date, '%Y-%m-%d') res_cancel_date
     		,	res_participant
     		,	res_price
     		,	res.u_no

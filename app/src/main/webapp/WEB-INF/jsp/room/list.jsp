@@ -14,7 +14,7 @@
 
       <c:forEach items="${roomList}" var="room">
           <div class="row featurette">
-            <div class="col-md-7" style="width: 50%;">
+            <div class="col-md-7" style="width: 50%; padding-block: 100px;">
               <h4 class="featurette-heading">
               <a href="./detail?no=${room.no}" class="nav-link px-2" style="color: white; font-family: twaysky;font-size: xx-large; text-shadow: 4px 4px 6px darkgrey;">${room.title}</a>
               </h4><br>
@@ -24,7 +24,7 @@
               </div>
             </div>
             <div class="col-md-5" style="width: 50%;">
-              <img src="${room.photo}" width="100%" height="100%">
+              <img src="<%=request.getContextPath()%>/img/${room.photo}" width="100%" height="100%">
             </div>
           </div>
           <hr class="featurette-divider">

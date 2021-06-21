@@ -68,7 +68,7 @@
 		var password = $('#password').val();
 		
 		$.ajax({
-				url: 'confirmPassword',
+				url: 'account/confirmPassword',
 				type: 'POST',
 				data: {
 					password : password
@@ -79,7 +79,7 @@
 						location.href = '<%=request.getContextPath()%>/mypage/update';
 					} else {
 						alert('잘못된 비밀번호입니다.');
-						location.href = '<%=request.getContextPath()%>/mypage/';
+						location.href = '<%=request.getContextPath()%>/mypage/info';
 					}
 				},
 				error: function() {

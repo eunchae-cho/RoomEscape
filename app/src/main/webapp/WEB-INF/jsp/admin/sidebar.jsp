@@ -32,7 +32,7 @@
   </button>
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
-      <a class="nav-link" href="#">logout</a>
+      <a id="logout" class="nav-link" href="<%=request.getContextPath() %>/admin/logout">logout</a>
     </li>
   </ul>
 </header>
@@ -79,5 +79,10 @@
 
 <script src="<%=request.getContextPath() %>/bootstrap/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script>
+	$('#logout').on('click', function() {
+		alert('로그아웃되었습니다.');
+	});
+</script>
 </body>
 </html>

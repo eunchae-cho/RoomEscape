@@ -35,21 +35,24 @@ public class MypageController {
 		User loginUser = (User) session.getAttribute("loginUser");
 		ModelAndView mv = new ModelAndView();
 		// 만약 로그인되어 있지 않다면 로그인 페이지로 리턴
-		if (loginUser == null) {
-			mv.setViewName("auth/login");
-			return mv;
-		}
+//		if (loginUser == null) {
+//			mv.setViewName("auth/login");
+//			return mv;
+//		}
 		List<Reservation> list = reservationService.listByUno(loginUser.getNo());
 		int size = list.size();
+		
 		if (list.size() == 0) {
 			mv.addObject("size", size);
 			mv.setViewName("mypage/mypage");
 			return mv;
 		}
+		
 		Reservation reservation = new Reservation();
 		reservation.setNo(list.get(0).getNo());
 		reservation.setDoDate(list.get(0).getDoDate());
 		reservation.setRoomTime(list.get(0).getRoomTime());
+		
 		Room room = new Room();
 		room.setTitle(list.get(0).getRoom().getTitle());
 		reservation.setRoom(room);
@@ -57,6 +60,7 @@ public class MypageController {
 		mv.addObject("recentRes", reservation);
 		mv.addObject("size", size);
 		mv.setViewName("mypage/mypage");
+		
 		return mv;
 	}
 	
@@ -67,7 +71,7 @@ public class MypageController {
 	}
 	
 	@ResponseBody
-	@PostMapping("/confirmPassword")
+	@PostMapping("/account/confirmPassword")
 	public String confirmPassword(String password, HttpSession session) throws Exception {
 		User user = userService.findPassword(password);
 		User loginUser = (User) session.getAttribute("loginUser");
@@ -77,17 +81,17 @@ public class MypageController {
 		return "fail";
 	}
 	
-	@GetMapping("info")
+	@GetMapping("/info")
 	public String info() throws Exception {
 		return "mypage/account/info";
 	}
 	
-	@GetMapping("update")
+	@GetMapping("/update")
 	public String update() throws Exception {
 		return "mypage/account/update";
 	}
 	
-	@PostMapping("update")
+	@PostMapping("/update")
 	public String updateForm(int no, String email, String phone, String password, HttpSession session) throws Exception {
 		User user = userService.userByNo(no);
 		user.setEmail(email);
@@ -100,7 +104,7 @@ public class MypageController {
 		// 업데이트 후 새로 조회
 		user = userService.userByNo(no);
 		session.setAttribute("loginUser", user);
-		return "redirect:/mypage/account/info";
+		return "redirect:/mypage/info";
 	}
 	
 	@GetMapping("/reservation")

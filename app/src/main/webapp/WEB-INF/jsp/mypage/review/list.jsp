@@ -23,8 +23,8 @@
 					    <tr>
 					      <th scope="col" style="width: 11%">리뷰 번호</th>
 					      <th scope="col" style="width: 20%">사진</th>
-					      <th scope="col" style="width: 20%">참여 테마</th>
-					      <th scope="col" style="width: 30%">제목</th>
+					      <th scope="col" style="width: 23%">제목</th>
+					      <th scope="col" style="width: 21%">참여 테마</th>
 					      <th scope="col" style="width: 13%">작성자</th>
 					      <th scope="col" style="width: 11%"></th>
 					    </tr>
@@ -35,14 +35,16 @@
 						      <td style="height: 150px; table-layout: fixed ;vertical-align: middle;">${review.no}</td>
 						      <td style="height: 150px; table-layout: fixed; padding-block: 20px;">
 							      	<div style="width: 100px; height: 120px; margin: 0 auto;">
-							      		<c:if test="${photo.revNo == review.no}">
-							      			<img src="<%=request.getContextPath()%>/upload/${photo.photo}" style="width: 100%; height: auto;">
+							      		<c:if test="${photo.photo != null}">
+							      			<c:if test="${photo.revNo == review.no}">
+							      				<img src="<%=request.getContextPath()%>/upload/${photo.photo}" style="width: 100%; height: auto;">
+							      			</c:if>
 							      		</c:if>
 							      	</div>
 						      	</td>
-						      <td style="height: 150px; table-layout: fixed;word-break:break-all; vertical-align: middle;">${review.room.title}</td>
 						      <td style="height: 150px; table-layout: fixed;word-break:break-all; vertical-align: middle;">
-						      	<a href="<%=request.getContextPath()%>/mypage/review/detail?no=${review.no}" style="color: white;">${review.title}</a></td>
+						      	<a href="<%=request.getContextPath()%>/mypage/review/detail?no=${review.no}" class="review-title">${review.title}</a></td>
+						      <td style="height: 150px; table-layout: fixed;word-break:break-all; vertical-align: middle;">${review.room.title}</td>
 						      <td style="height: 150px; table-layout: fixed; vertical-align: middle;">${review.user.id}</td>
 						      <td style="height: 150px; table-layout: fixed; vertical-align: middle;">
 						      	<div style="padding-bottom: 5px;">

@@ -46,6 +46,11 @@ body {
   
   a:hover {
   	color: white;
+  	text-decoration: underline;
+  }
+  
+  button:hover {
+  	text-decoration: underline;
   }
   
   li {
@@ -147,6 +152,13 @@ body {
     }
   }
   
+  
+   /* ROOM
+  -------------------------------------------------- */
+  .gallery ul li.gallery-list:nth-of-type(n+7) {
+  	display: none;
+  }
+  
   /* REVIEW CONTENT
   -------------------------------------------------- */
   .review-container {
@@ -220,8 +232,8 @@ body {
 	.review-photo-list {
 	position: relative;
     display: inline-block;
-    width: 87px;
-    height: 87px;
+    width: 200px;
+    height: 200px;
     cursor: pointer;
     overflow: hidden;
     margin-inline: 2px;
@@ -244,7 +256,7 @@ body {
 	}
 	
 	.review-content-conainer {
-	   word-wrap: break-word;
+	   display: inline-flex;
 	}
 	
 	.review-content {
@@ -322,6 +334,19 @@ body {
     padding-block: 3px;
     padding-inline: 20px;
   }
+  
+  .my_list li:hover {
+  	text-decoration: underline;
+  }
+  
+  .review-title {
+  color: white; 
+  text-decoration: none;
+  }
+  
+  .review-title:hover {
+  text-decoration: underline;
+  }  
  
   /* RESERVATION CSS
   -------------------------------------------------- */

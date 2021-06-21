@@ -32,30 +32,34 @@
 		        		<label>이용 시간: </label><span style="margin-left: 20px;">${res.roomTime}</span><br>
 		          </div>
 		          <div  style="margin-block: 10px; padding-bottom: 30px; border-bottom: solid; border-width:thin;">
-		        		<label>탈출: </label><span style="margin-left: 50px;">${res.escape} <c:if test="${res.escape == '성공'}">(${res.escapedTime})</c:if></span>
+		        		<label>탈출: </label><span style="margin-left: 50px;">${res.escape} 
+		        		<%-- <c:if test="${res.escape == '성공'}">(${res.escapedTime})</c:if> --%>
+		        		</span>
 		          </div>
 	        	 </div>
 	        	 
     			<article class="review-list">
-    				<div class="review-photo" style="margin-bottom: 50px;">
-    				<c:forEach items="${photoList}" var="photo">
-    					<c:if test="${photo.revNo == rev.no}">
-    					<div class="review-photo-list">
-    						<img class="reivew-img" src="<%=request.getContextPath()%>/upload/${photo.photo}">
-    					</div>
-    					</c:if>
-    				</c:forEach>
-    				</div>
     				<div class="review-cdt" style="margin-bottom: 30px;">
     					<label style="font-size: 14px;">작성일: </label>  &emsp; ${rev.createdDate}
     				</div>
-    				<div class="review-title">
+    				<div class="review-photo" style="margin-bottom: 50px;">
+    				<c:forEach items="${photoList}" var="photo">
+    					<c:if test="${photo.revNo == rev.no}">
+    						<c:if test="${photo.photo != null}">
+	    						<div class="review-photo-list">
+	    							<img class="reivew-img" src="<%=request.getContextPath()%>/upload/${photo.photo}">
+	    						</div>
+    						</c:if>
+    					</c:if>
+    				</c:forEach>
+    				</div>
+    				<div style="font-size: 14px;">
     					<label style="font-size: 14px;">제목: </label>  &emsp; ${rev.title}
     				</div>
     				<br>
     				<div class="review-content-conainer">
-    					<label style="font-size: 14px;">내용: </label>
-    					<div class="review-content" style="font-size: 14px; margin: 0 30px 30px 47px;">
+    					<label style="font-size: 14px;" style="white-space:pre;">내용: </label>
+    					<div class="review-content" style="font-size: 14px; margin: 0 30px 30px 20px;">
     						${rev.content}
     					</div>
     				</div>

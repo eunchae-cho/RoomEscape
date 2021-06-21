@@ -46,16 +46,16 @@
             </div>
             
              <div class="col-12">
-              <label for="address" class="form-label">비밀번호<span class="text-muted" >(최소 8~ 16자)</span></label>
-              <input type="password" class="form-control" id="password" name="password" placeholder="password" minlength="8" maxlength="16" required>
+              <label for="address" class="form-label">비밀번호<span class="text-muted" >(영문 + 숫자, 최소 8~ 16자)</span></label>
+              <input type="password" class="form-control" id="password" name="password" placeholder="password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$" minlength="8" maxlength="16" required>
               <div class="password-feedback invalid-feedback">
-                최소 8 ~ 16자 이내 비밀번호를 입력해주세요.
+                최소 8 ~ 16자 이내 영문과 숫자로 된 비밀번호를 입력해주세요.
               </div>
             </div>
             
             <div class="col-12">
               <label for="address" class="form-label">비밀번호 확인<span class="text-muted" ></span></label>
-              <input type="password" class="password-form form-control" id="confirmPassword" name="confirmPassword" placeholder="password" minlength="8" maxlength="16" required>
+              <input type="password" class="password-form form-control" id="confirmPassword" name="confirmPassword" placeholder="password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$" minlength="8" maxlength="16" required>
               <div class="confirmPassword-feedback invalid-feedback">
                 비밀번호가 맞지 않습니다.
               </div>
@@ -160,34 +160,44 @@
 		 $('.id-form').removeClass('is-invalid' );
 	 });
 	 
+	 $('#password').on('keyup', function() {
+		 var password = $('#password').val();
+		 var  regExp = '/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/';
+		 var result = password.search(regExp);
+		 confirmPwd();
+	 });
+	 
      // 비밀번호 확인창 입력 시 
      $('#confirmPassword').on('keyup', function() {
-	    	// 초기화
-	    	 if ($('#confirmPassword').val() == '') {
-				 $('.password-form').removeClass('is-invalid');
-				 $('.password-form').removeClass('is-valid');
-				 $('.cannot-make-password').html('');
-				 $('.can-make-password').html('');
-				 }
-	    	
-	    		 // 비밀번호 입력 내용이 같을 때 valid 되도록 처음에 invalid로 지정
-	    		 $('.password-form').addClass('is-invalid');
-    
-	    	 if ( $('#password').val() == $('#confirmPassword').val()) {
-	    		 console.log( $('#password').val());
-	    		 console.log( $('#confirmPassword').val());
-	    		 $('.cannot-make-password').html('');
-	    		 $('.password-form').removeClass('is-invalid');
-	    		 $('.password-form').addClass('is-valid');
-	    		 $('.cannot-make-password').html('');
-	    		 $('.can-make-password').html('비밀번호가 일치합니다.');
-	    	 } else {
-	    		 $('.confirmPassword-feedback').html('');
-	  	      	 $('.cannot-make-password').html('비밀번호가 같지 않습니다.');
-	  		  	 $('.can-make-password').html(''); 
-	    	 }
-	    	 
+    	 confirmPwd();
      });
+     
+     function confirmPwd() {
+    	// 초기화
+    	 if ($('#confirmPassword').val() == '') {
+			 $('.password-form').removeClass('is-invalid');
+			 $('.password-form').removeClass('is-valid');
+			 $('.cannot-make-password').html('');
+			 $('.can-make-password').html('');
+			 }
+    	
+    		 // 비밀번호 입력 내용이 같을 때 valid 되도록 처음에 invalid로 지정
+    		 $('.password-form').addClass('is-invalid');
+
+    	 if ( $('#password').val() == $('#confirmPassword').val()) {
+    		 console.log( $('#password').val());
+    		 console.log( $('#confirmPassword').val());
+    		 $('.cannot-make-password').html('');
+    		 $('.password-form').removeClass('is-invalid');
+    		 $('.password-form').addClass('is-valid');
+    		 $('.cannot-make-password').html('');
+    		 $('.can-make-password').html('비밀번호가 일치합니다.');
+    	 } else {
+    		 $('.confirmPassword-feedback').html('');
+  	      	 $('.cannot-make-password').html('비밀번호가 같지 않습니다.');
+  		  	 $('.can-make-password').html(''); 
+    	 }
+     }
      
      
   // 회원 가입 버튼 클릭 시
@@ -212,7 +222,11 @@
              event.stopPropagation()
           }  */
           else {
-        	alert("회원가입이 완료되었습니다.");
+        	 var result = confirm('회원가입을 하시겠습니까?');
+        	 if (result) {
+	        	alert("회원가입이 완료되었습니다.\n로그인 창으로 이동합니다.");
+        	 } else {
+        	 }
         	location.href = '<%=request.getContextPath() %>/auth/login';
           }
           form.classList.add('was-validated')

@@ -32,6 +32,7 @@ import com.sdc.escape.domain.Room;
 import com.sdc.escape.domain.RoomAttribute;
 import com.sdc.escape.domain.RoomTime;
 import com.sdc.escape.domain.Scheduler;
+import com.sdc.escape.domain.User;
 import com.sdc.escape.service.AdminService;
 import com.sdc.escape.service.EventService;
 import com.sdc.escape.service.ReservationService;
@@ -52,17 +53,17 @@ public class AdminController {
 
 	@GetMapping("/")
 	public String index(HttpSession session) throws Exception{
-//		Admin loginAdmin = (Admin) session.getAttribute("loginAdmin");
-//		if (loginAdmin == null) {
-//			return "admin/login";
-//		}
 		return "admin/index";
 	}
 	
+	// 스케줄러
 	@ResponseBody
 	@PostMapping("/scheduler")
 	public List<Scheduler> scheduler() throws Exception {
+		// 스케줄러에 넣을 데이터 조회
 		List<Reservation> list = reservationService.findAll();
+		
+		// 스케줄러에 넣을 데이터만 따로 리스트 생성
 		List<Scheduler> schedulerList = new ArrayList<>();
 		for (int i  = 0; i < list.size(); i++) {
 			Scheduler s= new Scheduler();
@@ -73,15 +74,16 @@ public class AdminController {
 			s.setUrl("/app/admin/reservation/detail?no=" + list.get(i).getNo());
 			schedulerList.add(s);
 		}
+		
 		return schedulerList;
 	}
 	
+	// 어드민 로그인
 	@GetMapping("/login")
 	public ModelAndView login(HttpServletRequest req) throws Exception{
-		
 		String id = "";
-		
 		Cookie[] cookies = req.getCookies();
+		
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
 				if (cookie.getName().equals("id")) {
@@ -90,6 +92,7 @@ public class AdminController {
 				}
 			}
 		}
+		
 		// 이전페이지 기억하고 세션에 저장
 		String referer = req.getHeader("Referer");
 		req.getSession().setAttribute("prevPage", referer);
@@ -97,9 +100,11 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("id", id);
 		mv.setViewName("admin/login");
+		
 		return mv;
 	}
-	
+		
+		// 로그인 검사
 		@ResponseBody
 		@PostMapping("/login")
 		public String loginForm(
@@ -108,7 +113,7 @@ public class AdminController {
 				String rememberMe,
 				HttpServletResponse res,
 				HttpSession session) throws Exception {
-			
+
 			Cookie idCookie = new Cookie("id", id);
 			
 			if (rememberMe != null) {
@@ -125,34 +130,51 @@ public class AdminController {
 			}
 		
 			session.setAttribute("loginAdmin", loginAdmin);
+			
 			return "ok";
 		}
+		
+	// 어드민 로그아웃
+	@GetMapping("/logout")
+	public String logout(HttpServletResponse res, HttpSession session) {
+		Admin loginAdmin = (Admin) session.getAttribute("loginAdmin");
+			
+		if(loginAdmin != null) {
+			session.invalidate();
+		}
+		
+		return "redirect:/admin/";
+	}
 	
+	// 예약 관리
 	@GetMapping("/reservation")
 	public String reservation(Model model, String date) throws Exception {
+		
+		// date의 default를 오늘 날짜로 설정
 		if (date == null) {
 			Date today = new Date();
 			SimpleDateFormat d = new SimpleDateFormat("yyyy-MM-dd");
 			date = d.format(today);
 			model.addAttribute("dateToday", date);
 		}
+		
 		List<Reservation> list = reservationService.listByNoDate(date);
 		model.addAttribute("list", list);
+		
 		return "admin/reservation/list";
 	}
 	
+	// 날짜에 따른 예약 조회
 	@ResponseBody
 	@GetMapping("/selectDate")
 	public List<Reservation> selectDate(String date) throws Exception {
 		return reservationService.listByNoDate(date);
 	}
 	
+	// 예약 관리의 수정 버튼
 	@ResponseBody
 	@GetMapping("/edit")
 	public String edit(int no, int status, String escape) throws Exception {
-		System.out.println(no);
-		System.out.println(status);
-		System.out.println(escape);
 		Reservation reservation = reservationService.reservationByNo(no);
 		reservation.setStatus(status);
 		reservation.setEscape(escape);
@@ -160,6 +182,7 @@ public class AdminController {
 		return "ok";
 	}
 	
+	// 예약 상세 페이지
 	@GetMapping("/reservation/detail")
 	public String reservationDetail(Model model, int no) throws Exception {
 		Reservation res = reservationService.reservationByNo(no);
@@ -167,6 +190,7 @@ public class AdminController {
 		return "admin/reservation/detail";
 	}
 	
+	// 룸 테마 설정
 	@GetMapping("/room")
 	public String room(Model model) throws Exception {
 		List<Room> list = roomService.list();
@@ -174,6 +198,7 @@ public class AdminController {
 		return "admin/room/list";
 	}
 	
+	// 룸 테마 상세보기
 	@GetMapping("/room/detail")
 	public String roomDetail(Model model, int no) throws Exception {
 		Room room = roomService.roomByNo(no);
@@ -185,11 +210,13 @@ public class AdminController {
 		return "admin/room/detail";
 	}
 	
+	// 룸 테마 추가
 	@GetMapping("/room/add")
 	public String roomAdd() throws Exception {
 		return "admin/room/add";
 	}
 	
+	// 룸 테마 추가
 	@PostMapping("room/add")
 	public String roomAddForm(String title,
 														String content,
@@ -207,12 +234,15 @@ public class AdminController {
 		room.setContent(content);
 		room.setLevel(level);
 		room.setParticipant(participant);
+		
+		// 사진 파일 이름 덮기
 		String filename = UUID.randomUUID().toString();
 		String saveFilePath = multiReq.getSession().getServletContext().getRealPath("/img/") +  filename;
 		photo.transferTo(new File(saveFilePath));
 		room.setPhoto(filename);
 		roomService.add(room);
 		
+		// 최근 번호
 		int roomNo = roomService.recentNo();
 		
 		for (int i = 0; i < roomTime.length; i++) {
@@ -222,6 +252,7 @@ public class AdminController {
 			roomTimeService.add(rtime);
 		}
 		
+		// 방 테마 속성
 		RoomAttribute roomAttr = new RoomAttribute();
 		roomAttr.setRno(roomNo);
 		roomAttr.setReasoning(reasoning);
@@ -328,7 +359,7 @@ public class AdminController {
 		event.setAdminNo(loginAdmin.getNo());
 		// 사진 파일 이름 암호화
 		String filename = UUID.randomUUID().toString();
-		String saveFilePath = multiReq.getSession().getServletContext().getRealPath("img/") +  filename;
+		String saveFilePath = multiReq.getSession().getServletContext().getRealPath("/img/") +  filename;
 		photo.transferTo(new File(saveFilePath));
 		event.setPhoto(filename);
 		eventService.add(event);

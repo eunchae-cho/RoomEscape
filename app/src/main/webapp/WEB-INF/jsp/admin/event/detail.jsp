@@ -37,9 +37,9 @@
 	 	<label><b>제목: </b></label>
 	 	<div style="width: 94%; float: right;">${event.title}</div>
 	</div>
-	<div>
+	<div style="display: flow-root;">
  	 	<label><b>내용: </b></label>
-	 	<div style="width: 94%; float: right;">${event.content}</div>
+	 	<div style="width: 94%; float: right; white-space:pre;">${event.content}</div>
 	</div>
 	<div style="text-align: center; margin-top: 100px;">
 	<button type="button" class="btn btn-secondary updateBtn" style="font-size: 12px;">수정</button>

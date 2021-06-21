@@ -101,7 +101,6 @@
 			},
 			dataType: 'json',
 			success: function(data) {
-				console.log(data);
 				$('.res-table tbody').text('')
 				var htmls = '';
 				
@@ -136,15 +135,18 @@
 	
 	// 수정 버튼 누를 시
 	$(".editBtn").on('click', function() {
+		// 테이블 행 선택되지 않게
+		$('.res-table tbody tr td').attr('onclick', 'event.cancelBubble=true');
 		
 		$(".editBtn").css('display', 'none');
 		$(".ajaxBtn").css('display', 'inline-block');
 		
-		$('.res-table tr').each(function() {
+		$('.res-table tbody tr').each(function() {
 			var st_value = $(this).find('td:eq(6)').text();
 			var es_value = $(this).find('td:eq(7)').text();
 			var status = $(this).find('td:eq(6)');
 			var escape = $(this).find('td:eq(7)');
+			
 			
 			status.text('');
 			escape.text('');
@@ -156,13 +158,25 @@
 				$('.select-status').append('<option value="2">종료</option>');
 			}
 			
+			console.log('---------- no: '+$(this).find('td:eq(0)').text())
+			console.log('st select: ' + $('.select-status option:eq(0)').text())
+			console.log('st select: ' + $('.select-status option:eq(1)').text())
+			console.log('st select: ' + $('.select-status option:eq(2)').text())
+			
 			if (st_value == '예약') {
-				$('.select-status option:eq(0)').attr('selected', 'selected');
+				console.log(0)
+				$(this).find('.select-status option:eq(0)').prop('selected', true);
 			} else if (st_value == '예약취소') {
-				$('.select-status option:eq(1)').attr('selected', 'selected');
+				console.log(1)
+				$(this).find('.select-status option:eq(1)').prop('selected', true);
 			} else if (st_value == '종료') {
-				$('.select-status option:eq(2)').attr('selected', 'selected');
+				console.log(2)
+				$(this).find('.select-status option:eq(2)').prop('selected', true);
 			}
+			
+			console.log($(this).find('.select-status option:eq(0)').text())
+			console.log('st: ' + st_value);
+			
 			
 			escape.append('<select class="form-select select-escape" style="width: 100px; padding-block: 2px; font-size:15px;">');
 			if ($('.select-escape').empty()) {
@@ -170,11 +184,18 @@
 				$('.select-escape').append('<option value="1">성공</option>');
 			}
 			
+			console.log('st escape: ' + $('.select-escape option:eq(0)').text())
+			console.log('st escape: ' + $('.select-escape option:eq(1)').text())
+			
 			if (es_value == '실패') {
-				$('.select-escape option:eq(0)').attr('selected', 'selected');
+				console.log(10)
+				$(this).find('.select-escape option:eq(0)').prop('selected', true);
 			} else if (es_value == '성공') {
-				$('.select-escape option:eq(1)').attr('selected', 'selected');
+				console.log(11)
+				$(this).find('.select-escape option:eq(1)').prop('selected', true);
 			} 
+			
+			console.log('es: ' + es_value);
 			
 			var max_cnt = 0;
 			var record = record = document.getElementById('record');;

@@ -66,6 +66,7 @@
 		 if (validCnt == 0) {
 			 var result = confirm('수정 하시겠습니까?');
 				if(result) {
+					alert('수정되었습니다.');
 					location.href('<%=request.getContextPath()%>/mypage/');
 				} else {
 					return false;

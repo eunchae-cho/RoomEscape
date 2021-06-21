@@ -45,7 +45,7 @@ public class AuthController {
 		user.setPhone(phone);
 		userService.add(user);
 		
-		return "redirect:../";
+		return "auth/login";
 	}
 	
 	// 아이디 중복 확인
@@ -69,7 +69,7 @@ public class AuthController {
 	// 로그인
 	@GetMapping("/login")
 	public ModelAndView login(HttpServletRequest req) throws Exception {
-		
+		System.out.println(req.getPathInfo());
 		String id = "";
 		
 		Cookie[] cookies = req.getCookies();

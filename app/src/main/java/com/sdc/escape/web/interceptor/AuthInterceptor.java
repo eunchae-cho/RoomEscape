@@ -12,7 +12,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest req,
 														HttpServletResponse res,
 														Object handler) throws Exception {
-		if (req.getPathInfo().startsWith("/auth") ||
+		if (req.getRequestURI().startsWith("/auth") ||
 				req.getSession().getAttribute("loginUser") != null) {
 					return true;
 		} 

@@ -66,6 +66,11 @@
 			$('#loginBtn').click();
 		}
 	});
+	$('#id').on('keydown', function(e) {
+		if (e.keyCode == 13) {
+			$('#loginBtn').click();
+		}
+	});
 </script>
 </body>
 </html>

@@ -32,7 +32,9 @@
 		        		<label>이용 시간: </label><span style="margin-left: 20px;">${res.roomTime}</span><br>
 		          </div>
 		          <div  style="margin-block: 10px; padding-bottom: 30px; border-bottom: solid; border-width:thin;">
-		        		<label>탈출: </label><span style="margin-left: 50px;">${res.escape} <c:if test="${res.escape == '성공'}">(${res.escapedTime})</c:if></span>
+		        		<label>탈출: </label><span style="margin-left: 50px;">${res.escape} 
+		        		<%-- <c:if test="${res.escape == '성공'}">(${res.escapedTime})</c:if> --%>
+		        		</span>
 		          </div>
 	        	 </div>
 	        	 

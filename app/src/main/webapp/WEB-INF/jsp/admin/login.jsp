@@ -7,10 +7,6 @@
 <title>[room escape] 관리자</title>
 <link href="<%=request.getContextPath() %>/bootstrap/css/admin.css?var=2" rel="stylesheet">
 <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
-
-    
-
-    <!-- Bootstrap core CSS -->
 <link href="<%=request.getContextPath() %>/bootstrap/css/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous">
 
     <style>
@@ -33,7 +29,7 @@
   <body class="text-center" style="padding-block: 250px;">
     
 <main class="form-signin">
-  <form action="login" method="post">
+  <form id="form" action="login" method="post">
     <h1 class="h3 mb-3 fw-normal">관리자 로그인</h1>
 
     <div class="form-floating">
@@ -50,7 +46,7 @@
         <input type="checkbox" value="remember-me"> Remember me
       </label>
     </div>
-    <button id="loginBtn" class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
+    <button id="loginBtn" class="w-100 btn btn-lg btn-primary" type="button">login</button>
   </form>
 </main>
 
@@ -61,17 +57,18 @@
 // 아이디와 비밀번호가 올바른지 확인
 $('#loginBtn').on('click', function() {
 	var formData = $('#form').serialize();
-	var prevPage = '${sessionScope.prevPage}'
 	 $.ajax({
 			 url: 'login',
-			 type: 'POST',
+			 type: 'post',
 			 data: formData,
+			 dataType : 'text',
 			 success: function(data) {
-				 if (data == 'ok') {
-					 location.href = '<%=request.getContextPath() %>/admin/';
-				 } else if (data == 'fail') {
+				 console.log(data)
+				if (data == 'ok') {
+					location.href = '<%=request.getContextPath() %>/admin/';
+				 } else {
 					 alert('아이디 혹은 비밀번호가 맞지 않습니다.');
-				 }
+				 } 
 			 },
 			 error: function() {
 				 console.log('error');
@@ -79,7 +76,12 @@ $('#loginBtn').on('click', function() {
 	});
 });
 // 로그인 버튼 엔터 시
-$('#password').on('keydown', function(e) {
+$('#floatingPassword').on('keydown', function(e) {
+	if (e.keyCode == 13) {
+		$('#loginBtn').click();
+	}
+});
+$('#floatingInput').on('keydown', function(e) {
 	if (e.keyCode == 13) {
 		$('#loginBtn').click();
 	}

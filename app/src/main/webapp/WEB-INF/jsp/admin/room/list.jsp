@@ -33,19 +33,19 @@
  </div>
   <div style="margin-top: 20px;">
       <div class="table-responsive">
-        <table class="table table-striped table-sm">
+        <table class="table table-striped table-sm" style="table-layout: fixed;">
           <thead>
             <tr>
               <th style="width: 15%;">no.</th>
               <th style="width: 30%;">제목</th>
-              <th>내용</th>
+              <th style="width: 150%;">내용</th>
             </tr>
           </thead>
           <tbody>
           <c:forEach items="${list}" var="room">
             <tr>
               <td>${room.no}</td>
-              <td><a href="<%=request.getContextPath() %>/admin/room/detail?no=${room.no}">${room.title}</a></td>
+              <td><a class="room-list-title" href="<%=request.getContextPath() %>/admin/room/detail?no=${room.no}">${room.title}</a></td>
               <td style="overflow:hidden; text-overflow: ellipsis; white-space: nowrap;">${room.content}</td>
             </tr>
             </c:forEach>

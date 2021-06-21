@@ -97,6 +97,7 @@
  			if (result) {
  				location.href = '<%=request.getContextPath()%>/mypage/account/delete/do';
  				self.close();
+ 				alert('회원 탈퇴 처리했습니다.');
  				window.opener.location.href='<%=request.getContextPath()%>/';
  			}
  		}

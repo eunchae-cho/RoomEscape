@@ -12,8 +12,7 @@ public class AuthAdminInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest req,
 														HttpServletResponse res,
 														Object handler) throws Exception {
-		if (req.getPathInfo().startsWith("/login") ||
-				req.getSession().getAttribute("loginAdmin") != null) {
+		if (req.getSession().getAttribute("loginAdmin") != null) {
 					return true;
 		}
 			ServletContext servletContext = req.getServletContext();
