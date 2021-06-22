@@ -4,9 +4,7 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.Cookie;
@@ -32,7 +30,6 @@ import com.sdc.escape.domain.Room;
 import com.sdc.escape.domain.RoomAttribute;
 import com.sdc.escape.domain.RoomTime;
 import com.sdc.escape.domain.Scheduler;
-import com.sdc.escape.domain.User;
 import com.sdc.escape.service.AdminService;
 import com.sdc.escape.service.EventService;
 import com.sdc.escape.service.ReservationService;
@@ -264,17 +261,22 @@ public class AdminController {
 		return "redirect:/admin/room";
 	}
 	
+	// 룸 테마 수정
 	@GetMapping("/room/update")
 	public String roomUpdate(Model model, int no) throws Exception {
 		Room room = roomService.roomByNoWithoutStar(no);
 		model.addAttribute("room", room);
+		
 		List<RoomTime> roomTimeList = roomTimeService.timeByNo(no);
 		model.addAttribute("roomTimeList", roomTimeList);
+		
 		RoomAttribute roomAttr = roomAttributeService.roomAttrByNoWithoutStar(no);
 		model.addAttribute("roomAttr", roomAttr);
+		
 		return "admin/room/update";
 	}
 	
+	// 룸 테마 수정 - form 
 	@PostMapping("room/update")
 	public String roomUpdateForm(int no,
 														String title,
@@ -294,12 +296,15 @@ public class AdminController {
 		room.setContent(content);
 		room.setLevel(level);
 		room.setParticipant(participant);
+		
 		String filename = UUID.randomUUID().toString();
 		String saveFilePath = multiReq.getSession().getServletContext().getRealPath("/img/") +  filename;
 		photo.transferTo(new File(saveFilePath));
 		room.setPhoto(filename);
+		// 방 테마 수정
 		roomService.update(room);
 		
+		// 방 테마 시간대 수정
 		for (int i = 0; i < roomTime.length; i++) {
 			RoomTime rtime = new RoomTime();
 			rtime.setRno(no);
@@ -308,6 +313,7 @@ public class AdminController {
 			roomTimeService.add(rtime);
 		}
 		
+		// 방 속성 수정
 		RoomAttribute roomAttr = new RoomAttribute();
 		roomAttr.setRno(no);
 		roomAttr.setReasoning(reasoning);
@@ -319,53 +325,65 @@ public class AdminController {
 		return "redirect:/admin/room/detail?no=" + no;
 	}
 	
+	// 방 테마 삭제
 	@GetMapping("/room/delete")
 	public String roomDelete(int no) throws Exception {
 		roomTimeService.delete(no);
 		roomAttributeService.delete(no);
 		roomService.delete(no);
+		
 		return "redirect:/admin/room";
 	}
 	
+	// 이벤트 리스트
 	@GetMapping("/event")
 	public String event(Model model) throws Exception {
 		List<Event> list = eventService.list();
 		model.addAttribute("list", list);
+		
 		return "admin/event/list";
 	}
 	
+	// 이벤트 상세보기
 	@GetMapping("/event/detail")
 	public String eventDetail(Model model, int no)  throws Exception {
 		Event event = eventService.eventByNo(no);
 		model.addAttribute("event", event);
+		
 		return "admin/event/detail";
 	}
 	
+	// 이벤트 등록
 	@GetMapping("/event/add")
 	public String eventAdd() throws Exception {
 		return "admin/event/add";
 	}
 	
+	// 이벤트 등록 - form 
 	@PostMapping("/event/add")
 	public String eventAddForm(String title, 
 												String content, 
 												HttpSession session,
 												MultipartFile photo,
 												MultipartHttpServletRequest multiReq) throws Exception {
+		
 		Event event = new Event();
 		event.setTitle(title);
 		event.setContent(content);
 		Admin loginAdmin = (Admin) session.getAttribute("loginAdmin");
 		event.setAdminNo(loginAdmin.getNo());
-		// 사진 파일 이름 암호화
+		
+		// 사진 파일 이름 코드 생성
 		String filename = UUID.randomUUID().toString();
 		String saveFilePath = multiReq.getSession().getServletContext().getRealPath("/img/") +  filename;
 		photo.transferTo(new File(saveFilePath));
 		event.setPhoto(filename);
 		eventService.add(event);
+		
 		return "redirect:/admin/event";
 	}
 	
+	// 이벤트 수정
 	@GetMapping("/event/update")
 	public String eventUpdate(Model model, int no) throws Exception {
 		Event event = eventService.eventByNo(no);
@@ -373,24 +391,29 @@ public class AdminController {
 		return "admin/event/update";
 	}
 	
+	// 이벤트 수정 - form 
 	@PostMapping("/event/update")
 	public String eventUpdateForm(int no,
 													String title, 
 													String content, 
 													MultipartFile photo,
 													MultipartHttpServletRequest multiReq) throws Exception {
+		
 		Event event = eventService.eventByNo(no);
 		event.setTitle(title);
 		event.setContent(content);
-		// 사진 파일 이름 암호화
+		
+		// 사진 파일 이름 코드 생성
 		String filename = UUID.randomUUID().toString();
 		String saveFilePath = multiReq.getSession().getServletContext().getRealPath("img/") +  filename;
 	    photo.transferTo(new File(saveFilePath));
 		event.setPhoto(filename);
 		eventService.update(event);
+		
 		return "redirect:/admin/event/detail?no="+ no;
 	}
 	
+	// 이벤트 삭제
 	@GetMapping("/event/delete")
 	public String eventDelete(int no) throws Exception {
 		eventService.delete(no);

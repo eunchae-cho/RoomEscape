@@ -19,12 +19,15 @@ public class IndexController {
 	@Autowired RoomService roomService;
 	@Autowired EventService eventService;
 
+	// 처음 메인 페이지
     @GetMapping("/")
     public String index(HttpServletRequest request) throws Exception {
     	List<Room> roomList =  roomService.list();
     	request.setAttribute("roomList", roomList);
+    	
     	List<Event> eventList = eventService.list();
     	request.setAttribute("eventList", eventList);
-        return "index";
+        
+    	return "index";
     }
 }

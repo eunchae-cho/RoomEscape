@@ -120,6 +120,7 @@ public class AuthController {
 		return "ok";
 	}
 	
+	// 로그 아웃
 	@GetMapping("/logout")
 	public String logout(HttpServletResponse res, HttpSession session) {
 		User loginUser = (User) session.getAttribute("loginUser");
@@ -135,6 +136,7 @@ public class AuthController {
 		return "auth/findId";
 	}
 	
+	// 아이디 찾기 - ajax
 	@ResponseBody
 	@PostMapping("/findId")
 	public User findIdAjax(String name, String email) throws Exception{

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sdc.escape.domain.Reservation;
-import com.sdc.escape.domain.Review;
 import com.sdc.escape.domain.Room;
 import com.sdc.escape.domain.User;
 import com.sdc.escape.service.ReservationService;
@@ -30,24 +29,21 @@ public class MypageController {
 	@Autowired UserService userService;
 	@Autowired ReviewService reviewService;
 	
+	// 마이페이지 
 	@GetMapping("/")
 	public ModelAndView mypage(HttpSession session) throws Exception {
 		User loginUser = (User) session.getAttribute("loginUser");
+		
 		ModelAndView mv = new ModelAndView();
-		// 만약 로그인되어 있지 않다면 로그인 페이지로 리턴
-//		if (loginUser == null) {
-//			mv.setViewName("auth/login");
-//			return mv;
-//		}
 		List<Reservation> list = reservationService.listByUno(loginUser.getNo());
 		int size = list.size();
-		
+		// 만약 예약 리스트가 없을 때 
 		if (list.size() == 0) {
 			mv.addObject("size", size);
 			mv.setViewName("mypage/mypage");
 			return mv;
 		}
-		
+		// 가장 최신 예약 리스트 하나 조회
 		Reservation reservation = new Reservation();
 		reservation.setNo(list.get(0).getNo());
 		reservation.setDoDate(list.get(0).getDoDate());
@@ -64,33 +60,39 @@ public class MypageController {
 		return mv;
 	}
 	
+	//  수정 버튼
 	@ResponseBody
 	@GetMapping("/editBtn")
 	public String testPassword() throws Exception {
 		return "ok";
 	}
 	
+	// 회원 정보 수정 -  비밀번호 확인
 	@ResponseBody
 	@PostMapping("/account/confirmPassword")
 	public String confirmPassword(String password, HttpSession session) throws Exception {
 		User user = userService.findPassword(password);
 		User loginUser = (User) session.getAttribute("loginUser");
+		// 로그인 된 회원의 비밀번호가 맞다면
 		if (loginUser.getPassword().equals(user.getPassword())) {
 			return "ok";
 		}
 		return "fail";
 	}
 	
+	// 회원 정보 수정 - 조회
 	@GetMapping("/info")
 	public String info() throws Exception {
 		return "mypage/account/info";
 	}
 	
+	// 회원 정보 수정 
 	@GetMapping("/update")
 	public String update() throws Exception {
 		return "mypage/account/update";
 	}
 	
+	// 회원 정보 수정 - form
 	@PostMapping("/update")
 	public String updateForm(int no, String email, String phone, String password, HttpSession session) throws Exception {
 		User user = userService.userByNo(no);
@@ -107,6 +109,7 @@ public class MypageController {
 		return "redirect:/mypage/info";
 	}
 	
+	// 예약 확인/취소
 	@GetMapping("/reservation")
 	public String reservation(Model model, HttpSession session) throws Exception {
 		User loginUser = (User) session.getAttribute("loginUser");
@@ -115,6 +118,7 @@ public class MypageController {
 		return "mypage/reservation";
 	}
 	
+	// 예약 취소
 	@GetMapping("/cancel")
 	public String cancel(int no) throws Exception {
 		Reservation res = reservationService.reservationByNo(no);
@@ -125,14 +129,14 @@ public class MypageController {
 		return "redirect:/mypage/reservation";
 	}
 	
+	// 이용 내역
 	@GetMapping("/history")
 	public String history(Model model, HttpSession session) throws Exception {
 		User loginUser = (User) session.getAttribute("loginUser");
 		List<Reservation> list = reservationService.listByUno(loginUser.getNo());
 		List<Reservation> historyList = new ArrayList<>();
-		
+		// 리스트의 상태만 따로 추출
 		for (int i = 0; i < list.size(); i++) {
-			// 상태만 따로 추출
 			if (list.get(i).getStatus() == 2) {
 				historyList.add(list.get(i));
 			}
@@ -141,26 +145,32 @@ public class MypageController {
 		return "mypage/history";
 	}
 	
+	// 리뷰 조회
+	// 리뷰가 있다면 리뷰 쓰기 버튼 보이지 않게 하기
 	@ResponseBody
 	@GetMapping("/hasReview")
 	public int[] historyAjax(int[] resNoArr) throws Exception {
+		
 		if (resNoArr == null) {
 			return new int[0];
 		}
+		
 		int length = resNoArr.length;
 		int[] intArr = new int[length];
 		for(int i = 0; i < resNoArr.length; i++) {
-			System.out.println(reviewService.selectNoByResNo(resNoArr[i]));
 				intArr[i] = reviewService.selectNoByResNo(resNoArr[i]);
 		}
+		
 		return intArr;
 	}
 	
+	// 회원 탈퇴
 	@GetMapping("/account/delete") 
 	public String delete() throws Exception {
 		return "mypage/account/delete";
 	}
 	
+	// 회원 탈퇴 - a태그(회원탈퇴) submit
 	@GetMapping("/account/delete/do")
 	public void accountDelete(HttpSession session) throws Exception {
 		User loginUser =(User)  session.getAttribute("loginUser");
