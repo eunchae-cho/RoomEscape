@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="com.sdc.escape.dao.ReviewDao">
+    <resultMap type="review" id="ReviewMap">
+        <id column="rev_no" property="no"></id>
+        <result column="rev_title" property="title"></result>
+        <result column="rev_content" property="content"></result>
+        <result column="rev_cdt" property="createdDate"></result>
+        <result column="res_no" property="resNo"></result>
+        
+        <association property="user" javaType="user">
+        	<id column="u_no" property="no"></id>
+        	<result column="u_id" property="id"></result>
+        </association>
+        
+        <association property="room" javaType="room">
+        	<id column="r_no" property="no"></id>
+        	<result column="r_title" property="title"></result>
+        </association>
+    </resultMap>
+	
+	<resultMap type="photo" id="PhotoMap">
+		<id column="rev_no" property="revNo"></id>
+		<result column="rev_Photo" property="photo"></result>
+	</resultMap>
+    
+    <select id="findAll" resultMap="ReviewMap">
+    </select>
+    
+    <select id="findByUno" resultMap="ReviewMap" parameterType="int">
+    	SELECT
+	    		ev.rev_no
+	    	,	ev.rev_title
+	    	,	ev.rev_content
+	    	,	ev.rev_cdt
+	    	,	ev.res_no
+	    	,  u.u_no
+	    	,	u.u_id
+	    	,  r.r_no
+	    	,	r.r_title 
+	    FROM escape_review AS ev
+	    	INNER JOIN escape_user AS u
+	    		ON ev.u_no = u.u_no
+	    	INNER JOIN escape_room AS r
+	    		ON ev.r_no = r.r_no
+	    WHERE ev.u_no = #{no}
+    	ORDER BY ev.rev_no DESC
+    </select>
+    
+    <select id="findByNo" resultMap="ReviewMap" parameterType="int">
+	    SELECT 
+					rev_no
+				,	rev_title
+		    	,	rev_content
+		    	,	rev_cdt
+		    	,	res_no
+		FROM escape_review 
+		WHERE rev_no = #{no}
+    </select>
+    
+    <select id="findReviewByRoom" resultMap="ReviewMap" parameterType="int">
+	    SELECT 
+					ev.rev_no
+				,	ev.rev_title
+		    	,	ev.rev_content
+		    	,	ev.rev_cdt
+		    	,	ev.res_no
+		    	,  	u.u_no
+		    	,	u.u_id
+		FROM escape_review AS ev 
+			INNER JOIN escape_user AS u
+				    	ON ev.u_no = u.u_no
+		WHERE r_no = #{no}
+		ORDER BY ev.rev_no DESC
+    </select>
+    
+    <select id="selectNoByResNo" resultType="int" parameterType="int">
+    	SELECT EXISTS 
+			(SELECT 
+				1
+				FROM escape_review
+				WHERE res_no = #{no}) 
+    </select>
+    
+    <select id="selectOne" resultMap="ReviewMap" >
+	    SELECT 
+	    	rev_no
+	    FROM escape_review
+	    ORDER BY rev_cdt DESC 
+	    LIMIT 1
+    </select>
+    
+    <select id="countReview" resultType="int" parameterType="int" >
+	    SELECT 
+	    	COUNT (*)
+	    FROM escape_review AS ev
+	    	INNER JOIN escape_room AS er 
+					ON er.r_no = ev.r_no 
+	    WHERE ev.r_no = #{no}
+    </select>
+    
+    <select id="findPhotosByRno" resultMap="PhotoMap" parameterType="int">
+    	SELECT
+    			ph.rev_no
+    		,	ev.rev_photo
+    	FROM escape_review_photo AS ph
+    		INNER JOIN escape_review AS ev
+    				ON ph.rev_no = ev.rev_no
+    		INNER JOIN escape_room AS r
+    				ON ev.r_no = r.r_no
+    	WHERE r.r_no = #{no} 
+    </select>
+    
+     <select id="findPhotosByUno" resultMap="PhotoMap" parameterType="int">
+    	SELECT
+    			ph.rev_no
+    		,	ev.rev_photo
+    	FROM escape_review_photo AS ph
+    		INNER JOIN escape_review AS ev
+    				ON ph.rev_no = ev.rev_no
+    		INNER JOIN escape_user AS u
+    				ON ev.u_no = u.u_no
+    		WHERE u.u_no = #{no}
+    		ORDER BY ph.rev_no
+    </select>
+    
+    <select id="findPhotosByResNo" resultMap="PhotoMap" parameterType="int">
+    	SELECT
+    			ph.rev_no
+    		,	ev.rev_photo
+    	FROM escape_review_photo AS ph
+    		INNER JOIN escape_review AS ev
+    				ON ph.rev_no = ev.rev_no
+    		WHERE ph.rev_no = #{no}
+    </select>
+    
+    <select id="countPhoto" resultType="int" parameterType="int">
+    	SELECT
+			COUNT(*) 
+    	FROM escape_review_photo AS ph
+    	INNER JOIN escape_review AS ev
+    			ON ph.rev_no  = ev.rev_no 
+    	INNER JOIN  escape_room AS r 
+    			ON ev.r_no = r.r_no 
+    	WHERE r.r_no = #{no}
+    </select>
+    
+    <select id="hasPhoto" resultType="int" parameterType="int">
+    	SELECT
+			COUNT(*) 
+    	FROM escape_review_photo ph
+    	INNER JOIN escape_review AS ev 
+    			ON ph.rev_no  = ev.rev_no 
+    	WHERE ph.rev_no = #{no}
+    </select>
+    
+    <insert id="addReview" parameterType="Review">
+    	INSERT INTO escape_review
+    		(rev_no, r_no, u_no, rev_title, rev_content, rev_cdt, res_no)
+    	VALUES
+    		(#{no}, #{room.no}, #{user.no}, #{title}, #{content}, now(), #{resNo})
+    </insert>
+    
+    <insert id="addPhotos" parameterType="map">
+    	INSERT INTO escape_review_photo
+    		(rev_no,  rev_photo)
+    	VALUES
+    		(#{no}, #{photo})
+    </insert>
+    
+    <delete id="deleteByNo" parameterType="int">
+    	DELETE
+    	FROM escape_review
+    	WHERE rev_no = #{no}
+    </delete>
+    
+    <delete id="deletePhotoByNo" parameterType="int">
+    	DELETE
+    	FROM escape_review_photo
+    	WHERE rev_no = #{no}
+    </delete>
+    
+    <update id="update" parameterType="Review">
+    	UPDATE escape_review
+    	SET
+    			rev_title = #{title}
+    		,	rev_content = #{content}
+    	WHERE rev_no = #{no}
+    </update>
+  </mapper>
