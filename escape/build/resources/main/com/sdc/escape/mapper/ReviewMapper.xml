@@ -32,22 +32,22 @@
     
     <select id="findByUno" resultMap="ReviewMap" parameterType="int">
     	SELECT
-	    		rev_no
-	    	,	rev_title
-	    	,	rev_content
-	    	,	rev_cdt
-	    	,	res_no
+	    		ev.rev_no
+	    	,	ev.rev_title
+	    	,	ev.rev_content
+	    	,	ev.rev_cdt
+	    	,	ev.res_no
 	    	,  u.u_no
 	    	,	u.u_id
 	    	,  r.r_no
 	    	,	r.r_title 
-	    FROM escape_review rev
-	    	INNER JOIN escape_user u
-	    		ON rev.u_no = u.u_no
-	    	INNER JOIN escape_room r
-	    		ON rev.r_no = r.r_no
-	    WHERE rev.u_no = #{no}
-    	ORDER BY rev_no DESC
+	    FROM escape_review AS ev
+	    	INNER JOIN escape_user AS u
+	    		ON ev.u_no = u.u_no
+	    	INNER JOIN escape_room AS r
+	    		ON ev.r_no = r.r_no
+	    WHERE ev.u_no = #{no}
+    	ORDER BY ev.rev_no DESC
     </select>
     
     <select id="findByNo" resultMap="ReviewMap" parameterType="int">
@@ -63,18 +63,18 @@
     
     <select id="findReviewByRoom" resultMap="ReviewMap" parameterType="int">
 	    SELECT 
-					er.rev_no
-				,	rev_title
-		    	,	rev_content
-		    	,	rev_cdt
-		    	,	res_no
+					ev.rev_no
+				,	ev.rev_title
+		    	,	ev.rev_content
+		    	,	ev.rev_cdt
+		    	,	ev.res_no
 		    	,  	u.u_no
 		    	,	u.u_id
-		FROM escape_review er 
-			INNER JOIN escape_user u
-				    		ON er.u_no = u.u_no
+		FROM escape_review AS ev 
+			INNER JOIN escape_user AS u
+				    	ON ev.u_no = u.u_no
 		WHERE r_no = #{no}
-		ORDER BY rev_no DESC
+		ORDER BY ev.rev_no DESC
     </select>
     
     <select id="selectNoByResNo" resultType="int" parameterType="int">
@@ -90,39 +90,39 @@
 	    	rev_no
 	    FROM escape_review
 	    ORDER BY rev_cdt DESC 
-	    limit 1
+	    LIMIT 1
     </select>
     
     <select id="countReview" resultType="int" parameterType="int" >
 	    SELECT 
 	    	COUNT (*)
-	    FROM escape_review rev
-	    	INNER JOIN escape_room er 
-					ON er.r_no = rev.r_no 
-	    WHERE rev.r_no = #{no}
+	    FROM escape_review AS ev
+	    	INNER JOIN escape_room AS er 
+					ON er.r_no = ev.r_no 
+	    WHERE ev.r_no = #{no}
     </select>
     
     <select id="findPhotosByRno" resultMap="PhotoMap" parameterType="int">
     	SELECT
     			ph.rev_no
-    		,	rev_photo
-    	FROM escape_review_photo ph
-    		INNER JOIN escape_review rev
-    				ON ph.rev_no = rev.rev_no
-    		INNER JOIN escape_room r
-    				ON rev.r_no = r.r_no
+    		,	ph.rev_photo
+    	FROM escape_review_photo AS ph
+    		INNER JOIN escape_review AS ev
+    				ON ph.rev_no = ev.rev_no
+    		INNER JOIN escape_room AS r
+    				ON ev.r_no = r.r_no
     	WHERE r.r_no = #{no} 
     </select>
     
      <select id="findPhotosByUno" resultMap="PhotoMap" parameterType="int">
     	SELECT
     			ph.rev_no
-    		,	rev_photo
-    	FROM escape_review_photo ph
-    		INNER JOIN escape_review rev
-    				ON ph.rev_no = rev.rev_no
-    		INNER JOIN escape_user u
-    				ON rev.u_no = u.u_no
+    		,	ph.rev_photo
+    	FROM escape_review_photo AS ph
+    		INNER JOIN escape_review AS ev
+    				ON ph.rev_no = ev.rev_no
+    		INNER JOIN escape_user AS u
+    				ON ev.u_no = u.u_no
     		WHERE u.u_no = #{no}
     		ORDER BY ph.rev_no
     </select>
@@ -130,21 +130,21 @@
     <select id="findPhotosByResNo" resultMap="PhotoMap" parameterType="int">
     	SELECT
     			ph.rev_no
-    		,	rev_photo
-    	FROM escape_review_photo ph
-    		INNER JOIN escape_review rev
-    				ON ph.rev_no = rev.rev_no
+    		,	ph.rev_photo
+    	FROM escape_review_photo AS ph
+    		INNER JOIN escape_review AS ev
+    				ON ph.rev_no = ev.rev_no
     		WHERE ph.rev_no = #{no}
     </select>
     
     <select id="countPhoto" resultType="int" parameterType="int">
     	SELECT
 			COUNT(*) 
-    	FROM escape_review_photo ph
-    	INNER JOIN escape_review er 
-    			ON ph.rev_no  = er.rev_no 
-    	INNER JOIN  escape_room r 
-    			ON er.r_no = r.r_no 
+    	FROM escape_review_photo AS ph
+    	INNER JOIN escape_review AS ev
+    			ON ph.rev_no  = ev.rev_no 
+    	INNER JOIN  escape_room AS r 
+    			ON ev.r_no = r.r_no 
     	WHERE r.r_no = #{no}
     </select>
     
@@ -152,8 +152,8 @@
     	SELECT
 			COUNT(*) 
     	FROM escape_review_photo ph
-    	INNER JOIN escape_review er 
-    			ON ph.rev_no  = er.rev_no 
+    	INNER JOIN escape_review AS ev 
+    			ON ph.rev_no  = ev.rev_no 
     	WHERE ph.rev_no = #{no}
     </select>
     

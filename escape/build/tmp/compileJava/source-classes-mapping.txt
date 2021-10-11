@@ -24,20 +24,20 @@ com/sdc/escape/web/filter/CommonsRequestLoggingFilter.java
  com.sdc.escape.web.filter.CommonsRequestLoggingFilter
 com/sdc/escape/service/impl/DefaultEventService.java
  com.sdc.escape.service.impl.DefaultEventService
-com/sdc/escape/service/RoomAttributeService.java
- com.sdc.escape.service.RoomAttributeService
 com/sdc/escape/domain/User.java
  com.sdc.escape.domain.User
+com/sdc/escape/service/RoomAttributeService.java
+ com.sdc.escape.service.RoomAttributeService
 com/sdc/escape/domain/RoomAttribute.java
  com.sdc.escape.domain.RoomAttribute
 com/sdc/escape/service/ReservationService.java
  com.sdc.escape.service.ReservationService
-com/sdc/escape/web/RoomController.java
- com.sdc.escape.web.RoomController
 com/sdc/escape/dao/ReviewDao.java
  com.sdc.escape.dao.ReviewDao
 com/sdc/escape/service/impl/DefaultUserService.java
  com.sdc.escape.service.impl.DefaultUserService
+com/sdc/escape/web/RoomController.java
+ com.sdc.escape.web.RoomController
 com/sdc/escape/domain/Scheduler.java
  com.sdc.escape.domain.Scheduler
 com/sdc/escape/dao/ReservationDao.java
@@ -70,26 +70,26 @@ com/sdc/escape/service/UserService.java
  com.sdc.escape.service.UserService
 com/sdc/escape/web/IndexController.java
  com.sdc.escape.web.IndexController
-com/sdc/escape/web/interceptor/AuthAdminInterceptor.java
- com.sdc.escape.web.interceptor.AuthAdminInterceptor
 com/sdc/escape/dao/RoomDao.java
  com.sdc.escape.dao.RoomDao
-com/sdc/escape/web/AdminController.java
- com.sdc.escape.web.AdminController
+com/sdc/escape/web/interceptor/AuthAdminInterceptor.java
+ com.sdc.escape.web.interceptor.AuthAdminInterceptor
 com/sdc/escape/dao/RoomTimeDao.java
  com.sdc.escape.dao.RoomTimeDao
+com/sdc/escape/web/AdminController.java
+ com.sdc.escape.web.AdminController
 com/sdc/escape/service/RoomTimeService.java
  com.sdc.escape.service.RoomTimeService
 com/sdc/escape/config/MybatisConfig.java
  com.sdc.escape.config.MybatisConfig
 com/sdc/escape/service/impl/DefaultReviewService.java
  com.sdc.escape.service.impl.DefaultReviewService
+com/sdc/escape/dao/UserDao.java
+ com.sdc.escape.dao.UserDao
 com/sdc/escape/service/EventService.java
  com.sdc.escape.service.EventService
 com/sdc/escape/web/AuthController.java
  com.sdc.escape.web.AuthController
-com/sdc/escape/dao/UserDao.java
- com.sdc.escape.dao.UserDao
 com/sdc/escape/web/ReservationController.java
  com.sdc.escape.web.ReservationController
 com/sdc/escape/config/AppWebConfig.java

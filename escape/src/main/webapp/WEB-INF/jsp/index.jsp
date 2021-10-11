@@ -74,7 +74,7 @@
                 <c:forEach items="${eventList}" var="ev">
                 <div class="col">
                   <div class="card shadow-sm" style="background-color: black;">
-                    <img src="<%=request.getContextPath()%>/img/${ev.photo}" style="width: 100%; height: 225px;'">
+                    <img src="<%=request.getContextPath()%>/img/${ev.photo}" style="width: 100%; height: 225px;">
                     <div class="card-body">
                       <p class="card-text">${ev.title}</p>
                       <p class="card-text" style="white-space:pre;">${ev.content}</p>

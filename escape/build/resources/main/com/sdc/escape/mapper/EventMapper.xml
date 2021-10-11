@@ -19,27 +19,27 @@
     
     <select id="findAll" resultMap="EventMap">
     	SELECT
-    			ev_no
-    		,	ev_title
-    		,	ev_content
-    		,	ev_photo
+    			e.ev_no
+    		,	e.ev_title
+    		,	e.ev_content
+    		,	e.ev_photo
     		,	e.ad_no
-    		,	ad_id
-    	FROM escape_event e
-    		INNER JOIN escape_admin a
+    		,	a.ad_id
+    	FROM escape_event AS e
+    		INNER JOIN escape_admin  AS a
    					ON e.ad_no = a.ad_no
     </select>
     
      <select id="findByNo" resultMap="EventMap" parameterType="int">
     	SELECT
-    			ev_no
-    		,	ev_title
-    		,	ev_content
-    		,	ev_photo
+    			e.ev_no
+    		,	e.ev_title
+    		,	e.ev_content
+    		,	e.ev_photo
     		,	e.ad_no
-    		,	ad_id
-    	FROM escape_event e
-    		INNER JOIN escape_admin a
+    		,	a.ad_id
+    	FROM escape_event AS e
+    		INNER JOIN escape_admin AS a
    					ON e.ad_no = a.ad_no
    		WHERE ev_no = #{no}
     </select>

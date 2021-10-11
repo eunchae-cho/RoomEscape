@@ -33,110 +33,110 @@
 
     <select id="findAll" resultMap="ReservationMap">
     	SELECT
-    			res_no
-    		,	res_time
-    		,	res_rdt
-    		,	res_cancel
-    		,	res_cancel_date
-    		,	res_participant
-    		,	res_price
-    		,	res.u_no
-    		,	res.r_no
-    		,	res_status
-    		,  date_format(res_date,'%Y-%m-%d') res_date
-    		,  IF (res_escape = 1, '성공', '실패') AS res_escape
-    		,  res_escape_time
-    		,	r.r_title r_title
-    	FROM escape_reservation res
-    		INNER JOIN escape_room r
-    			ON res.r_no = r.r_no
-    	WHERE res_cancel = 0
-    	ORDER BY res_date DESC
+    			es.res_no
+    		,	es.res_time
+    		,	es.res_rdt
+    		,	es.res_cancel
+    		,	es.res_cancel_date
+    		,	es.res_participant
+    		,	es.res_price
+    		,	es.u_no
+    		,	es.r_no
+    		,	es.res_status
+    		,  DATE_FORMAT(es.res_date,'%Y-%m-%d') AS res_date
+    		,  IF (es.res_escape = 1, '성공', '실패') AS res_escape
+    		,  es.res_escape_time
+    		,	r.r_title
+    	FROM escape_reservation AS es
+    		INNER JOIN escape_room  AS r
+    			ON es.r_no = r.r_no
+    	WHERE es.res_cancel = 0
+    	ORDER BY es.res_date DESC
     </select>
     
     <select id="findByUno" resultMap="ReservationMap" parameterType="int">
     	SELECT
-    			res_no
-    		,	res_time
-    		,	res_rdt
-    		,	res_cancel
-    		,	res_cancel_date
-    		,	res_participant
-    		,	res_price
-    		,	res.u_no
-    		,	res.r_no
-    		,	res_status
-    		,  date_format(res_date,'%Y-%m-%d') res_date
-    		,  IF (res_escape = 1, '성공', '실패') AS res_escape
-    		,  res_escape_time
-    		,	r.r_title r_title
-    	FROM escape_reservation res
-    		INNER JOIN escape_user u
-    			ON res.u_no = u.u_no
+    			es.res_no
+    		,	es.res_time
+    		,	es.res_rdt
+    		,	es.res_cancel
+    		,	es.res_cancel_date
+    		,	es.res_participant
+    		,	es.res_price
+    		,	es.u_no
+    		,	es.r_no
+    		,	es.res_status
+    		,  DATE_FORMAT(es.res_date,'%Y-%m-%d') AS res_date
+    		,  IF (es.res_escape = 1, '성공', '실패') AS res_escape
+    		,  es.res_escape_time
+    		,	r.r_title 
+    	FROM escape_reservation AS es
+    		INNER JOIN escape_user AS u
+    			ON es.u_no = u.u_no
     		INNER JOIN escape_room r
-    			ON res.r_no = r.r_no
-     	WHERE res.u_no = #{no}
-    	ORDER BY res_no DESC
+    			ON es.r_no = r.r_no
+     	WHERE es.u_no = #{no}
+    	ORDER BY es.res_no DESC
     </select>
     
     <select id="findByUnoReservated" resultMap="ReservationMap" parameterType="int">
     	SELECT
-    			res_no
-    		,	res_time
-    		,	res_rdt
-    		,	res_cancel
-    		,	res_cancel_date
-    		,	res_participant
-    		,	res_price
-    		,	res.u_no
-    		,	res.r_no
-    		,	res_status
-    		,  date_format(res_date,'%Y-%m-%d') res_date
-    		,  IF (res_escape = 1, '성공', '실패') AS res_escape
-    		,  res_escape_time
-    		,	r.r_title r_title
-    	FROM escape_reservation res
-    		INNER JOIN escape_user u
-    			ON res.u_no = u.u_no
-    		INNER JOIN escape_room r
-    			ON res.r_no = r.r_no
-     	WHERE res.u_no = #{no}
-     		AND res_status != 2
-    	ORDER BY res_date DESC
+    			es.res_no
+    		,	es.res_time
+    		,	es.res_rdt
+    		,	es.res_cancel
+    		,	es.res_cancel_date
+    		,	es.res_participant
+    		,	es.res_price
+    		,	es.u_no
+    		,	es.r_no
+    		,	es.res_status
+    		,  DATE_FORMAT(es.res_date,'%Y-%m-%d') AS res_date
+    		,  IF (es.res_escape = 1, '성공', '실패') AS res_escape
+    		,  es.res_escape_time
+    		,	r.r_title 
+    	FROM escape_reservation AS es
+    		INNER JOIN escape_user AS u
+    			ON es.u_no = u.u_no
+    		INNER JOIN escape_room AS r
+    			ON es.r_no = r.r_no
+     	WHERE es.u_no = #{no}
+     		AND es.res_status != 2
+    	ORDER BY es.res_date DESC
     </select>
     
     <select id="findByNo" resultMap="ReservationMap" parameterType="int">
     	SELECT
-    			res_no
-    		,	res_time
-    		,	res_rdt
-    		,	res_cancel
-    		,	date_format(res_cancel_date, '%Y-%m-%d') res_cancel_date
-    		,	res_participant
-    		,	res_price
-    		,	res.u_no
-    		,	res.r_no
-    		,	res_status
-    		,  date_format(res_date,'%Y-%m-%d') res_date
-    		,  IF (res_escape = 1, '성공', '실패') AS res_escape
-    		,  res_escape_time
-    		,	r.r_title r_title
+    			es.res_no
+    		,	es.res_time
+    		,	es.res_rdt
+    		,	es.res_cancel
+    		,	DATE_FORMAT(es.res_cancel_date, '%Y-%m-%d') res_cancel_date
+    		,	es.res_participant
+    		,	es.res_price
+    		,	es.u_no
+    		,	es.r_no
+    		,	es.res_status
+    		,  DATE_FORMAT(es.res_date,'%Y-%m-%d') res_date
+    		,  IF (es.res_escape = 1, '성공', '실패') AS res_escape
+    		,  es.res_escape_time
+    		,	r.r_title
     		, 	u.u_name
     		,	u.u_phone
-    	FROM escape_reservation res
-    		INNER JOIN escape_room r
-    			ON res.r_no = r.r_no
-    		INNER JOIN escape_user u
-    			ON u.u_no = res.u_no
-     	WHERE res_no = #{no}
-    	ORDER BY res_date DESC
+    	FROM escape_reservation AS es
+    		INNER JOIN escape_room AS r
+    			ON es.r_no = r.r_no
+    		INNER JOIN escape_user AS u
+    			ON u.u_no = es.u_no
+     	WHERE es.res_no = #{no}
+    	ORDER BY es.res_date DESC
     </select>
     
     <select id="findReservation" resultMap="ReservationMap" parameterType="Date">
     	SELECT 
     			r_no
     		,	res_time
-    		,	date_format(res_date,'%Y-%m-%d') res_date
+    		,	DATE_FORMAT(res_date,'%Y-%m-%d') AS res_date
     	FROM  escape_reservation
     	WHERE res_date = #{date} 
     		AND res_cancel = 0
@@ -144,76 +144,76 @@
     
     <select id="findByRoom" resultMap="ReservationMap" parameterType="int">
 	    SELECT
-	    			res.res_no
-	    		,	res_time
-	    		,	res_rdt
-	    		,	res_cancel
-	    		,	res_cancel_date
-	    		,	res_participant
-	    		,	res_price
-	    		,	res.u_no
-	    		,	res.r_no
-	    		,	res_status
-	    		,  date_format(res_date,'%Y-%m-%d') res_date
-	    		,  IF (res_escape = 1, '성공', '실패') AS res_escape
-	    		,  res_escape_time
-	    		,	r.r_title r_title
-	    	FROM escape_reservation res
-	    		INNER JOIN escape_room r
-	    			ON res.r_no = r.r_no
-	     	WHERE res.r_no= #{no}
-	    	ORDER BY res_date DESC
+		    		es.res_no
+	    		,	es.res_time
+	    		,	es.res_rdt
+	    		,	es.res_cancel
+	    		,	es.res_cancel_date
+	    		,	es.res_participant
+	    		,	es.res_price
+	    		,	es.u_no
+	    		,	es.r_no
+	    		,	es.res_status
+	    		,  DATE_FORMAT(es.res_date,'%Y-%m-%d') AS res_date
+	    		,  IF (es.res_escape = 1, '성공', '실패') AS res_escape
+	    		,  es.res_escape_time
+	    		,	r.r_title 
+	    	FROM escape_reservation AS es
+	    		INNER JOIN escape_room AS r
+	    			ON es.r_no = r.r_no
+	     	WHERE es.r_no= #{no}
+	    	ORDER BY es.res_date DESC
     </select>
     
     <select id="findByResNo" resultMap="ReservationMap" parameterType="int">
 	    SELECT
-	    			res.res_no
-	    		,	res_time
-	    		,	res_rdt
-	    		,	res_cancel
-	    		,	res_cancel_date
-	    		,	res_participant
-	    		,	res_price
-	    		,	res.u_no
-	    		,	res.r_no
-	    		,	res_status
-	    		,  date_format(res_date,'%Y-%m-%d') res_date
-	    		,  IF (res_escape = 1, '성공', '실패') AS res_escape
-	    		,  res_escape_time
-	    		,	r.r_title r_title
-	    	FROM escape_reservation res
-	    		INNER JOIN escape_room r
-	    			ON res.r_no = r.r_no
-	    		INNER JOIN escape_review er
+		    			es.res_no
+	    		,	es.res_time
+	    		,	es.res_rdt
+	    		,	es.res_cancel
+	    		,	es.res_cancel_date
+	    		,	es.res_participant
+	    		,	es.res_price
+	    		,	es.u_no
+	    		,	es.r_no
+	    		,	es.res_status
+	    		,  DATE_FORMAT(es.res_date,'%Y-%m-%d') AS res_date
+	    		,  IF (es.res_escape = 1, '성공', '실패') AS res_escape
+	    		,  es.res_escape_time
+	    		,	r.r_title 
+	    	FROM escape_reservation AS es
+	    		INNER JOIN escape_room AS r
+	    			ON es.r_no = r.r_no
+	    		INNER JOIN escape_review AS er
 	    			ON r.r_no = er.r_no
 	     	WHERE er.rev_no= #{no}
-	     		AND res.res_no = er.res_no
+	     		AND es.res_no = er.res_no
     </select>
     
     <select id="findByDate" resultMap="ReservationMap" parameterType="String">
     	SELECT
-    			res_no
-    		,	res_time
-    		,	res_rdt
-    		,	res_cancel
-    		,	res_cancel_date
-    		,	res_participant
-    		,	res_price
-    		,	res.u_no
-    		,	res.r_no
-    		,	res_status
-    		,  date_format(res_date,'%Y-%m-%d') res_date
-    		,  IF (res_escape = 1, '성공', '실패') AS res_escape
-    		,  res_escape_time
+    			es.res_no
+    		,	es.res_time
+    		,	es.res_rdt
+    		,	es.res_cancel
+    		,	es.res_cancel_date
+    		,	es.res_participant
+    		,	es.res_price
+    		,	es.u_no
+    		,	es.r_no
+    		,	es.res_status
+    		,  DATE_FORMAT(es.res_date,'%Y-%m-%d') AS res_date
+    		,  IF (es.res_escape = 1, '성공', '실패') AS res_escape
+    		,  es.res_escape_time
     		,	r.r_title 
     		,	u.u_name 
-    	FROM escape_reservation res
-    		INNER JOIN escape_room r
-    			ON res.r_no = r.r_no
-    		INNER JOIN escape_user u
-    			ON res.u_no = u.u_no
-    	WHERE res_date = #{doDate}
-    	ORDER BY r_no, res_time 
+    	FROM escape_reservation AS es
+    		INNER JOIN escape_room AS r
+    			ON es.r_no = r.r_no
+    		INNER JOIN escape_user AS u
+    			ON es.u_no = u.u_no
+    	WHERE es.res_date = #{doDate}
+    	ORDER BY r.r_no, es.res_time 
     </select>
     
     <insert id="add" parameterType="Reservation">
