@@ -41,7 +41,7 @@
    		WHERE ev_no = #{no}
     </select>
 
-	<select id="findPhotoByEventNo" parameterType="hashmap">
+	<select id="findPhotoByEventNo" resultType="map" parameterType="int">
 		SELECT
 				ev_no AS eventNo
 			,	ev_photo AS eventPhoto
@@ -64,7 +64,7 @@
     		)
     </insert>
 
-	<insert id="addPhoto" parameterType="hashmap">
+	<insert id="addPhoto" parameterType="map">
 		INSERT INTO escape_event_photo
 			(
 			 	ev_no
@@ -91,7 +91,7 @@
     	WHERE ev_no = #{no}
     </update>
 
-	<update id="updatePhoto" parameterType="hashmap">
+	<update id="updatePhoto" parameterType="map">
 		UPDATE escape_event_photo
 		SET
 			ev_photo = #{eventPhoto}
