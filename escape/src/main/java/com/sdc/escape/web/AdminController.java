@@ -2,10 +2,7 @@ package com.sdc.escape.web;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -347,9 +344,15 @@ public class AdminController {
 	// 이벤트 상세보기
 	@GetMapping("/event/detail")
 	public String eventDetail(Model model, int no)  throws Exception {
+		// 이벤트 조회
 		Event event = eventService.eventByNo(no);
+		// 이벤트 사진 조회
+		Map<String, Object> photoMap = new HashMap<>();
+		photoMap = eventService.findPhotoByEventNo(no);
+
 		model.addAttribute("event", event);
-		
+		model.addAttribute("photoMap", photoMap);
+
 		return "admin/event/detail";
 	}
 	
@@ -372,22 +375,35 @@ public class AdminController {
 		event.setContent(content);
 		Admin loginAdmin = (Admin) session.getAttribute("loginAdmin");
 		event.setAdminNo(loginAdmin.getNo());
+		eventService.add(event);
 		
 		// 사진 파일 이름 코드 생성
 		String filename = UUID.randomUUID().toString();
 		String saveFilePath = multiReq.getSession().getServletContext().getRealPath("/img/") +  filename;
 		photo.transferTo(new File(saveFilePath));
-		event.setPhoto(filename);
-		eventService.add(event);
-		
+
+		//사진 저장
+		Map<String, Object> photoMap = new HashMap<>();
+		// 어드민 일련번호로 방금 넣은 이벤트 일련번호 조회
+		photoMap.put("adminNo", loginAdmin.getNo());
+		photoMap.put("eventPhoto", filename);
+		photoMap.put("eventPhotoName", photo.getOriginalFilename());
+		eventService.addPhoto(photoMap);
+
 		return "redirect:/admin/event";
 	}
 	
 	// 이벤트 수정
 	@GetMapping("/event/update")
 	public String eventUpdate(Model model, int no) throws Exception {
+		// 이벤트 조회
 		Event event = eventService.eventByNo(no);
+		// 사진 조회
+		Map<String, Object> photoMap = new HashMap<>();
+		photoMap = eventService.findPhotoByEventNo(no);
+
 		model.addAttribute("event", event);
+		model.addAttribute("photoMap", photoMap);
 		return "admin/event/update";
 	}
 	
@@ -402,13 +418,21 @@ public class AdminController {
 		Event event = eventService.eventByNo(no);
 		event.setTitle(title);
 		event.setContent(content);
+		eventService.update(event);
 		
 		// 사진 파일 이름 코드 생성
 		String filename = UUID.randomUUID().toString();
 		String saveFilePath = multiReq.getSession().getServletContext().getRealPath("img/") +  filename;
 	    photo.transferTo(new File(saveFilePath));
-		event.setPhoto(filename);
-		eventService.update(event);
+
+		// 사진 저장
+		Map<String, Object> photoMap = new HashMap<>();
+		photoMap.put("eventNo", event.getNo());
+		photoMap.put("eventPhoto", filename);
+		photoMap.put("eventPhotoName", photo.getOriginalFilename());
+		// 기존의 사진 삭제
+		eventService.deletePhoto(no);
+		eventService.updatePhoto(photoMap);
 		
 		return "redirect:/admin/event/detail?no="+ no;
 	}
@@ -416,6 +440,7 @@ public class AdminController {
 	// 이벤트 삭제
 	@GetMapping("/event/delete")
 	public String eventDelete(int no) throws Exception {
+		eventService.deletePhoto(no);
 		eventService.delete(no);
 		return "redirect:/admin/event";
 	}

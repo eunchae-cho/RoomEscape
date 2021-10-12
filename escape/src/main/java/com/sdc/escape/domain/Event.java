@@ -4,7 +4,6 @@ public class Event {
 	private int no;
 	private String title;
 	private String content;
-	private String photo;
 	private int adminNo;
 	private Admin admin;
 	
@@ -25,12 +24,6 @@ public class Event {
 	}
 	public void setContent(String content) {
 		this.content = content;
-	}
-	public String getPhoto() {
-		return photo;
-	}
-	public void setPhoto(String photo) {
-		this.photo = photo;
 	}
 	public int getAdminNo() {
 		return adminNo;

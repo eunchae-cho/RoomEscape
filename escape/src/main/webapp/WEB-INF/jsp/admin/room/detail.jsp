@@ -39,9 +39,9 @@
 	</div>
 	<div>
  	 	<label><b>내용: </b></label>
-	 	<div style="width: 94%; float: right; padding-left: 15px;">${room.content}</div>
+	 	<div style="width: 94%; float: right; padding-left: 15px; white-space: pre;">${room.content}</div>
 	</div>
-	<div style="margin-top: 30px; display: inline-flex;">
+	<div style="margin-top: 30px; display: inline-flex;">s
 		<label><b>시간대: </b></label>
 		<div style="margin-left: 30px;">
 			<c:forEach items="${roomTimeList}" var="rt">

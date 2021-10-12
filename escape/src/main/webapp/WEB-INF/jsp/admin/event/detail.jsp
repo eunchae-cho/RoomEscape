@@ -31,7 +31,7 @@
   <p style="margin-left: 50px;"><b>no. ${event.no}</b></p>
   <div style="margin: 50px;">
   <div style="margin-block: 50px;">
-  	<img src="<%=request.getContextPath()%>/img/${event.photo}">
+  	<img src="<%=request.getContextPath()%>/img/${photoMap.eventPhoto}">
   </div>
 	 <div style="margin-bottom: 30px;">
 	 	<label><b>제목: </b></label>

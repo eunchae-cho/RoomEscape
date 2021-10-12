@@ -39,7 +39,7 @@
  	 <textarea id="content" name="content" class="form-control" aria-label="With textarea" style="resize: none; height: 300px;"></textarea>
 	</div>
 	<div class="mb-3">
-	  <input name="photo" class="form-control form-control-sm" id="formFileSm" type="file">
+	  <input name="eventPhoto" class="form-control form-control-sm" id="formFileSm" type="file">
 	</div>
 	<div style="text-align: center;">
 	<button type="submit" name="photo" class="btn btn-secondary addBtn" style="font-size: 12px;">등록</button>

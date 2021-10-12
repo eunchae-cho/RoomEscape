@@ -105,7 +105,7 @@
     <select id="findPhotosByRno" resultMap="PhotoMap" parameterType="int">
     	SELECT
     			ph.rev_no
-    		,	ev.rev_photo
+    		,	ph.rev_photo
     	FROM escape_review_photo AS ph
     		INNER JOIN escape_review AS ev
     				ON ph.rev_no = ev.rev_no
@@ -117,7 +117,7 @@
      <select id="findPhotosByUno" resultMap="PhotoMap" parameterType="int">
     	SELECT
     			ph.rev_no
-    		,	ev.rev_photo
+    		,	ph.rev_photo
     	FROM escape_review_photo AS ph
     		INNER JOIN escape_review AS ev
     				ON ph.rev_no = ev.rev_no
@@ -130,7 +130,7 @@
     <select id="findPhotosByResNo" resultMap="PhotoMap" parameterType="int">
     	SELECT
     			ph.rev_no
-    		,	ev.rev_photo
+    		,	ph.rev_photo
     	FROM escape_review_photo AS ph
     		INNER JOIN escape_review AS ev
     				ON ph.rev_no = ev.rev_no

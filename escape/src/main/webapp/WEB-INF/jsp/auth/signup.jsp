@@ -41,7 +41,7 @@
                  최소 4자 이상 영문 대소문자나 숫자로만 아이디를 입력해주세요.
                 </div>
               </div>
-                <div class="cannot-make-id" style="margin-top: 2px; color: crimson; font-size: 14px;'"> </div>
+                <div class="cannot-make-id" style="margin-top: 2px; color: crimson; font-size: 14px;"> </div>
                 <div class="can-make-id" style="margin-top: 2px; color: lightgreen; font-size: 14px;"> </div>
             </div>
             
@@ -59,7 +59,7 @@
               <div class="confirmPassword-feedback invalid-feedback">
                 비밀번호가 맞지 않습니다.
               </div>
-              <div class="cannot-make-password" style="margin-top: 2px; color: crimson; font-size: 14px;'"> </div>
+              <div class="cannot-make-password" style="margin-top: 2px; color: crimson; font-size: 14px;"> </div>
               <div class="can-make-password" style="margin-top: 2px; color: lightgreen; font-size: 14px;"> </div>
             </div>
 

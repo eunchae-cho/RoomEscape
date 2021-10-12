@@ -93,7 +93,7 @@ public class ReviewController {
 				System.out.println("=====================================");
 				System.out.println(photos[i]);
 				String filename = UUID.randomUUID().toString();
-				String saveFilePath = multiReq.getSession().getServletContext().getRealPath("/upload/") +  filename;
+				String saveFilePath = multiReq.getSession().getServletContext().getRealPath("/img/") +  filename;
 				photos[i].transferTo(new File(saveFilePath));
 				reviewService.addPhotos(review.getNo(), filename);
 			}
@@ -148,7 +148,7 @@ public class ReviewController {
 		// 사진 식별 코드 생성
 		for (int i = 0; i < photos.length; i++) {
 			String filename = UUID.randomUUID().toString();
-			String saveFilePath = multiReq.getSession().getServletContext().getRealPath("/upload/") +  filename;
+			String saveFilePath = multiReq.getSession().getServletContext().getRealPath("/img/") +  filename;
 			photos[i].transferTo(new File(saveFilePath));
 			reviewService.deletePhotoByNo(no);
 			reviewService.addPhotos(no, filename);

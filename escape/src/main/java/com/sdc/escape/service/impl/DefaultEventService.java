@@ -1,6 +1,7 @@
 package com.sdc.escape.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ public class DefaultEventService implements EventService{
 	EventDao eventDao;
 
     public DefaultEventService(EventDao eventDao) {
-        this.eventDao = eventDao;
+		this.eventDao = eventDao;
     }
    
 	 @Override
@@ -38,6 +39,27 @@ public class DefaultEventService implements EventService{
 	 
 	 @Override
 	public int delete(int no) throws Exception {
+		eventDao.deletePhoto(no);
 		return eventDao.delete(no);
+	}
+
+	@Override
+	public Map<String, Object> findPhotoByEventNo(int eventNo) throws Exception {
+		return eventDao.findPhotoByEventNo(eventNo);
+	}
+
+	@Override
+	public int addPhoto(Map<String, Object> photoMap) throws Exception {
+		return eventDao.addPhoto(photoMap);
+	}
+
+	@Override
+	public int updatePhoto(Map<String, Object> photoMap) throws  Exception {
+		return eventDao.updatePhoto(photoMap);
+	}
+
+	@Override
+	public int deletePhoto(int no) throws Exception {
+		return eventDao.deletePhoto(no);
 	}
 }

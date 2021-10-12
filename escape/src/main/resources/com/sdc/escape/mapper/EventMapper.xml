@@ -8,8 +8,7 @@
         <result column="ev_no" property="no"></result>
         <result column="ev_title" property="title"></result>
         <result column="ev_content" property="content"></result>
-        <result column="ev_photo" property="photo"></result>
-         <result column="ad_no" property="adminNo"></result>
+		<result column="ad_no" property="adminNo"></result>
         
         <association property="admin" javaType="admin">
         	<id column="ad_no" property="no"></id>
@@ -22,7 +21,6 @@
     			e.ev_no
     		,	e.ev_title
     		,	e.ev_content
-    		,	e.ev_photo
     		,	e.ad_no
     		,	a.ad_id
     	FROM escape_event AS e
@@ -35,7 +33,6 @@
     			e.ev_no
     		,	e.ev_title
     		,	e.ev_content
-    		,	e.ev_photo
     		,	e.ad_no
     		,	a.ad_id
     	FROM escape_event AS e
@@ -43,26 +40,73 @@
    					ON e.ad_no = a.ad_no
    		WHERE ev_no = #{no}
     </select>
+
+	<select id="findPhotoByEventNo" parameterType="hashmap">
+		SELECT
+				ev_no AS eventNo
+			,	ev_photo AS eventPhoto
+			,	ev_photo_name AS eventPhotoName
+		FROM escape_event_photo
+		WHERE ev_no = #{eventNo}
+	</select>
     
     <insert id="add" parameterType="event">
     	INSERT INTO escape_event
-    		(ev_title, ev_content, ad_no, ev_photo)
+    		(
+    		 	ev_title
+    		, 	ev_content
+    		, 	ad_no)
     	VALUES
-    		(#{title}, #{content}, #{adminNo}, #{photo})
+    		(
+    		 	#{title}
+    		, 	#{content}
+    		, 	#{adminNo}
+    		)
     </insert>
+
+	<insert id="addPhoto" parameterType="hashmap">
+		INSERT INTO escape_event_photo
+			(
+			 	ev_no
+			 , 	ev_photo
+			 , ev_photo_name
+			 )
+		VALUES
+			(
+				(SELECT
+					MAX(ev_no)
+				FROM escape_event
+				WHERE ad_no = #{adminNo})
+			 , 	#{eventPhoto}
+			 , 	#{eventPhotoName}
+			 )
+	</insert>
+
     
     <update id="update" parameterType="event">
     	UPDATE escape_event
     		SET
     			ev_title = #{title}
     		,	ev_content = #{content}
-    		,	ev_photo = #{photo}
     	WHERE ev_no = #{no}
     </update>
+
+	<update id="updatePhoto" parameterType="hashmap">
+		UPDATE escape_event_photo
+		SET
+			ev_photo = #{eventPhoto}
+		  ,	ev_photo_name = #{eventPhotoName}
+		WHERE ev_no = #{eventNo}
+	</update>
     
     <delete id="delete" parameterType="int">
     	DELETE FROM escape_event
     	WHERE ev_no = #{no}
     </delete>
+
+	<delete id="deletePhoto" parameterType="int">
+		DELETE FROM escape_event_photo
+		WHERE ev_no = #{no}
+	</delete>
 
   </mapper>
