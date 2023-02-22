@@ -9,7 +9,7 @@
   - 룸테마를 등록해 홈페이지에 출력될 수 있도록 한다.
   ```
     
-  ### 📃 기술
+### 📃 기술
   - Java/JSP
   - Spring
   - JavaScript
@@ -17,5 +17,15 @@
   - MariaDB
   
     
-  ### 💡 화면 예시
+### 💡 화면 예시
+  
+#### 1. 예약
+![1](https://user-images.githubusercontent.com/68311262/220503113-2c9c91d5-8218-4c9f-a556-ccb60c9b689d.PNG)
+
+  
+#### 2. 마이페이지
+![2](https://user-images.githubusercontent.com/68311262/220503205-8d776aee-7455-4284-84c3-84502eaf3478.PNG)
+  
+### 3. 어드민
+![3](https://user-images.githubusercontent.com/68311262/220503243-bbecff14-62a7-4cab-b12d-349bca8ed582.PNG)
   
